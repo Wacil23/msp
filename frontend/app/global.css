@@ -1,0 +1,47 @@
+@font-face {
+  font-family: "Avenir";
+  src: url("../public/fonts/avenir/AvenirRegular.ttf");
+  font-weight: 400;
+}
+@font-face {
+  font-family: "Avenir";
+  src: url("../public/fonts/avenir/AvenirThin.ttf");
+  font-weight: 100;
+}
+@font-face {
+  font-family: "Avenir";
+  src: url("../public/fonts/avenir/AvenirLight.ttf");
+  font-weight: 200;
+}
+@font-face {
+  font-family: "Avenir";
+  src: url("../public/fonts/avenir/AvenirMedium.ttf");
+  font-weight: 600;
+}
+@font-face {
+  font-family: "Avenir";
+  src: url("../public/fonts/avenir/AvenirDemi.ttf");
+  font-weight: 700;
+}
+@font-face {
+  font-family: "Avenir";
+  src: url("../public/fonts/avenir/AvenirBold.ttf");
+  font-weight: 800;
+}
+@font-face {
+  font-family: "Avenir";
+  src: url("../public/fonts/avenir/AvenirHeavy.ttf");
+  font-weight: 900;
+}
+
+@tailwind base;
+@layer base {
+  html,
+  body {
+    @apply font-avenir;
+    font-family: "Avenir";
+    box-sizing: border-box;
+  }
+}
+@tailwind components;
+@tailwind utilities;
