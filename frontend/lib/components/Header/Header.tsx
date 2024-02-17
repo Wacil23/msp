@@ -1,14 +1,5 @@
 "use client";
-import {
-  ActionIcon,
-  Button,
-  ButtonGroup,
-  Center,
-  Drawer,
-  Flex,
-  Text,
-  Title,
-} from "@mantine/core";
+import { ActionIcon, Button, Drawer, Title } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import Link from "next/link";
 import React from "react";
@@ -24,19 +15,13 @@ const Header = () => {
   return (
     <>
       <header className="will-change-scroll z-50 px-5 sticky top-0 w-full bg-white py-5 flex justify-between items-center gap-5 border-b shadow-sm">
-        <FiMenu
-          onClick={open}
-          size={35}
-          className="text-primary-700 cursor-pointer"
-        />
         <nav className="flex">
           <Title
             order={1}
             size={"1rem"}
             className="font-bold text-primary-700 text-center"
           >
-            Maison de Santé <br />
-            Pluridisciplinaire de Denain
+            LOGO
           </Title>
           <ul className="hidden">
             <li>
@@ -54,9 +39,11 @@ const Header = () => {
             </li>
           </ul>
         </nav>
-        <ActionIcon variant="outline" size={"md"} color="primary.7">
-          <FiPhoneCall />
-        </ActionIcon>
+        <FiMenu
+          onClick={open}
+          size={35}
+          className="text-primary-700 cursor-pointer"
+        />
       </header>
       <MenuDrawer opened={opened} onClose={close} />
     </>
@@ -76,7 +63,12 @@ const MenuDrawer: React.FC<MenuDrawerProps> = ({ opened, onClose }) => {
 
   return (
     <>
-      <Drawer.Root size={"xs"} opened={opened} onClose={onClose}>
+      <Drawer.Root
+        position="right"
+        size={"xs"}
+        opened={opened}
+        onClose={onClose}
+      >
         <Drawer.Overlay />
         <Drawer.Content>
           <Drawer.Body className=" h-full flex bg-gray-100 flex-col px-5">
@@ -90,7 +82,7 @@ const MenuDrawer: React.FC<MenuDrawerProps> = ({ opened, onClose }) => {
                     href={link.href}
                   >
                     {link.title}
-                    <span className="block max-w-0 group-hover:max-w-full bg-primary-900 transition-all h-0.5"></span>
+                    <span className="block max-w-0 group-hover:max-w-full bg-primary-700 transition-all h-0.5"></span>
                   </Link>
                 </li>
               ))}
@@ -109,6 +101,7 @@ const MenuDrawer: React.FC<MenuDrawerProps> = ({ opened, onClose }) => {
                 fw={700}
                 variant="filled"
                 leftSection={<FiLogIn />}
+                bg={"primary.6"}
               >
                 Se connecter
               </Button>

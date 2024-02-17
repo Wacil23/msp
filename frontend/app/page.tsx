@@ -32,7 +32,7 @@ const Home: React.FC = () => {
             Des soins coordonnés au cœur de votre communauté
           </span>
         </h1>
-        <Button color="secondary.9" rightSection={<FiCalendar />}>
+        <Button color="darker" rightSection={<FiCalendar />}>
           Prendre rendez-vous
         </Button>
       </div>
