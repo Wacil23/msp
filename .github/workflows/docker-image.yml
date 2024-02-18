@@ -19,7 +19,7 @@ jobs:
         username: ${{ secrets.USERNAME }}
         key: ${{ secrets.SSH_KEY }}
         script: |
-          cd /path/to/your/project
+          cd /www/msp
           git pull origin prod
           docker-compose down
           docker-compose up --build -d
