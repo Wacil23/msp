@@ -1,0 +1,19 @@
+version: "3"
+services:
+  directus:
+    image: directus/directus:10.9.2
+    ports:
+      - "8055:8055"
+    volumes:
+      - ./backend/database:/directus/database
+      - ./backend/uploads:/directus/uploads
+      - ./backend/extensions:/directus/extensions
+    env_file:
+      - ./backend/.env
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"

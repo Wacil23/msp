@@ -2,6 +2,8 @@
 import { ActionIcon, Button, Drawer, Title } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { Router } from "next/router";
 import React from "react";
 import { FiLogIn, FiMenu, FiPhoneCall, FiUser } from "react-icons/fi";
 
@@ -103,7 +105,7 @@ const MenuDrawer: React.FC<MenuDrawerProps> = ({ opened, onClose }) => {
                 leftSection={<FiLogIn />}
                 bg={"primary.6"}
               >
-                Se connecter
+                <Link href={"/connexion"}>Se connecter</Link>
               </Button>
             </ul>
           </Drawer.Body>
