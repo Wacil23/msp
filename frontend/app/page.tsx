@@ -28,7 +28,7 @@ const Home: React.FC = () => {
       <div className="flex py-[3.75rem] gap-5 px-7 bg-primary-500 flex-col">
         <div className="flex flex-col gap-4">
           <h1 className="font-extrabold text-darker text-pretty leading-none text-center text-3xl">
-            Unis pour votre bien-être <br />
+            Unis pour votre bien-être de test <br />
           </h1>
           <span className="font-normal text-center leading-6 text-lg">
             Des soins coordonnés au cœur de votre communauté
