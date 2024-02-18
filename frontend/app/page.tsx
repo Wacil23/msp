@@ -1,8 +1,8 @@
-import CarouselActu from "@/lib/micro/ActuCard";
-import TeamsCard from "@/lib/micro/TeamsCard";
-import { ActionIcon, Button, Card, CardSection } from "@mantine/core";
+import { Button } from "@mantine/core";
+import Image from "next/image";
 import React from "react";
 import { FiCalendar, FiMail, FiMapPin, FiPhone } from "react-icons/fi";
+import bgHero from "@/public/images/Health professional team-amico.png";
 
 const Home: React.FC = () => {
   const contactCard = [
@@ -25,61 +25,32 @@ const Home: React.FC = () => {
 
   return (
     <div className="flex flex-col gap-20">
-      <div className="py-20 px-10 flex gap-7 bg-primary-700 flex-col">
-        <h1 className="font-extrabold text-white text-center text-2xl text-pretty ">
-          Unis pour votre bien-être <br />
-          <span className="font-semibold text-xl">
+      <div className="flex py-[3.75rem] gap-5 px-7 bg-primary-500 flex-col">
+        <div className="flex flex-col gap-4">
+          <h1 className="font-extrabold text-darker text-pretty leading-none text-center text-3xl">
+            Unis pour votre bien-être <br />
+          </h1>
+          <span className="font-normal text-center leading-6 text-lg">
             Des soins coordonnés au cœur de votre communauté
           </span>
-        </h1>
-        <Button color="secondary.9" rightSection={<FiCalendar />}>
+        </div>
+        <Image
+          quality={100}
+          alt="bg"
+          src={bgHero}
+          width={250}
+          className="mx-auto"
+        />
+        <Button
+          bg={"white"}
+          c={"darker"}
+          fw={"bold"}
+          w={"fit-content"}
+          mx={"auto"}
+          rightSection={<FiCalendar />}
+        >
           Prendre rendez-vous
         </Button>
-      </div>
-      <div className="flex px-10 flex-col items-center gap-5 w-full">
-        {contactCard.map((contact, index) => (
-          <Card
-            className="w-full"
-            shadow="sm"
-            padding="lg"
-            radius="md"
-            withBorder
-          >
-            <CardSection>
-              <div className="flex flex-col gap-8">
-                <div key={index} className="flex flex-col gap-3 items-center">
-                  <ActionIcon
-                    className="hover:-translate-y-1 py-4 transition-transform duration-150"
-                    variant="outline"
-                    color="primary.7"
-                    size={45}
-                  >
-                    {contact.icon}
-                  </ActionIcon>
-                  <p className="font-semibold text-gray-800">{contact.value}</p>
-                </div>
-              </div>
-            </CardSection>
-          </Card>
-        ))}
-      </div>
-      <div className="bg-primary-800  py-8">
-        <div className="px-10">
-          <h2 className="font-bold text-2xl text-white mb-5">Les équipes</h2>
-          <p className="text-white font-normal">
-            Les équipes de la MSP sont composés de plusieurs professionnels de
-            santé provenant de secteur différent. La msp recrute des internes en
-            médecine à Lille et des infirmières issu de la formation de l'IFSI
-            de Valenciennes.
-          </p>
-        </div>
-        <TeamsCard />
-      </div>
-      <div className="">
-        <h2 className="px-10 font-bold text-2xl text-gray-800 mb-5">
-          Les Actus
-        </h2>
-        <CarouselActu />
       </div>
     </div>
   );

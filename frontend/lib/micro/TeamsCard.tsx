@@ -41,7 +41,7 @@ const TeamsCard: React.FC = () => {
                   "" +
                   medecin.name.split(" ")[2].at(0)}
               </Avatar>
-              <Badge variant="outline" color="secondary.9">
+              <Badge variant="outline" color="darker">
                 Médecin Généraliste
               </Badge>
               <p className="text-sm text-nowrap text-white font-bold">
@@ -60,7 +60,7 @@ const TeamsCard: React.FC = () => {
                   "" +
                   medecin.name.split(" ")[2].at(0)}
               </Avatar>
-              <Badge variant="outline" color="secondary.9">
+              <Badge variant="outline" color="darker">
                 Infirmier
               </Badge>
               <p className="text-sm text-nowrap text-white font-bold">
@@ -79,7 +79,7 @@ const TeamsCard: React.FC = () => {
                   "" +
                   medecin.name.split(" ")[2].at(0)}
               </Avatar>
-              <Badge variant="outline" color="secondary.9">
+              <Badge variant="outline" color="darker">
                 Kinésithérapeuthe
               </Badge>
               <p className="text-sm text-nowrap text-white font-bold">
@@ -96,7 +96,7 @@ const TeamsCard: React.FC = () => {
                   "" +
                   medecin.name.split(" ")[2].at(0)}
               </Avatar>
-              <Badge variant="outline" color="secondary.9">
+              <Badge variant="outline" color="darker">
                 Cardiologue
               </Badge>
               <p className="text-sm text-nowrap text-white font-bold">
@@ -113,7 +113,7 @@ const TeamsCard: React.FC = () => {
                   "" +
                   medecin.name.split(" ")[2].at(0)}
               </Avatar>
-              <Badge variant="outline" color="secondary.9">
+              <Badge variant="outline" color="darker">
                 Diététicienne
               </Badge>
               <p className="text-sm text-nowrap text-white font-bold">

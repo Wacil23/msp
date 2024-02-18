@@ -62,7 +62,7 @@ const ActuCards: React.FC<CardProps> = ({
     >
       <div className="flex flex-col justify-around h-full gap-5">
         <Badge
-          color="secondary.7"
+          color="darker"
           className="font-black text-white opacity-85 mt-2 cursor-default"
         >
           {category}
