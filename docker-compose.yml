@@ -41,9 +41,6 @@ services:
       ADMIN_PASSWORD: "d1r3ctu5"
   frontend:
     container_name: frontend
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
     ports:
       - "3000:3000"
 volumes:
