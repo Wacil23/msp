@@ -5,7 +5,6 @@ COPY package.json ./
 COPY package-lock.json ./
 RUN npm install
 COPY . .
-RUN rm -rf .next
 RUN npm run build
 
 # Étape de production
