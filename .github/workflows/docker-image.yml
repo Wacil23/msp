@@ -22,4 +22,4 @@ jobs:
             cd www/msp
             git pull origin prod
             docker-compose -f docker-compose.yml -f docker-compose.prod.yml down
-            docker-compose -f docker-compose.yml -f docker-compose.prod.yml up --build -d
+            docker-compose -f docker-compose.yml --build -d
