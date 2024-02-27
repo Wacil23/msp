@@ -1,0 +1,19 @@
+# Étape de construction
+FROM node:alpine as builder
+WORKDIR /src/app
+COPY package.json ./
+COPY package-lock.json ./
+RUN npm install
+COPY . .
+RUN npm run build
+
+# Étape de production
+FROM node:alpine
+WORKDIR /app
+COPY --from=builder /src/app/next.config.mjs ./
+COPY --from=builder /src/app/public ./public
+COPY --from=builder /src/app/.next ./.next
+COPY --from=builder /src/app/node_modules ./node_modules
+COPY --from=builder /src/app/package.json ./package.json
+EXPOSE 3000
+CMD ["npm", "start"]

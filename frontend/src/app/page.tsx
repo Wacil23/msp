@@ -1,15 +1,13 @@
-"use client";
 import { Button } from "@mantine/core";
 import Image from "next/image";
 import React from "react";
-import { FiCalendar, FiMail, FiMapPin, FiPhone } from "react-icons/fi";
+import { FiCalendar } from "react-icons/fi";
 import bgHero from "@/public/images/Health professional team-amico.png";
-import { directus, readItems } from "@/app/_lib/directus";
+import { directus, readItems } from "@/src/app/_lib/directus";
 import GetBlog from "./_lib/services/Blog.service";
 
-const Home: React.FC = async () => {
-  const resp = await GetBlog();
-  console.log(resp);
+const Home: React.FC = () => {
+  const resp = GetBlog();
   return (
     <div className="flex flex-col gap-20">
       <div className="flex py-[3.75rem] gap-5 px-7 bg-primary-500 flex-col">
