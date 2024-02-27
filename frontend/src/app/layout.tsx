@@ -1,8 +1,8 @@
 import "./global.css";
 import { MantineProvider } from "@mantine/core";
-import Header from "@/app/_lib/components/Header/Header";
+import Header from "@/src/app/_lib/components/Header/Header";
 import "@mantine/core/styles.css";
-import theme from "@/app/_lib/config/theme/Theme";
+import theme from "@/src/app/_lib/config/theme/Theme";
 
 export const metadata = {
   title: "Next.js",
