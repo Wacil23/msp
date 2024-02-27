@@ -1,24 +1,13 @@
 name: Deploy on Production
 
 on:
-  pull_request:
+  push:
     branches:
       - prod
 
 jobs:
-  build-and-test:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-      - name: Install Dependencies
-        run: npm install
-      - name: Build
-        run: npm run build
   deploy:
-    needs: build-and-test
     runs-on: ubuntu-latest
-    if: github.event.pull_request.merged == true
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
