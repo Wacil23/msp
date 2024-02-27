@@ -6,7 +6,7 @@ import React from "react";
 import { FiArrowRight } from "react-icons/fi";
 import { useForm } from "@mantine/form";
 import { yupResolver } from "mantine-form-yup-resolver";
-import { schema } from "@/app/_lib/config/validations/Login";
+import { schema } from "@/src/app/_lib/config/validations/Login";
 
 const Connexion = () => {
   const form = useForm({
