@@ -1,0 +1,27 @@
+name: Build MSP on PR to Prod
+
+on:
+  pull_request:
+    branches:
+      - prod
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./frontend # Remplacez par le chemin réel de votre dossier frontend
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "20" # Spécifiez la version de Node.js qui correspond à votre projet
+
+      - name: Install MSP Dependencies
+        run: npm install
+
+      - name: Build MSP
+        run: npm run build
