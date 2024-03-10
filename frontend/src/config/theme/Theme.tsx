@@ -1,5 +1,6 @@
 "use client";
-import { Button, createTheme } from "@mantine/core";
+import { Button, Input, createTheme } from "@mantine/core";
+import classes from "./theme.module.css";
 
 const theme = createTheme({
   components: {
@@ -7,6 +8,11 @@ const theme = createTheme({
       defaultProps: {
         color: "primary.6",
         autoContrast: false,
+      },
+    }),
+    InputWrapper: Input.Wrapper.extend({
+      classNames: {
+        label: classes.label,
       },
     }),
   },
