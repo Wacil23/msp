@@ -38,6 +38,11 @@ services:
 
       ADMIN_EMAIL: "admin@example.com"
       ADMIN_PASSWORD: "d1r3ctu5"
+      CORS_ENABLED: "true"
+      CORS_ORIGIN: "http://localhost:8055,https://doc.petitdino.fr,http://127.0.0.1:8055"
+      CORS_METHODS: "GET,POST,PUT,DELETE"
+      CORS_ALLOWED_HEADERS: "Content-Type,Authorization,X-Requested-With"
+      CORS_EXPOSED_HEADERS: "Content-Range,X-Content-Range"
   frontend:
     container_name: frontend
     ports:
