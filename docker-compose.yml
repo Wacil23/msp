@@ -13,7 +13,7 @@ services:
     image: redis:6
   directus:
     container_name: directus
-    image: directus/directus:10.9.2
+    image: directus/directus:10.10.2
     ports:
       - "8055:8055"
     volumes:
@@ -39,7 +39,7 @@ services:
       ADMIN_EMAIL: "admin@example.com"
       ADMIN_PASSWORD: "d1r3ctu5"
       CORS_ENABLED: "true"
-      CORS_ORIGIN: "http://localhost:8055,https://doc.petitdino.fr,http://127.0.0.1:8055"
+      CORS_ORIGIN: "true"
       CORS_METHODS: "GET,POST,PUT,DELETE"
       CORS_ALLOWED_HEADERS: "Content-Type,Authorization,X-Requested-With"
       CORS_EXPOSED_HEADERS: "Content-Range,X-Content-Range"

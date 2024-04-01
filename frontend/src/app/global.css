@@ -41,6 +41,7 @@
     @apply font-avenir;
     font-family: "Avenir";
     box-sizing: border-box;
+    color: #1a3129;
   }
 }
 @tailwind components;
