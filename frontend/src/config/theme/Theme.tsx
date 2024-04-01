@@ -6,8 +6,8 @@ const theme = createTheme({
   components: {
     Button: Button.extend({
       defaultProps: {
-        color: "primary.6",
-        autoContrast: false,
+        color: "primary.3",
+        autoContrast: true,
       },
     }),
     InputWrapper: Input.Wrapper.extend({
@@ -18,16 +18,16 @@ const theme = createTheme({
   },
   colors: {
     primary: [
-      "#d0f4c3",
-      "#c7f1b7",
-      "#bdefab",
-      "#b4ed9f",
-      "#aaea93",
-      "#a1e887",
-      "#91d17a",
-      "#81ba6c",
-      "#71a25f",
-      "#618b51",
+      "#f6fde4",
+      "#eef9d2",
+      "#ddf1a8",
+      "#caea7a",
+      "#bbe353",
+      "#b0df3a",
+      "#abdd2b",
+      "#96c41c",
+      "#84ae13",
+      "#6f9700",
     ],
     darker: [
       "#000D44",
@@ -40,6 +40,18 @@ const theme = createTheme({
       "#000D44",
       "#000D44",
       "#000D44",
+    ],
+    main: [
+      "#FAFDF2",
+      "#FAFDF2",
+      "#FAFDF2",
+      "#FAFDF2",
+      "#FAFDF2",
+      "#FAFDF2",
+      "#FAFDF2",
+      "#FAFDF2",
+      "#FAFDF2",
+      "#FAFDF2",
     ],
   },
   fontFamily: "Avenir",
