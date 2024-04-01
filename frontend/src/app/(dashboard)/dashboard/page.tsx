@@ -1,7 +1,8 @@
+import Link from "next/link";
 import React from "react";
 
 const Dashboard = () => {
-  return <div>Dashboddasssssssssssssrd</div>;
+  return <Link href={"/"}>Retour a l'acceuil</Link>;
 };
 
 export default Dashboard;

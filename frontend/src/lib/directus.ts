@@ -7,11 +7,11 @@ import {
 
 export const directus = (token: string = "") => {
   if (token) {
-    return createDirectus("https://doc.petitdino.fr")
+    return createDirectus("http://host.docker.internal:8055")
       .with(staticToken(token))
-      .with(rest());
+      .with(rest({ credentials: "include" }));
   }
-  return createDirectus("https://doc.petitdino.fr")
+  return createDirectus("http://host.docker.internal:8055")
     .with(authentication())
-    .with(rest());
+    .with(rest({ credentials: "include" }));
 };
