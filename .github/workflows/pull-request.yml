@@ -21,7 +21,7 @@ jobs:
           node-version: "20" # Spécifiez la version de Node.js qui correspond à votre projet
 
       - name: Install MSP Dependencies
-        run: npm install
+        run: npm ci
 
       - name: Build MSP
         run: npm run build
