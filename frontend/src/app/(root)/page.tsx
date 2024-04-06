@@ -2,8 +2,7 @@ import { Button } from "@mantine/core";
 import Image from "next/image";
 import React from "react";
 import { FiCalendar, FiUsers } from "react-icons/fi";
-import bgHero from "@/public/images/Illustrations médecins Pana.svg";
-import HeroCard from "@/src/components/_Root/hero/card/card";
+import bgHero from "/public/images/Illustrations_médecins_Pana.svg";
 
 const Home: React.FC = () => {
   return (
