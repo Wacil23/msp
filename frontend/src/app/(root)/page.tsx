@@ -2,7 +2,6 @@ import { Button } from "@mantine/core";
 import Image from "next/image";
 import React from "react";
 import { FiCalendar, FiUsers } from "react-icons/fi";
-import bgHero from "/public/images/Illustrations_médecins_Pana.svg";
 
 const Home: React.FC = () => {
   return (
@@ -42,7 +41,12 @@ const Home: React.FC = () => {
           </div>
         </div>
         <div className="">
-          <Image src={bgHero} width={600} alt="" />
+          <Image
+            src={"/images/Illustrations_médecins_Pana.svg"}
+            width={600}
+            height={600}
+            alt=""
+          />
         </div>
       </div>
       <div className="">
