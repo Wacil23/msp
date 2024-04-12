@@ -34,8 +34,7 @@ const Header = ({ user }: { user: UserAuthenticated }) => {
           <Title
             order={1}
             size={"1rem"}
-            className="font-bold text-darker text-center"
-          >
+            className="font-bold text-darker text-center">
             LOGO
           </Title>
           <ul className="hidden text-darker lg:flex lg:gap-12 lg:font-semibold">
