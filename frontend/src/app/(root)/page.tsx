@@ -54,8 +54,8 @@ const Home: React.FC = () => {
           Qu'est ce qu'une MSP ?
         </h2>
         <p className="text-lg w-1/2">
-          Les maisons de santé pluriprofessionnelles sont des structures de
-          soins de proximité qui regroupent des professionnels de santé médicaux
+          Les maisons de santé pluriprofessionnelles sont des structure de soins
+          de proximité qui regroupent des professionnels de santé médicaux
           notamment des médecins généralistes et paramédicaux comme des
           infirmiers, des kinésithérapeutes ou des orthophonistes.
         </p>
