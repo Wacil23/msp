@@ -1,0 +1,15 @@
+#!/bin/sh
+# Chemin vers le script pre-push
+SCRIPT_PATH="./scripts/pre-push.sh"
+
+# Exécuter le script
+sh "$SCRIPT_PATH"
+
+# Vérifier si le script a réussi
+if [ $? -eq 0 ]; then
+  echo "Pre-push hook completed successfully."
+  exit 0
+else
+  echo "Pre-push hook failed."
+  exit 1
+fi
