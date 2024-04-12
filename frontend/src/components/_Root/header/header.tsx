@@ -22,12 +22,19 @@ const Header = ({ user }: { user: UserAuthenticated }) => {
     .join("");
   return (
     <>
-      <header className="will-change-scroll z-50 px-36 fixed top-0 w-full  py-5 flex justify-between items-center gap-5">
+      <div className="bg-primary-300 px-6 py-3">
+        <nav>
+          <ul>
+            <li>TEL</li>
+          </ul>
+        </nav>
+      </div>
+      <header className="will-change-scroll z-50 px-36 sticky bg-main top-0 w-full  py-5 flex justify-between items-center gap-5">
         <nav className="flex w-full items-center justify-between">
           <Title
             order={1}
             size={"1rem"}
-            className="font-bold text-primary-300 text-center"
+            className="font-bold text-darker text-center"
           >
             LOGO
           </Title>
@@ -65,7 +72,7 @@ const Header = ({ user }: { user: UserAuthenticated }) => {
                   </Button>
                 </div>
               ) : (
-                <Button component={Link} bg={"main"} href={"/connexion"}>
+                <Button component={Link} bg={""} href={"/connexion"}>
                   Connexion
                 </Button>
               )}

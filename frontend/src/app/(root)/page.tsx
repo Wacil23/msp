@@ -6,7 +6,7 @@ import { FiCalendar, FiUsers } from "react-icons/fi";
 const Home: React.FC = () => {
   return (
     <div className="flex relative flex-col gap-20">
-      <div className="flex   rounded-lg py-14 gap-5 md:flex-row  md:justify-between flex-col">
+      <div className="flex bg-primary-300  rounded-lg py-14 gap-5 md:flex-row  md:justify-around flex-col">
         <div className="flex md:flex-row md:justify-between flex-col items-center gap-4">
           <div className="flex flex-col gap-16">
             <div>
@@ -43,22 +43,22 @@ const Home: React.FC = () => {
         <div className="">
           <Image
             src={"/images/Illustrations_médecins_Pana.svg"}
-            width={600}
-            height={600}
+            width={550}
+            height={550}
             alt=""
           />
         </div>
       </div>
-      <div className="">
+      <div className="flex flex-col gap-5">
         <h2 className="font-extrabold text-darker text-4xl">
           Qu'est ce qu'une MSP ?
         </h2>
-        <div>
+        <p className="text-lg w-1/2">
           Les maisons de santé pluriprofessionnelles sont des structures de
           soins de proximité qui regroupent des professionnels de santé médicaux
           notamment des médecins généralistes et paramédicaux comme des
           infirmiers, des kinésithérapeutes ou des orthophonistes.
-        </div>
+        </p>
       </div>
     </div>
   );

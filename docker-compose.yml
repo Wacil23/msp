@@ -4,7 +4,7 @@ services:
     container_name: database
     image: postgis/postgis:13-master
     volumes:
-      - ./data/database:/var/lib/postgresql/data
+      - ./backend/database:/var/lib/postgresql/data
     environment:
       POSTGRES_USER: "directus"
       POSTGRES_PASSWORD: "directus"
@@ -19,6 +19,8 @@ services:
     volumes:
       - my_uploads:/directus/uploads
       - my_extensions:/directus/extensions
+      - "./backend/snapshots:/directus/snapshots"
+
     depends_on:
       - cache
       - database
@@ -31,11 +33,9 @@ services:
       DB_DATABASE: "directus"
       DB_USER: "directus"
       DB_PASSWORD: "directus"
-
       CACHE_ENABLED: "true"
       CACHE_STORE: "redis"
       REDIS: "redis://cache:6379"
-
       ADMIN_EMAIL: "admin@example.com"
       ADMIN_PASSWORD: "d1r3ctu5"
       CORS_ENABLED: "true"

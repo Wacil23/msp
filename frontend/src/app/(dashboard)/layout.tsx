@@ -1,4 +1,5 @@
 import Sidebar from "@/src/components/_Dashboard/sidebar/sidebar";
+import Header from "@/src/components/_Dashboard/header/header";
 
 export const metadata = {
   title: "Next.js",
@@ -11,9 +12,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex">
-      <Sidebar />
-      <main>{children}</main>
-    </div>
+    <>
+      <Header />
+      <div className="flex">
+        <Sidebar />
+        <main>{children}</main>
+      </div>
+    </>
   );
 }
