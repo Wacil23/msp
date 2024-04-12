@@ -1,6 +1,6 @@
 #!/bin/sh
 # Chemin vers le script pre-push
-SCRIPT_PATH="./scripts/pre-push.sh"
+SCRIPT_PATH="../../scripts/pre-push.sh"
 
 # Exécuter le script
 sh "$SCRIPT_PATH"
