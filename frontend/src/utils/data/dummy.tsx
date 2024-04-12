@@ -43,7 +43,7 @@ export const links = [
     links: [
       {
         url: "parametres",
-        name: "paramètre",
+        name: "paramètres",
         icon: <FiSettings />,
       },
     ],
