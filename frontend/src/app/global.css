@@ -46,3 +46,15 @@
 }
 @tailwind components;
 @tailwind utilities;
+.mantine-NavLink-label {
+  font-size: 1rem !important;
+}
+.mantine-NavLink-root[data-active] .mantine-NavLink-label {
+  font-weight: 700 !important;
+}
+.mantine-NavLink-root:active .mantine-NavLink-label {
+  color: white;
+}
+.mantine-NavLink-root:active .mantine-NavLink-section {
+  color: white;
+}

@@ -36,7 +36,6 @@ async function Hero() {
           </div>
         </div>
       </div>
-      <Categories subCategories={subCategories} categories={categories} />
     </div>
   );
 }
