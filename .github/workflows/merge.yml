@@ -23,3 +23,6 @@ jobs:
             git pull origin prod
             docker-compose -f docker-compose.yml -f docker-compose.prod.yml down
             docker-compose -f docker-compose.yml -f docker-compose.prod.yml up --build -d
+            LATEST_SNAPSHOT=$(ls -Art ./backend/snapshots/*.yaml | tail -n 1)
+            echo "Applying latest snapshot: $LATEST_SNAPSHOT"
+            docker-compose -f docker-compose.yml -f docker-compose.prod.yml exec -T directus npx directus schema apply $LATEST_SNAPSHOT
