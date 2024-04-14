@@ -3,8 +3,11 @@ services:
   database:
     container_name: database
     image: postgis/postgis:13-master
+    platform: linux/amd64
     volumes:
       - ./backend/database:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"
     environment:
       POSTGRES_USER: "directus"
       POSTGRES_PASSWORD: "directus"
