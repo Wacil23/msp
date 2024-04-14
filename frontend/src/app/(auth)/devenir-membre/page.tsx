@@ -1,7 +1,7 @@
 import React from "react";
 
 const DevenirMembre = () => {
-  return <div>DevenirMembre</div>;
+  return <div>Devenir Membre</div>;
 };
 
 export default DevenirMembre;
