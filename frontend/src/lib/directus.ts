@@ -5,13 +5,14 @@ import {
   staticToken,
 } from "@directus/sdk";
 
+const directusUrl = process.env.NEXT_PUBLIC_DIRECTUS;
 export const directus = (token: string = "") => {
   if (token) {
-    return createDirectus("http://host.docker.internal:8055")
+    return createDirectus(directusUrl!)
       .with(staticToken(token))
       .with(rest({ credentials: "include" }));
   }
-  return createDirectus("http://host.docker.internal:8055")
+  return createDirectus(directusUrl!)
     .with(authentication())
     .with(rest({ credentials: "include" }));
 };
