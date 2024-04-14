@@ -15,12 +15,11 @@ const Post: React.FC<PostProps> = ({ className, article }) => {
         <>
           <p className="text-darker decoration-primary-300 underline underline-offset-8 text-xl font-semibold"></p>
           <div className="w-full flex justify-end">
-            <Image
+            <img
               src={directusUrl + article.image.filename_disk}
               width={300}
               height={300}
               alt=""
-              priority={true}
               className="rounded-t-lg rounded-tr-lg h-40 object-cover w-[70%]"
             />
           </div>
