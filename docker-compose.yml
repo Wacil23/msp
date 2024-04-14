@@ -7,7 +7,7 @@ services:
     volumes:
       - ./backend/database:/var/lib/postgresql/data
     ports:
-      - "5432:5432"
+      - "5433:5432"
     environment:
       POSTGRES_USER: "directus"
       POSTGRES_PASSWORD: "directus"
@@ -23,10 +23,10 @@ services:
       - my_uploads:/directus/uploads
       - my_extensions:/directus/extensions
       - "./backend/snapshots:/directus/snapshots"
-
     depends_on:
       - cache
       - database
+    restart: unless-stopped
     environment:
       KEY: "255d861b-5ea1-5996-9aa3-922530ec40b1"
       SECRET: "6116487b-cda1-52c2-b5b5-c8022c45e263"

@@ -2,7 +2,7 @@ import { Button } from "@mantine/core";
 import Image from "next/image";
 import React from "react";
 import { FiCalendar, FiUsers } from "react-icons/fi";
-
+import HeroImage from "@/public/images/Illustrations_médecins_Pana.svg";
 const Home: React.FC = () => {
   return (
     <div className="flex relative flex-col gap-20">
@@ -41,12 +41,7 @@ const Home: React.FC = () => {
           </div>
         </div>
         <div className="">
-          <Image
-            src={"/images/Illustrations_médecins_Pana.svg"}
-            width={550}
-            height={550}
-            alt=""
-          />
+          <Image src={HeroImage} width={550} height={550} alt="hero image" />
         </div>
       </div>
       <div className="flex flex-col gap-5">

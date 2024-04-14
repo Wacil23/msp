@@ -7,7 +7,7 @@ type PostProps = {
   className: string;
   article: BlogArticle;
 };
-
+const directusUrl = process.env.NEXT_PUBLIC_DIRECTUS_ASSETS;
 const Post: React.FC<PostProps> = ({ className, article }) => {
   return (
     <div className={className}>
@@ -16,10 +16,7 @@ const Post: React.FC<PostProps> = ({ className, article }) => {
           <p className="text-darker decoration-primary-300 underline underline-offset-8 text-xl font-semibold"></p>
           <div className="w-full flex justify-end">
             <Image
-              src={
-                "http://host.docker.internal:8055/assets/" +
-                article.image.filename_disk
-              }
+              src={directusUrl + article.image.filename_disk}
               width={300}
               height={300}
               alt=""
