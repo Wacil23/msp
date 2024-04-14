@@ -6,7 +6,7 @@ import { signIn } from "next-auth/react";
 import React from "react";
 import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
 import Image from "next/image";
-import LoginImg from "@/public/images/Doctor-pana.svg";
+import LoginImg from "../../../../public/images/Doctor-pana.svg";
 import SnackBar, { SnackType } from "@/src/components/_Root/snackbar/snackbar";
 import { Divider } from "@mantine/core";
 
