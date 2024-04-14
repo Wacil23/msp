@@ -7,7 +7,7 @@ services:
     volumes:
       - ./backend/database:/var/lib/postgresql/data
     ports:
-      - "5433:5432"
+      - "5432:5432"
     environment:
       POSTGRES_USER: "directus"
       POSTGRES_PASSWORD: "directus"
