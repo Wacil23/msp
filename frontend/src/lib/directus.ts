@@ -8,6 +8,7 @@ import {
 const directusUrl = process.env.NEXT_PUBLIC_DIRECTUS;
 export const directus = (token: string = "") => {
   if (token) {
+    console.log("heeererererer");
     return createDirectus(directusUrl!)
       .with(staticToken(token))
       .with(rest({ credentials: "include" }));

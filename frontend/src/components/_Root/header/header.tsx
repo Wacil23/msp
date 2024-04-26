@@ -22,19 +22,20 @@ const Header = ({ user }: { user: UserAuthenticated }) => {
     .join("");
   return (
     <>
-      <div className="bg-primary-300 px-6 py-3">
+      <div className="bg-primary px-6 py-3">
         <nav>
           <ul>
             <li>TEL</li>
           </ul>
         </nav>
       </div>
-      <header className="will-change-scroll z-50 px-36 sticky bg-main top-0 w-full  py-5 flex justify-between items-center gap-5">
+      <header className="will-change-scroll z-50 px-24 sticky bg-main top-0 w-full py-5 flex justify-between items-center gap-5">
         <nav className="flex w-full items-center justify-between">
           <Title
             order={1}
             size={"1rem"}
-            className="font-bold text-darker text-center">
+            className="font-bold text-darker text-center"
+          >
             LOGO
           </Title>
           <ul className="hidden text-darker lg:flex lg:gap-12 lg:font-semibold">
@@ -121,7 +122,7 @@ const MenuDrawer: React.FC<MenuDrawerProps> = ({ opened, onClose, user }) => {
                     href={link.href}
                   >
                     {link.title}
-                    <span className="block max-w-0 group-hover:max-w-full bg-primary-300 transition-all h-0.5"></span>
+                    <span className="block max-w-0 group-hover:max-w-full bg-primary transition-all h-0.5"></span>
                   </Link>
                 </li>
               ))}

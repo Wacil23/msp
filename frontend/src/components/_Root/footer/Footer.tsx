@@ -6,7 +6,7 @@ import { PiMapPinBold, PiPhoneBold } from "react-icons/pi";
 
 const Footer = () => {
   return (
-    <footer className="bg-primary-300 sticky bottom-0 -z-10 flex flex-col gap-5 px-36 py-12">
+    <footer className="bg-primary sticky bottom-0 -z-10 flex flex-col gap-5 px-36 py-12">
       <div className="flex justify-between items-center text-darker font-semibold">
         <h2>LOGO</h2>
         <nav className="w-2/5">

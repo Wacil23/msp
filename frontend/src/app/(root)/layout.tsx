@@ -19,9 +19,7 @@ export default async function MainLayout({
   return (
     <>
       <Header user={user} />
-      <main className="bg-main md:px-36 md:pt-10 md:pb-32 min-h-dvh">
-        {children}
-      </main>
+      <main className="bg-main  min-h-dvh">{children}</main>
       <Footer />
     </>
   );

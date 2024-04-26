@@ -1,54 +1,46 @@
 "use client";
-import Image from "next/image";
+import Hero from "@/src/components/_Root/hero/hero";
+import { Button, TextInput, Textarea } from "@mantine/core";
 import React from "react";
-import ContactUs from "@/public/images/Contact us.svg";
-import AuthForm from "@/src/components/_Root/form/AuthForm";
-import { Button, ThemeIcon } from "@mantine/core";
-import { GrArticle } from "react-icons/gr";
-import { FiCalendar, FiUsers } from "react-icons/fi";
 
 const Contact = () => {
   return (
-    <div>
-      <div className="flex bg-primary-300  rounded-lg py-14 gap-5 md:flex-row  md:justify-around flex-col">
-        <div className="flex md:flex-row md:justify-between flex-col items-center gap-4">
-          <div className="flex flex-col gap-16">
-            <div>
-              <h1 className="font-extrabold md:text-5xl mb-4  text-darker text-pretty leading-none text-center text-3xl">
-                Contactez-nous
-              </h1>
-              <span className="font-semibold leading-6 text-lg"></span>
-            </div>
-            <div className="flex items-center gap-8">
-              <Button
-                bg={"main"}
-                c={"darker"}
-                fw={"bold"}
-                size="md"
-                variant="outline"
-                rightSection={<FiCalendar />}
-              >
-                Prendre rendez-vous
-              </Button>
-              <Button
-                variant="filled"
-                size="md"
-                fw={"bold"}
-                rightSection={<FiUsers />}
-              >
-                Devenir membre
-              </Button>
-            </div>
+    <div className="flex flex-col gap-8 py-16">
+      <Hero
+        title="Nous contacter"
+        subtitle={
+          <>
+            Une question ? <br /> Envoyer nous un message{" "}
+          </>
+        }
+      />
+      <div className="flex md:mx-24 border rounded-md p-5">
+        <form className="flex flex-col gap-3 w-1/2">
+          <div className="flex  gap-5">
+            <TextInput
+              className="w-full"
+              type="text"
+              label="Nom"
+              placeholder="Exemple : Doe"
+              required
+            />
+            <TextInput
+              className="w-full"
+              type="text"
+              label="Prénom"
+              placeholder="Exemple : John"
+              required
+            />
           </div>
-        </div>
-        <div className="">
-          <Image
-            src={"/images/Illustrations_médecins_Pana.svg"}
-            width={550}
-            height={550}
-            alt=""
+          <TextInput
+            type="email"
+            label="Email"
+            placeholder="Votre adresse email"
+            required
           />
-        </div>
+          <Textarea label="Message" placeholder="Votre message" required />
+          <Button className="mt-5">Envoyer</Button>
+        </form>
       </div>
     </div>
   );

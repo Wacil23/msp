@@ -24,7 +24,10 @@ export const useGetAllArticlesBlog = async () => {
     readItems("blog", {
       fields: [
         "title, id, small_description",
-        "category.category_blog_id.title",
+        "category.title",
+        "category.id",
+        "category.parent_category.id",
+        "category.parent_category.title",
         "image.filename_disk",
       ],
     })
