@@ -4,6 +4,7 @@ import Post from "./post/post";
 import { Button, Pagination, TextInput } from "@mantine/core";
 import { useBlogStore } from "@/src/store/blogStore";
 import { BlogSubCategoriesProps } from "@/src/lib/services/blog/BlogCategory";
+import { useSession } from "next-auth/react";
 
 interface PostsProps {
   subCategories: BlogSubCategoriesProps[];
@@ -14,7 +15,7 @@ const Posts: React.FC<PostsProps> = ({ subCategories }) => {
   const initializeArticles = useBlogStore((state) => state.initializeArticles);
   const [currentPage, setCurrentPage] = React.useState(1);
   const articlesPerPage = 6;
-
+  const token = useSession();
   React.useEffect(() => {
     initializeArticles();
   }, [initializeArticles]);
@@ -35,7 +36,11 @@ const Posts: React.FC<PostsProps> = ({ subCategories }) => {
       <div className="flex w-full justify-between px-24">
         <div className="grid lg:grid-cols-2 gap-y-8 w-[70%] justify-items-stretch ">
           {currentArticles?.map((article) => (
-            <Post article={article} subCategories={subCategories} />
+            <Post
+              key={article.id}
+              article={article}
+              subCategories={subCategories}
+            />
           ))}
         </div>
         <aside className="flex flex-col gap-2 w-2/6 bg-primary p-6 rounded-md">

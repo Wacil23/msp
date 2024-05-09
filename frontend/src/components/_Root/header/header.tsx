@@ -1,12 +1,21 @@
 "use client";
 import { UserAuthenticated } from "@/types/next-auth";
-import { Avatar, Button, Drawer, Title } from "@mantine/core";
+import { Button, Drawer, Title } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import { signOut } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React from "react";
-import { FiLogIn, FiMenu, FiUser } from "react-icons/fi";
+import {
+  FiHome,
+  FiLogIn,
+  FiLogOut,
+  FiMenu,
+  FiMessageCircle,
+  FiSettings,
+  FiUser,
+} from "react-icons/fi";
+import MenuUI, { MenuItem } from "../../_UI/Menu/Menu";
+import { signOut } from "next-auth/react";
 
 type MenuDrawerProps = {
   opened: boolean;
@@ -14,12 +23,36 @@ type MenuDrawerProps = {
   user: UserAuthenticated;
 };
 
+const menuItems: MenuItem[] = [
+  {
+    icon: FiHome,
+    label: "Accueil",
+    href: "/dashboard/",
+    component: Link,
+  },
+  {
+    icon: FiMessageCircle,
+    label: "Messages",
+    href: "/dashboard/chat",
+    component: Link,
+  },
+  {
+    icon: FiSettings,
+    label: "Paramètres",
+    href: "/dashboard/parametre",
+    component: Link,
+  },
+  {
+    icon: FiLogOut,
+    label: "Se déconnecter",
+    action: signOut,
+    color: "red",
+  },
+];
+
 const Header = ({ user }: { user: UserAuthenticated }) => {
   const [opened, { open, close }] = useDisclosure(false);
-  const initial = user?.name
-    ?.split(" ")
-    .map((part) => part[0].toUpperCase())
-    .join("");
+
   return (
     <>
       <div className="bg-primary px-6 py-3">
@@ -29,12 +62,12 @@ const Header = ({ user }: { user: UserAuthenticated }) => {
           </ul>
         </nav>
       </div>
-      <header className="will-change-scroll z-50 px-24 sticky bg-main top-0 w-full py-5 flex justify-between items-center gap-5">
+      <header className="will-change-scroll z-50  px-8 md:px-24 sticky bg-main top-0 w-full py-5 flex justify-between items-center gap-5">
         <nav className="flex w-full items-center justify-between">
           <Title
             order={1}
             size={"1rem"}
-            className="font-bold text-darker text-center"
+            className="font-semibold text-darker text-center"
           >
             LOGO
           </Title>
@@ -46,31 +79,19 @@ const Header = ({ user }: { user: UserAuthenticated }) => {
               <Link href="/blog">Blog</Link>
             </li>
             <li>
-              <Link href="/dashboard">Qui sommes nous ?</Link>
+              <Link href="/qui-sommes-nous">Qui sommes nous ?</Link>
             </li>
             <li>
               <Link href="/contact">Contact</Link>
             </li>
             <li>
-              <Link href="/dashboard">FAQ</Link>
+              <Link href="/faq">FAQ</Link>
             </li>
           </ul>
           <ul className="hidden lg:flex">
             <li>
               {user ? (
-                <div className="flex items-center gap-3">
-                  <Avatar
-                    className="cursor-pointer"
-                    radius="xl"
-                    size="lg"
-                    color="green"
-                  >
-                    {initial}
-                  </Avatar>
-                  <Button onClick={() => signOut()} color="red">
-                    Se déconnecter
-                  </Button>
-                </div>
+                <MenuUI menuItems={menuItems} name={user.name} key={user.id} />
               ) : (
                 <Button component={Link} bg={""} href={"/connexion"}>
                   Connexion
@@ -93,10 +114,10 @@ const Header = ({ user }: { user: UserAuthenticated }) => {
 const MenuDrawer: React.FC<MenuDrawerProps> = ({ opened, onClose, user }) => {
   const links = [
     { title: "Accueil", href: "/" },
-    { title: "Qui sommes nous ?", href: "/connexion" },
+    { title: "Qui sommes nous ?", href: "/qui-sommes-nous" },
     { title: "Blog", href: "/blog" },
-    { title: "FAQ", href: "/dashboard" },
-    { title: "Contact", href: "/dashboard" },
+    { title: "FAQ", href: "/faq" },
+    { title: "Contact", href: "/contact" },
   ];
 
   const handleLinkClick = () => onClose();

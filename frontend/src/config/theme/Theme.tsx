@@ -1,13 +1,14 @@
 "use client";
 import { Button, Input, createTheme } from "@mantine/core";
 import classes from "./theme.module.css";
+import { config } from "../../middleware";
 
 const theme = createTheme({
   components: {
     Button: Button.extend({
       defaultProps: {
         color: "primary.3",
-        autoContrast: true,
+        fw: "bold",
       },
     }),
     InputWrapper: Input.Wrapper.extend({
@@ -15,31 +16,36 @@ const theme = createTheme({
         label: classes.label,
       },
     }),
+    Input: Input.extend({
+      classNames: {
+        input: classes.input,
+      },
+    }),
   },
   colors: {
     primary: [
-      "#f6fde4",
-      "#eef9d2",
-      "#ddf1a8",
-      "#caea7a",
-      "#bbe353",
-      "#b0df3a",
-      "#abdd2b",
-      "#96c41c",
-      "#84ae13",
-      "#6f9700",
+      "#7cbb73",
+      "#7cbb73",
+      "#7cbb73",
+      "#7cbb73",
+      "#7cbb73",
+      "#7cbb73",
+      "#7cbb73",
+      "#7cbb73",
+      "#7cbb73",
+      "#7cbb73",
     ],
     darker: [
-      "#000D44",
-      "#000D44",
-      "#000D44",
-      "#000D44",
-      "#000D44",
-      "#000D44",
-      "#000D44",
-      "#000D44",
-      "#000D44",
-      "#000D44",
+      "#0a1c2d",
+      "#0a1c2d",
+      "#0a1c2d",
+      "#0a1c2d",
+      "#0a1c2d",
+      "#0a1c2d",
+      "#0a1c2d",
+      "#0a1c2d",
+      "#0a1c2d",
+      "#0a1c2d",
     ],
     main: [
       "#FAFDF2",
@@ -54,7 +60,7 @@ const theme = createTheme({
       "#FAFDF2",
     ],
   },
-  fontFamily: "Avenir",
+  fontFamily: "Silka",
 });
 
 export default theme;

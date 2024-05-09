@@ -1,7 +1,6 @@
 import { schema } from "@/src/config/validations/Login";
 import { Button, PasswordInput, TextInput } from "@mantine/core";
 import { useForm, yupResolver } from "@mantine/form";
-import Link from "next/link";
 import React, { FormEvent } from "react";
 import { CiAt } from "react-icons/ci";
 import { PiPasswordLight } from "react-icons/pi";
@@ -16,7 +15,7 @@ export type AuthFormProps = {
   buttonText: string;
   onSubmit: (data: Login) => void;
   linkText: string;
-  linkHref: string;
+  onButtonClick: () => void;
   loading: boolean;
 };
 
@@ -26,7 +25,7 @@ export default function AuthForm({
   loading,
   onSubmit,
   linkText,
-  linkHref,
+  onButtonClick,
 }: AuthFormProps) {
   const form = useForm({
     initialValues: { email: "", password: "" },
@@ -68,12 +67,13 @@ export default function AuthForm({
         <Button type="submit" loading={loading}>
           {buttonText}
         </Button>
-        <Link
-          className="text-md underline underline-offset-2 text-primary-700 font-bold text-center"
-          href={linkHref}
+        <Button
+          className="text-md underline underline-offset-2 w-fit font-medium text-center"
+          variant="transparent"
+          onClick={onButtonClick}
         >
           {linkText}
-        </Link>
+        </Button>
       </div>
     </form>
   );

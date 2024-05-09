@@ -1,46 +1,50 @@
 @font-face {
-  font-family: "Avenir";
-  src: url("../../public/fonts/avenir/AvenirRegular.ttf");
-  font-weight: 400;
-}
-@font-face {
-  font-family: "Avenir";
-  src: url("../../public/fonts/avenir/AvenirThin.ttf");
+  font-family: "Silka";
+  src: url("../../public/fonts/silka/silka-thin-webfont.ttf");
   font-weight: 100;
 }
 @font-face {
-  font-family: "Avenir";
-  src: url("../../public/fonts/avenir/AvenirLight.ttf");
+  font-family: "Silka";
+  src: url("../../public/fonts/silka/silka-extralight-webfont.ttf");
   font-weight: 200;
 }
 @font-face {
-  font-family: "Avenir";
-  src: url("../../public/fonts/avenir/AvenirMedium.ttf");
+  font-family: "Silka";
+  src: url("../../public/fonts/silka/silka-light-webfont.ttf");
+  font-weight: 300;
+}
+@font-face {
+  font-family: "Silka";
+  src: url("../../public/fonts/silka/silka-regular-webfont.ttf");
+  font-weight: 400;
+}
+@font-face {
+  font-family: "Silka";
+  src: url("../../public/fonts/silka/silka-medium-webfont.ttf");
+  font-weight: 500;
+}
+@font-face {
+  font-family: "Silka";
+  src: url("../../public/fonts/silka/silka-semibold-webfont.ttf");
   font-weight: 600;
 }
 @font-face {
-  font-family: "Avenir";
-  src: url("../../public/fonts/avenir/AvenirDemi.ttf");
+  font-family: "Silka";
+  src: url("../../public/fonts/silka/silka-bold-webfont.ttf");
   font-weight: 700;
 }
 @font-face {
-  font-family: "Avenir";
-  src: url("../../public/fonts/avenir/AvenirBold.ttf");
+  font-family: "Silka";
+  src: url("../../public/fonts/silka/silka-black-webfont.ttf");
   font-weight: 800;
-}
-@font-face {
-  font-family: "Avenir";
-  src: url("../../public/fonts/avenir/AvenirHeavy.ttf");
-  font-weight: 900;
 }
 
 @layer base {
   html,
   body {
-    @apply font-avenir;
-    font-family: "Avenir";
+    font-family: "Silka";
     box-sizing: border-box;
-    color: #1a3129;
+    color: #0a1c2d !important;
   }
 }
 @layer tailwind {
@@ -48,6 +52,7 @@
 }
 @tailwind components;
 @tailwind utilities;
+
 .mantine-NavLink-label {
   font-size: 1rem !important;
 }

@@ -10,12 +10,24 @@ declare module "next-auth" {
     access_token: string;
     expires: number;
     refresh_token: string;
+    avatar?: string;
+    profession?: string;
+    telephone?: string;
+    civility?: string;
   }
 
   interface Session {
     user: DefaultSession["user"] & {
       id?: string;
+      first_name?: string;
+      last_name?: string;
+      avatar?: string;
+      profession?: string;
+      telephone?: string;
+      civility?: string;
     };
+    acess_token?: string;
+    refresh_token?: string;
     error?: string;
   }
 }
@@ -43,6 +55,10 @@ export type UserSession = {
   access_token: string;
   expires: number;
   refresh_token: string;
+  avatar?: string;
+  telephone?: string;
+  profession?: string;
+  civility?: string;
 };
 
 export type UserParams = {
@@ -51,6 +67,10 @@ export type UserParams = {
   first_name?: string;
   last_name?: string;
   email?: string;
+  avatar?: string;
+  telephone?: string;
+  profession?: string;
+  civility?: string;
 };
 
 export type UserAuthenticated = {

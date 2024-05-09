@@ -12,6 +12,7 @@ const Blog: React.FC = async () => {
   const categories: BlogCategoriesProps[] = await useGetAllCategoriesBlog();
   const subCategories: BlogSubCategoriesProps[] =
     await useGetAllSubCategoriesBlog();
+
   return (
     <div className="flex flex-col gap-8 py-16">
       <Hero

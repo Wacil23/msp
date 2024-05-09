@@ -11,13 +11,16 @@ module.exports = {
     extend: {
       colors: {
         main: "#ffffff",
-        primary: "#f4f4f4",
-        secondary: "#caea7a",
-        darker: "#191818",
+        primary: "#f6f9fb",
+        secondary: "#09dc7e",
+        darker: "#0a1c2d",
+      },
+      boxShadow: {
+        header: "0px 2px 5px #f0f0f0",
       },
     },
     fontFamily: {
-      avenir: ["Avenir", "sans-serif"],
+      silka: ["Silka", "sans-serif"],
     },
   },
   plugins: [],

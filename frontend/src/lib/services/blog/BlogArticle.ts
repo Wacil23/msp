@@ -1,4 +1,4 @@
-import { readItems } from "@directus/sdk";
+import { readItems, withToken } from "@directus/sdk";
 import { directus } from "../../directus";
 
 export type BlogArticle = {
