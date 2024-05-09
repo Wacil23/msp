@@ -76,8 +76,8 @@ const Parametres = () => {
         email: me.email ?? "",
         first_name: me.first_name ?? "",
         last_name: me.last_name ?? "",
-        profession: me.profession,
-        telephone: me.telephone,
+        profession: me.profession ?? "",
+        telephone: me.telephone ?? "",
       });
     }
   }, [me]);
