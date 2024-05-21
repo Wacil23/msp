@@ -39,7 +39,7 @@ const Connexion = () => {
   };
 
   return (
-    <div className="flex h-dvh md:p-4">
+    <div className="flex  h-dvh md:p-4">
       <div className="bg-primary-200 hidden lg:w-3/5 xl:w-2/5 lg:flex rounded-xl">
         <Image className="mx-auto" src={LoginImg} alt="Image connexion" />
       </div>
@@ -52,7 +52,7 @@ const Connexion = () => {
             <FiArrowLeft /> Revenir à l'acceuil
           </Link>
           <div className="md:rounded-lg py-5 md:px-20 px-10 md:shadow-slate-100 m-auto md:mx-12 md:shadow">
-            <h1 className="text-xl md:text-4xl text-darker font-bold text-center mb-5">
+            <h1 className="text-xl md:text-4xl group text-darker font-bold text-center mb-5">
               Mot de passe oublié
             </h1>
 

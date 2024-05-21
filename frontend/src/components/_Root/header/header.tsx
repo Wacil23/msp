@@ -23,6 +23,34 @@ type MenuDrawerProps = {
   user: UserAuthenticated;
 };
 
+const navMenu = [
+  {
+    label: "Accueil",
+    href: "/",
+    isActive: false,
+  },
+  {
+    label: "Blog",
+    href: "/blog",
+    isActive: false,
+  },
+  {
+    label: "Qui sommes nous ?",
+    href: "/qui-sommes-nous",
+    isActive: false,
+  },
+  {
+    label: "contact",
+    href: "/contact",
+    isActive: false,
+  },
+  {
+    label: "faq",
+    href: "/faq",
+    isActive: false,
+  },
+];
+
 const menuItems: MenuItem[] = [
   {
     icon: FiHome,
@@ -52,7 +80,7 @@ const menuItems: MenuItem[] = [
 
 const Header = ({ user }: { user: UserAuthenticated }) => {
   const [opened, { open, close }] = useDisclosure(false);
-
+  const router = useRouter();
   return (
     <>
       <div className="bg-primary px-6 py-3">
@@ -71,22 +99,19 @@ const Header = ({ user }: { user: UserAuthenticated }) => {
           >
             LOGO
           </Title>
-          <ul className="hidden text-darker lg:flex lg:gap-12 lg:font-semibold">
-            <li>
-              <Link href="/">Accueil</Link>
-            </li>
-            <li>
-              <Link href="/blog">Blog</Link>
-            </li>
-            <li>
-              <Link href="/qui-sommes-nous">Qui sommes nous ?</Link>
-            </li>
-            <li>
-              <Link href="/contact">Contact</Link>
-            </li>
-            <li>
-              <Link href="/faq">FAQ</Link>
-            </li>
+          <ul className="hidden text-darker lg:flex lg:gap-12 ">
+            {navMenu.map((menu) => (
+              <li>
+                <Link
+                  className={`capitalize ${
+                    menu.isActive ? "font-semibold" : "font-medium"
+                  }`}
+                  href={menu.href}
+                >
+                  {menu.label}
+                </Link>
+              </li>
+            ))}
           </ul>
           <ul className="hidden lg:flex">
             <li>
