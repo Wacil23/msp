@@ -45,6 +45,7 @@
     font-family: "Silka";
     box-sizing: border-box;
     color: #0a1c2d !important;
+    scroll-behavior: smooth;
   }
 }
 @layer tailwind {

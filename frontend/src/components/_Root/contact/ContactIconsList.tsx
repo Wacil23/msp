@@ -16,7 +16,7 @@ function ContactIcon({
   ...others
 }: ContactIconProps) {
   return (
-    <div className="flex items-center text-white" {...others}>
+    <div className="flex items-center text-darker" {...others}>
       <Box mr="md">
         <Icon style={{ width: rem(24), height: rem(24) }} />
       </Box>
@@ -25,7 +25,7 @@ function ContactIcon({
         <Text size="xs" className="text-blue-500">
           {title}
         </Text>
-        <Text className="text-white">{description}</Text>
+        <Text className="text-darker">{description}</Text>
       </div>
     </div>
   );

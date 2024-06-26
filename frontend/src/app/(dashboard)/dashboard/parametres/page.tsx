@@ -9,7 +9,6 @@ import {
   Blockquote,
   Button,
   FileButton,
-  PasswordInput,
   Skeleton,
   TextInput,
 } from "@mantine/core";
@@ -20,7 +19,6 @@ import { FiCheck, FiEdit } from "react-icons/fi";
 import { Notifications, notifications } from "@mantine/notifications";
 import useSWR, { useSWRConfig } from "swr";
 import { CgClose } from "react-icons/cg";
-import Password from "@/src/components/_Root/parameters/password/password";
 import PasswordForm from "@/src/components/_Root/parameters/password/password";
 import { CiWarning } from "react-icons/ci";
 import { UploadFiles } from "@/src/lib/services/files/Files";
@@ -46,7 +44,7 @@ const Parametres = () => {
   const { mutate } = useSWRConfig();
   const { data: me, error } = useSWR(
     user?.acess_token ? "users/me" : null,
-    fetcher
+    fetcher,
   );
 
   const form = useForm<FormGeneralValues>({
@@ -85,7 +83,7 @@ const Parametres = () => {
   if (status === "unauthenticated") {
     return (
       <div>
-        <p>Vous avez été déconnecté...</p>
+        <p> Vous avez été déconnecté...</p>
         <Button onClick={() => signOut()}>Se reconnecter</Button>
       </div>
     );
@@ -93,7 +91,7 @@ const Parametres = () => {
 
   if (error)
     return (
-      <div className="grid place-items-center place-content-center">
+      <div className="grid place-content-center place-items-center">
         Oops ... Il semble qu'il y a eu un petit problème veuillez réessayer
       </div>
     );
@@ -101,15 +99,15 @@ const Parametres = () => {
   if (!me)
     return (
       <Skeleton className="m-10" animate>
-        <div className="p-12  rounded-md bg-primary/55 h-full">
+        <div className="h-full rounded-md bg-primary/55 p-12">
           <div className="flex items-center justify-between">
             <div className="flex flex-col">
-              <h1 className="font-extrabold text-2xl">Paramètres</h1>
+              <h1 className="text-2xl font-extrabold">Paramètres</h1>
               <h2>Modifiez vos paramètres de compte</h2>
             </div>
           </div>
-          <div className="py-12 flex gap-8 h-full">
-            <div className="flex flex-col gap-3 items-center"></div>
+          <div className="flex h-full gap-8 py-12">
+            <div className="flex flex-col items-center gap-3"></div>
           </div>
         </div>
       </Skeleton>
@@ -182,19 +180,18 @@ const Parametres = () => {
     });
     mutate("users/me", fetcher);
   };
-  console.log(user?.user.avatar);
   return (
     <div className="md:m-10">
       <Notifications position="top-right" />
-      <div className="md:p-12 p-4  rounded-md bg-primary/55 h-full">
+      <div className="h-full rounded-md bg-primary/55 p-4 md:p-12">
         <div className="flex items-center justify-between">
           <div className="flex flex-col">
-            <h1 className="font-extrabold text-2xl">Paramètres</h1>
+            <h1 className="text-2xl font-extrabold">Paramètres</h1>
             <h2>Modifiez vos paramètres de compte</h2>
           </div>
         </div>
-        <div className="py-12 flex flex-col md:flex-row gap-8 h-full">
-          <div className="flex flex-col gap-3 items-center">
+        <div className="flex h-full flex-col gap-8 py-12 md:flex-row">
+          <div className="flex flex-col items-center gap-3">
             <Avatar
               size={"5rem"}
               src={user?.user.avatar && directusUrl + user.user.avatar}
@@ -215,9 +212,9 @@ const Parametres = () => {
               )}
             </FileButton>
           </div>
-          <div className="flex flex-col gap-10 w-full">
-            <form className="w-full flex flex-col gap-5">
-              <h2 className="font-semibold text-lg">Générale</h2>
+          <div className="flex w-full flex-col gap-10">
+            <form className="flex w-full flex-col gap-5">
+              <h2 className="text-lg font-semibold">Générale</h2>
               <div className="flex gap-4">
                 <TextInput
                   className="w-full"
@@ -250,8 +247,8 @@ const Parametres = () => {
                 Enregistrer les modifications
               </Button>
             </form>
-            <form className="w-full flex flex-col gap-5">
-              <h2 className="font-semibold text-lg">Mot de passe</h2>
+            <form className="flex w-full flex-col gap-5">
+              <h2 className="text-lg font-semibold">Mot de passe</h2>
               <Blockquote
                 color="orange"
                 radius="md"

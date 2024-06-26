@@ -13,6 +13,14 @@ export default async function RootLayout({
 }) {
   return (
     <html lang="fr" data-mantine-color-scheme="light">
+      <head>
+        <script
+          id="Cookiebot"
+          src="https://consent.cookiebot.com/uc.js"
+          data-cbid="ebb3e4a4-f896-481e-88dd-88e6a54d26e2"
+          type="text/javascript"
+        ></script>
+      </head>
       <body>
         <Providers>
           <LoadingManager>

@@ -25,17 +25,12 @@ type MenuDrawerProps = {
 
 const navMenu = [
   {
-    label: "Accueil",
-    href: "/",
-    isActive: false,
-  },
-  {
     label: "Blog",
     href: "/blog",
     isActive: false,
   },
   {
-    label: "Qui sommes nous ?",
+    label: "Qui sommes nous",
     href: "/qui-sommes-nous",
     isActive: false,
   },
@@ -83,25 +78,18 @@ const Header = ({ user }: { user: UserAuthenticated }) => {
   const router = useRouter();
   return (
     <>
-      <div className="bg-primary px-6 py-3">
-        <nav>
-          <ul>
-            <li>TEL</li>
-          </ul>
-        </nav>
-      </div>
-      <header className="will-change-scroll z-50  px-8 md:px-24 sticky bg-main top-0 w-full py-5 flex justify-between items-center gap-5">
+      <header className="sticky top-0 z-50 flex w-full items-center justify-between gap-5 bg-main px-8 py-5 will-change-scroll md:px-28">
         <nav className="flex w-full items-center justify-between">
           <Title
             order={1}
             size={"1rem"}
-            className="font-semibold text-darker text-center"
+            className="text-center font-semibold text-darker"
           >
             LOGO
           </Title>
-          <ul className="hidden text-darker lg:flex lg:gap-12 ">
-            {navMenu.map((menu) => (
-              <li>
+          <ul className="hidden text-darker lg:flex lg:gap-12">
+            {navMenu.map((menu, index) => (
+              <li key={index}>
                 <Link
                   className={`capitalize ${
                     menu.isActive ? "font-semibold" : "font-medium"
@@ -118,7 +106,7 @@ const Header = ({ user }: { user: UserAuthenticated }) => {
               {user ? (
                 <MenuUI menuItems={menuItems} name={user.name} key={user.id} />
               ) : (
-                <Button component={Link} bg={""} href={"/connexion"}>
+                <Button component={Link} radius={"lg"} href={"/connexion"}>
                   Connexion
                 </Button>
               )}
@@ -157,18 +145,18 @@ const MenuDrawer: React.FC<MenuDrawerProps> = ({ opened, onClose, user }) => {
       >
         <Drawer.Overlay />
         <Drawer.Content>
-          <Drawer.Body className=" h-full flex bg-gray-100 flex-col px-5">
+          <Drawer.Body className="flex h-full flex-col bg-gray-100 px-5">
             <Drawer.CloseButton c={"primary.9"} size={35} />
-            <ul className="flex flex-col gap-5 items-center h-full justify-center">
+            <ul className="flex h-full flex-col items-center justify-center gap-5">
               {links.map((link) => (
                 <li key={link.title}>
                   <Link
                     onClick={handleLinkClick}
-                    className="group text-2xl text-neutral-800 text-justify transition duration-300 font-light"
+                    className="group text-justify text-2xl font-light text-neutral-800 transition duration-300"
                     href={link.href}
                   >
                     {link.title}
-                    <span className="block max-w-0 group-hover:max-w-full bg-primary transition-all h-0.5"></span>
+                    <span className="block h-0.5 max-w-0 bg-primary transition-all group-hover:max-w-full"></span>
                   </Link>
                 </li>
               ))}

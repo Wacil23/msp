@@ -10,10 +10,5 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return (
-    <div className="flex">
-      <Sidebar />
-      <main className="w-full">{children}</main>
-    </div>
-  );
+  return <Sidebar children={children} />;
 }

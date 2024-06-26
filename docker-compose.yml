@@ -16,7 +16,7 @@ services:
     image: redis:6
   directus:
     container_name: directus
-    image: directus/directus:10.10.2
+    image: directus/directus:10.12.1
     ports:
       - "8055:8055"
     volumes:
