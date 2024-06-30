@@ -38,7 +38,7 @@ export const getMembersUsers = async (token: string) => {
 
 export const getMe = async (token: string) => {
   const api = directus(token);
-  const user = await api.request<DirectusUser<UserSession>>(
+  const user = await api.request<UserSession>(
     withToken(
       token,
       readMe({
