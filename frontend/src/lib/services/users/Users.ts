@@ -1,6 +1,5 @@
 import {
   DirectusClient,
-  DirectusUser,
   RestClient,
   StaticTokenClient,
   readMe,
@@ -13,15 +12,13 @@ import { UserSession } from "@/types/next-auth";
 
 export const getAllUsers = async (token: string) => {
   const api = directus(token);
-  const users = await api.request<DirectusUser<UserSession>[]>(
-    withToken(token, readUsers()),
-  );
+  const users = await api.request<UserSession[]>(withToken(token, readUsers()));
   return users;
 };
 
 export const getMembersUsers = async (token: string) => {
   const api = directus();
-  const users = await api.request<DirectusUser<UserSession>[]>(
+  const users = await api.request<UserSession[]>(
     withToken(
       token,
       readUsers({
@@ -61,9 +58,9 @@ export const getMe = async (token: string) => {
 };
 export const UpdateMe = async (
   token: string,
-  newUser: Partial<DirectusUser<UserSession>>,
+  newUser: Partial<UserSession>,
 ) => {
   const api = directus(token);
-  const user = await api.request<DirectusUser<UserSession>>(updateMe(newUser));
+  const user = await api.request<UserSession>(updateMe(newUser));
   return user;
 };

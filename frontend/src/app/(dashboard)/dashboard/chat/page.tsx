@@ -1,7 +1,7 @@
 "use client";
 import { getMembersUsers } from "@/src/lib/services/users/Users";
 import { UserSession } from "@/types/next-auth";
-import { DirectusUser, SubscriptionOptionsEvents } from "@directus/sdk";
+import { SubscriptionOptionsEvents } from "@directus/sdk";
 import {
   ActionIcon,
   Avatar,
@@ -122,7 +122,7 @@ const Chat = () => {
     return () => client?.disconnect();
   }, [client]);
 
-  const dataSelect = (users: DirectusUser<UserSession>[]) => {
+  const dataSelect = (users: UserSession[]) => {
     return users.map((user) => {
       return {
         id: user.id,
@@ -188,7 +188,7 @@ const Chat = () => {
     if (messageHistory.length > 0 && session?.user.id) {
       const groupedMessages = groupMessagesByUser(
         messageHistory,
-        session.user.id
+        session.user.id,
       );
       setGroupedConversations(groupedMessages);
       if (reciever) {
@@ -200,7 +200,7 @@ const Chat = () => {
 
   const handleConversationClick = (
     userId?: string,
-    messagesParam?: Messages[]
+    messagesParam?: Messages[],
   ) => {
     if (!client) return;
     let finalUserId = userId;
@@ -221,7 +221,7 @@ const Chat = () => {
     setActiveMessages(finalMessages);
 
     const unreadMessages = finalMessages.filter(
-      (m) => !m.is_seen && m.user_reciever.id === session?.user.id
+      (m) => !m.is_seen && m.user_reciever.id === session?.user.id,
     );
 
     if (unreadMessages.length > 0) {
@@ -239,13 +239,13 @@ const Chat = () => {
 
   return (
     <div className="m-10">
-      <div className="p-12  rounded-md bg-primary/55 h-full">
+      <div className="h-full rounded-md bg-primary/55 p-12">
         <div className="flex items-center justify-between">
-          <h1 className="font-extrabold text-2xl">Chat</h1>
+          <h1 className="text-2xl font-extrabold">Chat</h1>
         </div>
-        <div className="py-6 flex gap-8 h-full">
-          <div className="flex flex-col w-2/6 bg-primary p-5 rounded-lg shadow-md">
-            <div className="flex items-center justify-between ">
+        <div className="flex h-full gap-8 py-6">
+          <div className="flex w-2/6 flex-col rounded-lg bg-primary p-5 shadow-md">
+            <div className="flex items-center justify-between">
               <h2 className="font-semibold">Vos conversations</h2>
               <ActionIcon
                 color="lime"
@@ -259,7 +259,7 @@ const Chat = () => {
                 <CiEdit className="cursor-pointer" />
               </ActionIcon>
             </div>
-            <div className="flex group flex-col max-h-[40rem] overflow-y-scroll gap-6 py-6">
+            <div className="group flex max-h-[40rem] flex-col gap-6 overflow-y-scroll py-6">
               {Object.keys(groupedConversations).length > 0 ? (
                 Object.entries(groupedConversations).map(
                   ([userId, messages]) => {
@@ -275,7 +275,7 @@ const Chat = () => {
                         transition={{ duration: 0.3, ease: "easeInOut" }}
                         className={`${
                           reciever?.id === userId ? "bg-zinc-300/55" : ""
-                        } flex cursor-pointer gap-3 hover:bg-zinc-200 bg-zinc-200/35 shadow-sm rounded-lg p-4 items-center justify-between`}
+                        } flex cursor-pointer items-center justify-between gap-3 rounded-lg bg-zinc-200/35 p-4 shadow-sm hover:bg-zinc-200`}
                       >
                         <div className="flex items-center gap-4">
                           <Avatar
@@ -308,11 +308,11 @@ const Chat = () => {
                         {!messages[messages.length - 1].is_seen &&
                           messages[messages.length - 1].user_created.id ===
                             userId && (
-                            <div className="w-2 h-2 rounded-full bg-secondary"></div>
+                            <div className="h-2 w-2 rounded-full bg-secondary"></div>
                           )}
                       </motion.div>
                     );
-                  }
+                  },
                 )
               ) : (
                 <p>Pas de messages reçus</p>
@@ -326,7 +326,7 @@ const Chat = () => {
               </h3>
             </Center>
           ) : (
-            <div className="w-full flex flex-col justify-between rounded-lg bg-primary h-full shadow-md">
+            <div className="flex h-full w-full flex-col justify-between rounded-lg bg-primary shadow-md">
               {reciever ? (
                 <div className="flex items-center justify-between p-5">
                   <p className="font-semibold capitalize">{reciever.value}</p>
@@ -339,7 +339,8 @@ const Chat = () => {
                   value={reciever}
                   onChange={(value) => {
                     const selectedUser = users!.find(
-                      (user) => `${user.first_name} ${user.last_name}` === value
+                      (user) =>
+                        `${user.first_name} ${user.last_name}` === value,
                     );
                     if (selectedUser) {
                       setReciever({
@@ -352,13 +353,13 @@ const Chat = () => {
                 />
               )}
               <div className="flex flex-col overflow-hidden">
-                <div className="flex flex-col gap-1 overflow-auto max-h-[35rem] px-4 py-1 min-h-[35rem]">
+                <div className="flex max-h-[35rem] min-h-[35rem] flex-col gap-1 overflow-auto px-4 py-1">
                   {activeMessages.length > 0 &&
                     activeMessages
                       .sort(
                         (a, b) =>
                           new Date(a.date_created).getTime() -
-                          new Date(b.date_created).getTime()
+                          new Date(b.date_created).getTime(),
                       )
                       .map((message, index, messages) => {
                         const isLastMessage = index === messages.length - 1;
@@ -368,17 +369,17 @@ const Chat = () => {
                             className="relative flex flex-col"
                           >
                             <p
-                              className={`px-4 py-2 rounded-3xl text-darker/85 max-w-[50%] text-sm relative  ${
+                              className={`relative max-w-[50%] rounded-3xl px-4 py-2 text-sm text-darker/85 ${
                                 message.user_created.id === session?.user.id
-                                  ? "self-end bg-secondary rounded-br-none"
-                                  : "self-start bg-darker/5 rounded-bl-none"
+                                  ? "self-end rounded-br-none bg-secondary"
+                                  : "self-start rounded-bl-none bg-darker/5"
                               }`}
                             >
                               {message.text}
                             </p>
                             {message.user_created.id === session?.user.id &&
                               isLastMessage && (
-                                <p className="text-xs text-gray-500 self-end mt-1">
+                                <p className="mt-1 self-end text-xs text-gray-500">
                                   {message.is_seen ? "Vu" : "Distribué"}
                                 </p>
                               )}
@@ -388,7 +389,7 @@ const Chat = () => {
                   <div ref={messagesEndRef}></div>
                 </div>
                 <Divider />
-                <div className="flex items-end justify-between p-5 gap-4">
+                <div className="flex items-end justify-between gap-4 p-5">
                   <Textarea
                     className="w-full"
                     autosize
@@ -403,8 +404,8 @@ const Chat = () => {
                     onClick={() => messageSubmit(messages)}
                     className={` ${
                       messages === ""
-                        ? "bg-secondary/55 pointer-events-none"
-                        : "bg-secondary transition-colors cursor-pointer "
+                        ? "pointer-events-none bg-secondary/55"
+                        : "cursor-pointer bg-secondary transition-colors"
                     } rounded-full p-2 transition-colors`}
                     size={35}
                     color={"white"}

@@ -5,13 +5,12 @@ import {
 } from "@/src/lib/types/users/profession/professions.types";
 import { categorySpecificProfessions } from "@/src/utils/func/RegroupUserByProfession";
 import { UserSession } from "@/types/next-auth";
-import { DirectusUser } from "@directus/sdk";
 import { Button, SegmentedControl } from "@mantine/core";
 import React from "react";
 import { FiMapPin, FiPhone } from "react-icons/fi";
 
 type TeamsProps = {
-  users: DirectusUser<UserSession>[];
+  users: UserSession[];
 };
 
 const Teams: React.FC<TeamsProps> = ({ users }) => {

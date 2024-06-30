@@ -1,9 +1,8 @@
 import { Professionnels } from "@/src/lib/types/users/profession/professions.types";
 import { UserSession } from "@/types/next-auth";
-import { DirectusUser } from "@directus/sdk";
 
 export const categorySpecificProfessions = (
-  users: DirectusUser<UserSession>[]
+  users: UserSession[],
 ): Record<string, Professionnels[]> => {
   const result: Record<string, Professionnels[]> = {};
 
