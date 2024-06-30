@@ -17,6 +17,7 @@ const userParams = (user: UserSession): UserParams => {
     avatar: user.avatar,
     telephone: user.telephone,
     profession: user.profession,
+    civility: user.civility,
   };
 };
 
@@ -56,7 +57,7 @@ export const options: NextAuthOptions = {
                 "profession",
                 "telephone",
               ],
-            })
+            }),
           );
           const user: Awaitable<User> = {
             id: loggedInUser.id,
@@ -95,13 +96,13 @@ export const options: NextAuthOptions = {
           access_token: user.access_token,
           expires_at: Math.floor(Date.now() / 1000 + (user.expires ?? 0)),
           refresh_token: user.refresh_token,
-          user: userParams(user),
+          user: userParams(user as unknown as UserSession),
         };
       } else if (Date.now() >= (token.expires_at ?? 0) * 1000) {
         try {
           const apiAuth = directus(token.access_token);
           const refreshedToken = await apiAuth.request(
-            refresh("json", token.refresh_token)
+            refresh("json", token.refresh_token),
           );
           const updatedUser = await apiAuth.request<UserSession>(
             readMe({
@@ -114,12 +115,12 @@ export const options: NextAuthOptions = {
                 "profession",
                 "telephone",
               ],
-            })
+            }),
           );
           return {
             access_token: refreshedToken.access_token ?? "",
             expires_at: Math.floor(
-              Date.now() / 1000 + (refreshedToken.expires ?? 0)
+              Date.now() / 1000 + (refreshedToken.expires ?? 0),
             ),
             refresh_token: refreshedToken.refresh_token ?? token.refresh_token,
             user: userParams(updatedUser),

@@ -19,8 +19,8 @@ declare module "next-auth" {
   interface Session {
     user: DefaultSession["user"] & {
       id?: string;
-      first_name?: string;
-      last_name?: string;
+      first_name?: string | null;
+      last_name?: string | null;
       avatar?: string;
       profession?: string;
       telephone?: string;
@@ -76,12 +76,12 @@ export type UserSession = {
 };
 
 export type UserParams = {
-  id?: string;
-  name?: string;
-  first_name?: string;
-  last_name?: string;
-  email?: string;
-  avatar?: string;
+  id: string;
+  first_name?: string | null;
+  last_name?: string | null;
+  email: string | null;
+  name: string;
+  avatar: DirectusFile<Schema> | string | null;
   telephone?: string;
   profession?: string;
   civility?: string;
