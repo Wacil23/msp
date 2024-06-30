@@ -14,7 +14,7 @@ import { UserSession } from "@/types/next-auth";
 export const getAllUsers = async (token: string) => {
   const api = directus(token);
   const users = await api.request<DirectusUser<UserSession>[]>(
-    withToken(token, readUsers())
+    withToken(token, readUsers()),
   );
   return users;
 };
@@ -30,8 +30,8 @@ export const getMembersUsers = async (token: string) => {
             name: "membre",
           },
         },
-      })
-    )
+      }),
+    ),
   );
   return users;
 };
@@ -54,14 +54,14 @@ export const getMe = async (token: string) => {
           "expires",
           "refresh_token",
         ],
-      })
-    )
+      }),
+    ),
   );
   return user;
 };
 export const UpdateMe = async (
   token: string,
-  newUser: Partial<DirectusUser<UserSession>>
+  newUser: Partial<DirectusUser<UserSession>>,
 ) => {
   const api = directus(token);
   const user = await api.request<DirectusUser<UserSession>>(updateMe(newUser));

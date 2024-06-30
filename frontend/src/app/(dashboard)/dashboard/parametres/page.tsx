@@ -38,7 +38,6 @@ export type FormPasswordValues = {
 
 const Parametres = () => {
   const directusUrl = process.env.NEXT_PUBLIC_DIRECTUS_ASSETS;
-  const [file, setFile] = useState<File | null>(null);
   const { data: user, status } = useSession();
   const fetcher = () => (user?.acess_token ? getMe(user.acess_token) : null);
   const { mutate } = useSWRConfig();
