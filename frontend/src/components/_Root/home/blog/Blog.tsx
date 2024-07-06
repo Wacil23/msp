@@ -33,11 +33,13 @@ const Blog = () => {
                 {article.title}
               </h3>
               <div className="flex gap-2">
-                <Badge color="light.1">
-                  <p className="text-darker">
-                    {article.category.parent_category.title}
-                  </p>
-                </Badge>
+                {article.category.parent_category && (
+                  <Badge color="light.1">
+                    <p className="text-darker">
+                      {article.category?.parent_category?.title}
+                    </p>
+                  </Badge>
+                )}
                 <Badge color="light.1">
                   <p className="text-darker">{article.read_time} min</p>
                 </Badge>
@@ -67,11 +69,13 @@ const Blog = () => {
                   {article.title}
                 </h3>
                 <div className="flex gap-2">
-                  <Badge color="light.1">
-                    <p className="text-darker">
-                      {article.category.parent_category.title}
-                    </p>
-                  </Badge>
+                  {article.category.parent_category && (
+                    <Badge color="light.1">
+                      <p className="text-darker">
+                        {article.category.parent_category.title}
+                      </p>
+                    </Badge>
+                  )}
                   <Badge color="light.1">
                     <p className="text-darker">{article.read_time} min</p>
                   </Badge>
@@ -101,11 +105,13 @@ const Blog = () => {
                 {article.title}
               </h3>
               <div className="flex gap-2">
-                <Badge color="light.1">
-                  <p className="text-darker">
-                    {article.category.parent_category.title}
-                  </p>
-                </Badge>
+                {article.category.parent_category && (
+                  <Badge color="light.1">
+                    <p className="text-darker">
+                      {article.category.parent_category.title}
+                    </p>
+                  </Badge>
+                )}
                 <Badge color="light.1">
                   <p className="text-darker">{article.read_time} min</p>
                 </Badge>
