@@ -12,7 +12,7 @@ const Hero = () => {
         <h3 className="text-xl text-darker">Bienvenue à la MSP de Denain</h3>
         <div className="flex flex-col gap-8">
           <h1 className="text-4xl font-semibold text-darker">
-            Votre santé, notre priorité : <br />
+            Votre santé, notre priorité de test : <br />
             Ensemble vers un bien-être optimal !
           </h1>
           <p className="text-lg text-darker">
