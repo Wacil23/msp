@@ -6,4 +6,4 @@ services:
       dockerfile: Dockerfile.prod
   directus:
     env_file:
-      - /backend/.env.prod
+      - backend/.env.prod

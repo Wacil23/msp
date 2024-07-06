@@ -10,4 +10,4 @@ services:
       - /app/.next
   directus:
     env_file:
-      - /backend/.env.local
+      - backend/.env.local
