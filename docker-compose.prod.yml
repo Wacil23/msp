@@ -4,6 +4,6 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile.prod
-  backend:
+  directus:
     env_file:
       - .env.prod
