@@ -19,7 +19,7 @@ const Loading: React.FC = () => {
   }, []);
 
   return (
-    <div className="h-screen grid place-content-center">
+    <div className="grid h-screen place-content-center">
       <div className="w-40" ref={animationRef}></div>
     </div>
   );
