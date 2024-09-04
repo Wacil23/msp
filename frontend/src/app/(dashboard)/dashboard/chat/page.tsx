@@ -236,15 +236,20 @@ const Chat = () => {
       });
     }
   };
+  const unreadMessages = messageHistory.filter(
+    (message) =>
+      !message.is_seen && message.user_reciever.id === session?.user.id,
+  );
+  console.log("unread messages", unreadMessages);
 
   return (
     <div className="m-10">
-      <div className="h-full rounded-md bg-primary/55 p-12">
+      <div className="h-full rounded-md p-12">
         <div className="flex items-center justify-between">
           <h1 className="text-2xl font-extrabold">Chat</h1>
         </div>
         <div className="flex h-full gap-8 py-6">
-          <div className="flex w-2/6 flex-col rounded-lg bg-primary p-5 shadow-md">
+          <div className="flex w-2/6 flex-col p-5">
             <div className="flex items-center justify-between">
               <h2 className="font-semibold">Vos conversations</h2>
               <ActionIcon
@@ -274,8 +279,8 @@ const Chat = () => {
                         initial={{ scale: 1 }}
                         transition={{ duration: 0.3, ease: "easeInOut" }}
                         className={`${
-                          reciever?.id === userId ? "bg-zinc-300/55" : ""
-                        } flex cursor-pointer items-center justify-between gap-3 rounded-lg bg-zinc-200/35 p-4 shadow-sm hover:bg-zinc-200`}
+                          reciever?.id === userId ? "bg-zinc-200/55" : ""
+                        } flex cursor-pointer items-center justify-between gap-3 rounded-lg bg-zinc-100 p-4 shadow-sm hover:bg-zinc-200`}
                       >
                         <div className="flex items-center gap-4">
                           <Avatar
@@ -283,7 +288,15 @@ const Chat = () => {
                             variant="light"
                           ></Avatar>
                           <div>
-                            <p className="font-bold capitalize text-darker/65">
+                            <p
+                              className={`${
+                                !messages[messages.length - 1].is_seen &&
+                                messages[messages.length - 1].user_created
+                                  .id !== session?.user.id
+                                  ? "!font-extrabold"
+                                  : "!font-medium"
+                              } capitalize text-darker`}
+                            >
                               {user?.first_name} {user?.last_name}
                             </p>
                             <Text
@@ -326,7 +339,7 @@ const Chat = () => {
               </h3>
             </Center>
           ) : (
-            <div className="flex h-full w-full flex-col justify-between rounded-lg bg-primary shadow-md">
+            <div className="flex h-full w-full flex-col justify-between rounded-lg border-2 border-slate-200">
               {reciever ? (
                 <div className="flex items-center justify-between p-5">
                   <p className="font-semibold capitalize">{reciever.value}</p>
@@ -369,10 +382,10 @@ const Chat = () => {
                             className="relative flex flex-col"
                           >
                             <p
-                              className={`relative max-w-[50%] rounded-3xl px-4 py-2 text-sm text-darker/85 ${
+                              className={`relative max-w-[50%] rounded-3xl px-4 py-2 text-sm ${
                                 message.user_created.id === session?.user.id
-                                  ? "self-end rounded-br-none bg-secondary"
-                                  : "self-start rounded-bl-none bg-darker/5"
+                                  ? "self-end rounded-br-none bg-secondary text-white"
+                                  : "self-start rounded-bl-none bg-darker/5 text-darker/85"
                               }`}
                             >
                               {message.text}

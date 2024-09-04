@@ -5,11 +5,11 @@ interface HeroProps {
 
 const Hero: React.FC<HeroProps> = ({ title, subtitle }) => {
   return (
-    <div className="mx-80 my-20 flex flex-col gap-2">
-      <h1 className="text-darkLight m-auto text-lg font-medium text-darker">
+    <div className="flex flex-col gap-2 lg:mx-52 lg:my-16 xl:mx-80 xl:my-20">
+      <h1 className="text-darkLight text-md m-auto font-medium text-darker md:text-lg">
         {title}
       </h1>
-      <h2 className="m-auto text-center text-4xl font-extrabold text-darker">
+      <h2 className="m-auto text-center text-xl font-extrabold text-darker md:text-4xl">
         {subtitle}
       </h2>
     </div>

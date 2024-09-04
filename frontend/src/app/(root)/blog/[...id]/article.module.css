@@ -1,0 +1,33 @@
+.blogContent h2 {
+  font-size: 1rem;
+  font-weight: 500;
+}
+.blogContent p,
+.blogContent span,
+.blogContent div {
+  font-size: 0.875rem !important;
+}
+.blogContent li {
+  list-style-type: disc;
+}
+.blogContent ul {
+  padding: 0 0.75rem;
+}
+@media (min-width: 1345px) {
+  .blogContent h2 {
+    font-size: 1.5rem;
+    font-weight: 500;
+  }
+  .blogContent p,
+  .blogContent span,
+  .blogContent div {
+    font-size: 1.2rem !important;
+    margin-top: 0.75rem;
+  }
+  .blogContent li {
+    list-style-type: disc;
+  }
+  .blogContent ul {
+    padding: 0 1rem;
+  }
+}

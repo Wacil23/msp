@@ -29,6 +29,7 @@ declare module "next-auth" {
     acess_token?: string;
     refresh_token?: string;
     error?: string;
+    expires?: number;
   }
 }
 

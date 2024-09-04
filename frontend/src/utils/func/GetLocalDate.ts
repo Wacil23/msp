@@ -11,7 +11,7 @@ const formatDate = (dateString: string) => {
     dateParts[1] = dateParts[1].substring(0, 3);
   }
   dateParts[1] =
-    dateParts[1].charAt(0).toUpperCase() + dateParts[1].slice(1) + ".";
+    dateParts[1].charAt(0).toUpperCase() + dateParts[1]?.slice(1) + ".";
 
   return `${dateParts[0]} ${dateParts[1]} ${dateParts[2]}`;
 };

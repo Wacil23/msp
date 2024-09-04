@@ -19,7 +19,7 @@ import { BlogArticle } from "@/src/lib/types/blog/BlogArticle";
 
 type PostProps = {
   article: BlogArticle;
-  subCategories: BlogSubCategoriesProps[];
+  subCategories?: BlogSubCategoriesProps[];
 };
 const directusUrl = process.env.NEXT_PUBLIC_DIRECTUS_ASSETS!;
 

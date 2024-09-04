@@ -1,7 +1,7 @@
 "use client";
 import { getMembersUsers } from "@/src/lib/services/users/Users";
 import { UserSession } from "@/types/next-auth";
-import { Avatar, Skeleton } from "@mantine/core";
+import { Avatar, Skeleton, TextInput } from "@mantine/core";
 import { useSession } from "next-auth/react";
 import useSWR from "swr";
 
@@ -29,7 +29,7 @@ const Membres = () => {
   if (!users)
     return (
       <Skeleton className="m-10" animate>
-        <div className="h-full rounded-md bg-primary/55 p-12">
+        <div className="h-full rounded-md p-12">
           <div className="flex items-center justify-between">
             <div className="flex flex-col">
               <h1 className="text-2xl font-extrabold">Paramètres</h1>
@@ -45,12 +45,13 @@ const Membres = () => {
 
   return (
     <div className="w-full p-12">
-      <div className="rounded-md bg-primary/55 p-12">
+      <div className="rounded-md p-12">
         <h1 className="text-2xl font-bold">Membres de la MSP</h1>
-        <div className="grid grid-cols-2 gap-y-6 p-20 md:grid-cols-3">
+        <TextInput type="search" placeholder="Rechercher un membre" />
+        <div className="grid grid-cols-2 gap-6 py-20 md:grid-cols-3">
           {users?.map((user) => (
-            <div key={user.id} className="p-4">
-              <div className="flex items-center gap-2">
+            <div key={user.id} className="rounded-md bg-[#0e0e0e0d] p-4">
+              <div className="flex flex-col items-start gap-2">
                 <Avatar>{getInital(user)}</Avatar>
                 <p>
                   {user.first_name} {user.last_name}

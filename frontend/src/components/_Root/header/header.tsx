@@ -83,7 +83,8 @@ const Header = ({ user }: { user: UserAuthenticated }) => {
           <Title
             order={1}
             size={"1rem"}
-            className="text-center font-semibold text-darker"
+            onClick={() => router.push("/")}
+            className="cursor-pointer text-center font-semibold text-darker"
           >
             LOGO
           </Title>
