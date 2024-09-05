@@ -182,7 +182,7 @@ const Parametres = () => {
   return (
     <div className="md:m-10">
       <Notifications position="top-right" />
-      <div className="h-full rounded-md bg-primary/55 p-4 md:p-12">
+      <div className="h-full rounded-md p-4 md:p-12">
         <div className="flex items-center justify-between">
           <div className="flex flex-col">
             <h1 className="text-2xl font-extrabold">Paramètres</h1>

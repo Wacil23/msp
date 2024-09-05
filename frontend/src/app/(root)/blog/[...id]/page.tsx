@@ -1,5 +1,6 @@
 "use client";
 import Hero from "@/src/components/_Root/hero/hero";
+import styles from "./article.module.css";
 import { useBlogStore } from "@/src/store/blogStore";
 import { Badge, Blockquote, Button, TextInput } from "@mantine/core";
 import { useParams } from "next/navigation";
@@ -34,28 +35,12 @@ const Article = () => {
   }
 
   return (
-    <div className="mx-28 flex flex-col">
-      <Hero title={"Article de la MSP"} subtitle={article.title} />
-      <div className="flex items-start gap-8">
-        <div className="0 sticky top-32 flex h-full w-1/3 flex-col gap-10">
-          <div className="flex flex-col gap-5 rounded-lg border border-slate-100 p-5 shadow-md">
-            <div className="flex items-center gap-3">
-              <IoNewspaperOutline color="#23410C" />
-              <h3 className="text-lg font-medium text-darker">
-                Notre newsletter
-              </h3>
-            </div>
-            <div className="flex flex-col gap-3">
-              <TextInput
-                placeholder="Entrez votre adresse email"
-                leftSection={<BsAt />}
-                label="Inscrivez vous à notre newsletter"
-              />
-              <Button variant="outline" color="darker.1" className="w-full">
-                S'inscrire
-              </Button>
-            </div>
-          </div>
+    <div className="mx-10 flex flex-col lg:mx-28 lg:mb-28">
+      <div className="py-12 md:py-16">
+        <Hero title={"Article de la MSP"} subtitle={article.title} />
+      </div>
+      <div className="mt-6 flex flex-col-reverse items-start gap-8 lg:flex-row">
+        <div className="0 top-32 flex h-full w-full flex-col gap-10 lg:sticky lg:w-1/3">
           <div className="flex flex-col gap-5 rounded-lg border border-slate-100 p-5 shadow-md">
             <div className="flex items-center gap-3">
               <IoShareSocial color="#23410C" />
@@ -87,7 +72,7 @@ const Article = () => {
         </div>
         <div className="flex w-full flex-col gap-12">
           <img
-            className="mx-auto aspect-video h-[30rem] w-full rounded-3xl object-cover shadow-md transition-shadow hover:shadow-lg"
+            className="mx-auto aspect-video h-[20rem] w-full rounded-3xl object-cover shadow-md transition-shadow hover:shadow-lg lg:h-[30rem]"
             src={diretcusUrl + article.image.filename_disk}
           />
           <div className="flex items-center gap-5">
@@ -115,7 +100,7 @@ const Article = () => {
             {article.small_description}
           </Blockquote>
           <div
-            className="mb-24"
+            className={styles.blogContent}
             dangerouslySetInnerHTML={{ __html: article.content }}
           ></div>
         </div>

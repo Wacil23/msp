@@ -46,11 +46,13 @@ export const useBlogStore = create<BlogStore>()((set) => ({
       return { activeCategory: parentCategoryId };
     }),
   initializeArticles: async (size?: number) => {
+    console.log("size", size);
     const articles = await useGetAllArticlesBlog();
+    console.log("art", articles);
     set({
       articles,
       filteredArticles: articles,
-      lastArticles: articles.slice(0, size ?? 5),
+      lastArticles: articles?.slice(0, size ?? 5),
     });
   },
   getArticleById: async (articleId: string) => {
@@ -105,7 +107,7 @@ export const useBlogStore = create<BlogStore>()((set) => ({
         );
         return { filteredArticles };
       }
-      const filteredArticles = state.filteredArticles.filter(
+      const filteredArticles = state?.filteredArticles?.filter(
         (article) =>
           article.title.toLowerCase().includes(query.toLowerCase()) ||
           article.category.title.toLowerCase().includes(query.toLowerCase()) ||

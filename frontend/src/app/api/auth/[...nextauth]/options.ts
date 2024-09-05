@@ -68,7 +68,7 @@ export const options: NextAuthOptions = {
             profession: loggedInUser.profession,
             telephone: loggedInUser.telephone,
             access_token: auth.access_token ?? "",
-            expires: Math.floor(Date.now() / 1000 + (auth.expires ?? 0)),
+            expires: Math.floor(Date.now() / 1000 + (auth.expires ?? 0) / 1000),
             refresh_token: auth.access_token ?? "",
           };
           return user;
@@ -94,7 +94,7 @@ export const options: NextAuthOptions = {
       if (account) {
         return {
           access_token: user.access_token,
-          expires_at: Math.floor(Date.now() / 1000 + (user.expires ?? 0)),
+          expires_at: user.expires ?? 0,
           refresh_token: user.refresh_token,
           user: userParams(user as unknown as UserSession),
         };
@@ -120,7 +120,7 @@ export const options: NextAuthOptions = {
           return {
             access_token: refreshedToken.access_token ?? "",
             expires_at: Math.floor(
-              Date.now() / 1000 + (refreshedToken.expires ?? 0),
+              Date.now() / 1000 + (refreshedToken.expires ?? 0) / 1000,
             ),
             refresh_token: refreshedToken.refresh_token ?? token.refresh_token,
             user: userParams(updatedUser),
@@ -133,9 +133,10 @@ export const options: NextAuthOptions = {
       }
     },
     async session({ session, token }): Promise<Session> {
-      session.error = token.error ?? "";
+      session.error = token.error;
       session.acess_token = token.access_token;
       session.refresh_token = token.refresh_token;
+      session.expires = token.expires_at;
       const {
         id,
         name,

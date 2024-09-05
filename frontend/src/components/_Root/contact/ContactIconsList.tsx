@@ -25,7 +25,7 @@ function ContactIcon({
         <Text size="xs" className="text-blue-500">
           {title}
         </Text>
-        <Text className="text-darker">{description}</Text>
+        <Text className="md:text-md text-xs text-darker">{description}</Text>
       </div>
     </div>
   );

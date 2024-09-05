@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import ARS from "../../../../../public/images/MSP partenaires/ARS.png";
 import CH from "../../../../../public/images/MSP partenaires/CH.png";
@@ -6,43 +7,48 @@ import Hainaut from "../../../../../public/images/MSP partenaires/Hainaut.png";
 import CPAM from "../../../../../public/images/MSP partenaires/CPAM.png";
 import Ministere from "../../../../../public/images/MSP partenaires/Ministere.png";
 import Image from "next/image";
+import { useWindowSize } from "@/src/lib/hooks/window/useWindowSize";
 
 const Partnairs = () => {
+  const size = useWindowSize();
+  const isMobile = size.width <= 768;
   const partenaires = [
     {
       nom: "ARS",
       image: ARS,
-      width: 150,
+      width: isMobile ? 100 : 150,
     },
     {
       nom: "CH",
       image: CH,
-      width: 110,
+      width: isMobile ? 60 : 110,
     },
     {
       nom: "Denain",
       image: Denain,
-      width: 150,
+      width: isMobile ? 100 : 150,
     },
     {
       nom: "Hainaut",
       image: Hainaut,
-      width: 150,
+      width: isMobile ? 100 : 150,
     },
     {
       nom: "CPAM",
       image: CPAM,
-      width: 150,
+      width: isMobile ? 100 : 150,
     },
     {
       nom: "Ministère",
       image: Ministere,
-      width: 150,
+      width: isMobile ? 100 : 150,
     },
   ];
   return (
-    <div className="flex flex-col gap-24 md:my-28 md:px-24">
-      <h2 className="text-4xl font-semibold text-darker">Nos partenaires</h2>
+    <div className="mx-8 my-12 flex flex-col gap-16 md:my-28 md:gap-24 md:px-24">
+      <h2 className="text-2xl font-semibold text-darker md:text-4xl">
+        Nos partenaires
+      </h2>
       <div className="inline-flex w-full flex-nowrap overflow-hidden [mask-image:_linear-gradient(to_right,transparent_0,_black_128px,_black_calc(100%-200px),transparent_100%)]">
         <ul className="flex animate-infinite-scroll items-center justify-center md:justify-start [&_img]:max-w-none [&_li]:mx-8">
           {partenaires.map((partenaire) => {

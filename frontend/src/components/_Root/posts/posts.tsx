@@ -14,8 +14,8 @@ import { IoFilter } from "react-icons/io5";
 import { CiCalendarDate } from "react-icons/ci";
 import { BsSortAlphaDown, BsSortAlphaDownAlt } from "react-icons/bs";
 interface PostsProps {
-  subCategories: BlogSubCategoriesProps[];
-  categories: BlogCategoriesProps[];
+  subCategories?: BlogSubCategoriesProps[];
+  categories?: BlogCategoriesProps[];
 }
 
 const Posts: React.FC<PostsProps> = ({ subCategories, categories }) => {
@@ -38,7 +38,7 @@ const Posts: React.FC<PostsProps> = ({ subCategories, categories }) => {
 
   const indexOfLastArticle = currentPage * articlesPerPage;
   const indexOfFirstArticle = indexOfLastArticle - articlesPerPage;
-  const currentArticles = filteredArticles.slice(
+  const currentArticles = filteredArticles?.slice(
     indexOfFirstArticle,
     indexOfLastArticle,
   );
@@ -59,21 +59,21 @@ const Posts: React.FC<PostsProps> = ({ subCategories, categories }) => {
     <>
       <div className="relative overflow-hidden rounded-full bg-[#fafafa] py-7">
         <div
-          className={`absolute top-1/2 flex w-full items-center justify-evenly ${isSubCategories ? classes.categoryTranslateUp : "-translate-y-1/2 opacity-100 transition-all duration-300"}`}
+          className={`absolute top-1/2 flex w-full items-center justify-evenly gap-8 overflow-auto text-nowrap p-4 ${isSubCategories ? classes.categoryTranslateUp : "-translate-y-1/2 opacity-100 transition-all duration-300"}`}
         >
           <p
             tabIndex={1}
-            className={`cursor-pointer ${activeCategory === "all" ? "underline-darker font-semibold text-darker underline underline-offset-2" : ""}`}
+            className={`cursor-pointer text-sm ${activeCategory === "all" ? "underline-darker font-semibold text-darker underline underline-offset-2" : ""}`}
             onClick={() => setActiveCategory("all")}
           >
             Tout
           </p>
           {categories
-            .filter((cat) => cat.title !== "Autres")
+            ?.filter((cat) => cat.title !== "Autres")
             .map((category) => (
               <p
                 tabIndex={1}
-                className={`flex cursor-pointer items-center gap-2 ${
+                className={`flex cursor-pointer items-center gap-2 text-sm ${
                   activeCategory === category.title
                     ? "font-semibold text-darker"
                     : ""
@@ -88,22 +88,24 @@ const Posts: React.FC<PostsProps> = ({ subCategories, categories }) => {
           <p
             tabIndex={1}
             onClick={() => setActiveCategory("autres")}
-            className={`cursor-pointer ${activeCategory === "autres" ? "underline-darker font-semibold text-darker underline underline-offset-2" : ""}`}
+            className={`cursor-pointer text-sm ${activeCategory === "autres" ? "underline-darker font-semibold text-darker underline underline-offset-2" : ""}`}
           >
             Autres
           </p>
         </div>
         <div
-          className={`absolute top-1/2 flex w-full items-center justify-evenly ${isSubCategories ? classes.subcategoryTranslateUp : "translate-y-[4rem] opacity-0"}`}
+          className={`absolute top-1/2 flex w-full items-center justify-evenly gap-8 overflow-auto text-nowrap p-4 text-sm ${isSubCategories ? classes.subcategoryTranslateUp : "translate-y-[4rem] opacity-0"}`}
         >
-          <IoIosArrowBack
-            className="cursor-pointer"
-            onClick={() => handleBackClick()}
-          >
-            Retour
-          </IoIosArrowBack>
+          <div>
+            <IoIosArrowBack
+              className="cursor-pointer"
+              onClick={() => handleBackClick()}
+            >
+              Retour
+            </IoIosArrowBack>
+          </div>
           {subCategories
-            .filter(
+            ?.filter(
               (subCategory) =>
                 subCategory.parent_category.title === selectedCategory,
             )
@@ -183,11 +185,11 @@ const Posts: React.FC<PostsProps> = ({ subCategories, categories }) => {
             ))}
           </div>
         </div>
-        {Math.ceil(filteredArticles.length / articlesPerPage) > 1 && (
+        {Math.ceil(filteredArticles?.length / articlesPerPage) > 1 && (
           <Pagination
             size={"lg"}
             color="#caea7a"
-            total={Math.ceil(filteredArticles.length / articlesPerPage)}
+            total={Math.ceil(filteredArticles?.length / articlesPerPage)}
             siblings={1}
             defaultValue={1}
             onChange={handlePageChange}

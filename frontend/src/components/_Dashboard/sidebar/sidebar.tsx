@@ -8,13 +8,18 @@ import { NavLink } from "@mantine/core";
 import Link from "next/link";
 import Drawer from "./drawer/drawer";
 import HeaderSidebar from "./header/header";
+import { Notifications, notifications } from "@mantine/notifications";
+import { getSession } from "next-auth/react";
+import { useUnreadMessages } from "@/src/lib/providers/useMessagesUnreadContext";
 
 const Sidebar = ({ children }: { children?: React.ReactNode }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const pathname = usePathname().replace("/dashboard", "");
+  const session = getSession();
 
   return (
     <>
+      <Notifications position="bottom-right" />
       <div>
         <Drawer
           pathname={pathname}
@@ -54,18 +59,15 @@ const Sidebar = ({ children }: { children?: React.ReactNode }) => {
                     </div>
                   ))}
                 </li>
-                <li className="mt-auto">
-                  <a
-                    href="#"
-                    className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-700 hover:bg-gray-50 hover:text-indigo-600"
-                  >
-                    <CiSettings
-                      className="h-6 w-6 shrink-0 text-gray-400 group-hover:text-indigo-600"
-                      aria-hidden="true"
-                    />
-                    Paramètres
-                  </a>
-                </li>
+                <NavLink
+                  component={Link}
+                  href={`/dashboard/parametres`}
+                  leftSection={<CiSettings className="h-6 w-6" />}
+                  className="-mx-2 mt-auto flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-900 hover:bg-[#0e0e0e0d]"
+                  active={pathname === "/parametres"}
+                  label="Paramètres"
+                  color="darker.1"
+                ></NavLink>
               </ul>
             </nav>
           </div>

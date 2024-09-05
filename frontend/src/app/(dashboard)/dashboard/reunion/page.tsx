@@ -6,13 +6,13 @@ import React from "react";
 const Reunion = () => {
   const [opened, { open, close }] = useDisclosure(false);
   return (
-    <div className="p-12 w-full">
-      <div className="p-12 rounded-md bg-primary/55">
+    <div className="w-full p-12">
+      <div className="rounded-md p-12">
         <div className="flex items-center justify-between">
-          <h1 className="font-extrabold text-2xl">Vos réunions</h1>
+          <h1 className="text-2xl font-extrabold">Vos réunions</h1>
           <Button onClick={open}>Créer une réunion</Button>
         </div>
-        <div className="grid grid-cols-2 md:grid-cols-3 p-20 gap-y-6"></div>
+        <div className="grid grid-cols-2 gap-y-6 p-20 md:grid-cols-3"></div>
       </div>
       <Modal
         size={"65%"}

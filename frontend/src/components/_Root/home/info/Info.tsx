@@ -6,7 +6,7 @@ import React from "react";
 const Info = () => {
   const [opened, { toggle }] = useDisclosure(false);
   return (
-    <div className="mx-10 mb-36 flex flex-col gap-12 md:mx-24">
+    <div className="mx-4 mb-8 flex flex-col gap-12 md:mx-24 md:mb-36">
       <h2 className="text-2xl font-semibold text-darker md:text-4xl">
         Qu'est ce qu'une MSP ?
       </h2>
@@ -54,8 +54,7 @@ const Info = () => {
           )}
         </div>
         <iframe
-          className="rounded-3xl"
-          width="50%"
+          className="w-full rounded-3xl md:w-1/2"
           height="400"
           src="https://www.youtube-nocookie.com/embed/Rz0zCWxAsqE?si=Jzd-SWmn6SLT690K&amp;controls=0&amp;loop=1&amp;modestbranding=1"
           title="Qu'est ce qu'une msp"

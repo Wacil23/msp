@@ -1,12 +1,4 @@
-import {
-  DirectusClient,
-  RestClient,
-  StaticTokenClient,
-  readMe,
-  readUsers,
-  updateMe,
-  withToken,
-} from "@directus/sdk";
+import { readMe, readUsers, updateMe, withToken } from "@directus/sdk";
 import { directus } from "../../directus";
 import { UserSession } from "@/types/next-auth";
 
@@ -18,19 +10,23 @@ export const getAllUsers = async (token: string) => {
 
 export const getMembersUsers = async (token: string) => {
   const api = directus();
-  const users = await api.request<UserSession[]>(
-    withToken(
-      token,
-      readUsers({
-        filter: {
-          role: {
-            name: "membre",
+  try {
+    const users = await api.request<UserSession[]>(
+      withToken(
+        token,
+        readUsers({
+          filter: {
+            role: {
+              name: "membre",
+            },
           },
-        },
-      }),
-    ),
-  );
-  return users;
+        }),
+      ),
+    );
+    return users;
+  } catch (e) {
+    console.error("Unable to call member users");
+  }
 };
 
 export const getMe = async (token: string) => {

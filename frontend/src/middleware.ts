@@ -4,15 +4,9 @@ import { NextResponse } from "next/server";
 
 export default withAuth(async function middleware(req) {
   const token = await getToken({ req });
-  const isAuth = !!token;
-  if (!isAuth) {
-    return NextResponse.redirect(new URL("/", req.url));
-  }
-  if (
-    token.error === "RefreshAccessTokenError" ||
-    Date.now() >= (token.expires_at ?? 0) * 1000
-  ) {
-    // Rediriger vers la page de connexion
+  const isExpired = Date.now() >= (token?.expires_at ?? 0) * 1000;
+
+  if (token?.error === "RefreshAccessTokenError" || isExpired) {
     return NextResponse.redirect(new URL("/connexion", req.url));
   }
   return NextResponse.next();

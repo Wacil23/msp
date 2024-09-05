@@ -24,8 +24,12 @@ const Contact = () => {
           </>
         }
       />
-      <Paper className="mx-24" shadow="md" radius="lg">
-        <div className="flex flex-col rounded-lg border border-solid border-gray-200 p-8 md:flex-row">
+      <Paper
+        className="mx-4 md:mx-10 lg:mx-16 xl:mx-24"
+        shadow="md"
+        radius="lg"
+      >
+        <div className="flex flex-col rounded-lg border border-solid border-gray-200 p-4 md:p-8 lg:flex-row">
           <div className="relative mb-2 box-border flex flex-auto flex-col items-center gap-12 rounded-lg border border-solid border-transparent bg-light to-90% bg-cover bg-center p-8 pl-8 text-darker md:mb-0">
             <Text fz="lg" fw={700} className="mb-8 md:mb-12" c="darker.1">
               Informations
@@ -35,7 +39,7 @@ const Contact = () => {
           </div>
 
           <form
-            className="flex w-1/2 flex-col gap-5 border-l-0 p-6 pl-6 md:p-8"
+            className="flex flex-col gap-5 border-l-0 p-5 md:p-6 lg:w-1/2 lg:p-8"
             onSubmit={(event) => event.preventDefault()}
           >
             <Text fz="lg" fw={700}>
@@ -43,7 +47,7 @@ const Contact = () => {
             </Text>
 
             <div>
-              <SimpleGrid cols={{ base: 1, sm: 2 }}>
+              <SimpleGrid cols={{ base: 1, sm: 1, md: 2 }}>
                 <TextInput
                   label="Votre nom complet"
                   placeholder="Votre nom complet"

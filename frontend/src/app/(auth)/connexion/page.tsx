@@ -39,24 +39,24 @@ const Connexion = () => {
   };
 
   return (
-    <div className="flex  h-dvh md:p-4">
-      <div className="bg-primary-200 hidden lg:w-3/5 xl:w-2/5 lg:flex rounded-xl">
+    <div className="flex h-dvh md:p-4">
+      <div className="bg-primary-200 hidden rounded-xl lg:flex lg:w-3/5 xl:w-2/5">
         <Image className="mx-auto" src={LoginImg} alt="Image connexion" />
       </div>
       {forgotPassword ? (
-        <div className="flex flex-col w-3/4 ">
+        <div className="flex w-3/4 flex-col">
           <Link
             className="flex items-center gap-2 pl-8 pt-5 font-semibold text-darker"
             href={"/"}
           >
             <FiArrowLeft /> Revenir à l'acceuil
           </Link>
-          <div className="md:rounded-lg py-5 md:px-20 px-10 md:shadow-slate-100 m-auto md:mx-12 md:shadow">
-            <h1 className="text-xl md:text-4xl group text-darker font-bold text-center mb-5">
+          <div className="m-auto px-10 py-5 md:mx-12 md:rounded-lg md:px-20 md:shadow md:shadow-slate-100">
+            <h1 className="group mb-5 text-center text-xl font-bold text-darker md:text-4xl">
               Mot de passe oublié
             </h1>
 
-            <div className="flex flex-col gap-6 py-5 md:my-8 my-4">
+            <div className="my-4 flex flex-col gap-6 py-5 md:my-8">
               <TextInput
                 label="Votre email"
                 type="email"
@@ -69,15 +69,15 @@ const Connexion = () => {
           </div>
         </div>
       ) : (
-        <div className="flex flex-col mx-auto">
+        <div className="mx-auto flex flex-col">
           <Link
             className="flex items-center gap-2 pl-8 pt-5 font-semibold text-darker"
             href={"/"}
           >
             <FiArrowLeft /> Revenir à l'acceuil
           </Link>
-          <div className="md:rounded-lg py-5 md:px-20 px-10 md:shadow-slate-100 m-auto md:mx-12 md:shadow">
-            <h1 className="text-xl md:text-4xl text-darker font-bold text-center mb-5">
+          <div className="m-auto px-10 py-5 md:mx-12 md:rounded-lg md:px-20 md:shadow md:shadow-slate-100">
+            <h1 className="mb-5 text-center text-xl font-bold text-darker md:text-4xl">
               Accès Professionnel
             </h1>
             <Blockquote
@@ -91,7 +91,7 @@ const Connexion = () => {
               compte et vous connecter.
             </Blockquote>
 
-            <div className="flex flex-col gap-6 py-5 md:my-8 my-4">
+            <div className="my-4 flex flex-col gap-6 py-5 md:my-8">
               {error && (
                 <SnackBar
                   message={error}
@@ -107,17 +107,7 @@ const Connexion = () => {
                 onButtonClick={() => setForgotPassword((prev) => !prev)}
                 loading={loading}
               />
-              <Divider />
             </div>
-            <p className="flex flex-col items-center  font-semibold justify-center">
-              Vous êtes professionnel ?
-              <Link
-                href={"/"}
-                className="underline text-primary-700 text-center w-fit flex items-center justify-start gap-2 cursor-pointer"
-              >
-                Devenir adhérent <FiArrowRight />{" "}
-              </Link>
-            </p>
           </div>
         </div>
       )}
