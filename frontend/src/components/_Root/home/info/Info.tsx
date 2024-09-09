@@ -1,17 +1,18 @@
 "use client";
 import { Button, Collapse } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
+import { YouTubeEmbed } from "@next/third-parties/google";
 import React from "react";
 
 const Info = () => {
   const [opened, { toggle }] = useDisclosure(false);
   return (
-    <div className="mx-4 mb-8 flex flex-col gap-12 md:mx-24 md:mb-36">
-      <h2 className="text-2xl font-semibold text-darker md:text-4xl">
+    <div className="mx-4 mb-8 flex flex-col gap-12 md:mx-20 lg:mx-24 lg:mb-36">
+      <h2 className="text-xl font-semibold text-darker md:text-2xl lg:text-4xl">
         Qu'est ce qu'une MSP ?
       </h2>
-      <div className="flex flex-col items-center gap-12 md:flex-row md:gap-28">
-        <div className="flex flex-col items-start md:w-[55%]">
+      <div className="flex flex-col items-center gap-12 md:gap-20 lg:flex-row lg:gap-28">
+        <div className="flex flex-col items-start lg:w-[55%]">
           <p className="text-md md:text-lg">
             Les maisons de santé pluriprofessionnelles sont des structure de
             soins de proximité qui regroupent des professionnels de santé
@@ -53,15 +54,14 @@ const Info = () => {
             </Button>
           )}
         </div>
-        <iframe
-          className="w-full rounded-3xl md:w-1/2"
-          height="400"
-          src="https://www.youtube-nocookie.com/embed/Rz0zCWxAsqE?si=Jzd-SWmn6SLT690K&amp;controls=0&amp;loop=1&amp;modestbranding=1"
-          title="Qu'est ce qu'une msp"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          referrerPolicy="strict-origin-when-cross-origin"
-          allowFullScreen
-        ></iframe>
+        <div className="w-full rounded-3xl lg:w-1/2">
+          <YouTubeEmbed
+            style="border-radius: 1.5rem"
+            params="controls=0&loop=1&modestbranding=1"
+            videoid="Rz0zCWxAsqE"
+            height={400}
+          />
+        </div>
       </div>
     </div>
   );

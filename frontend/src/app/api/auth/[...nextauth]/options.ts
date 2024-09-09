@@ -59,12 +59,20 @@ export const options: NextAuthOptions = {
               ],
             }),
           );
+          if (
+            !loggedInUser.email ||
+            !loggedInUser.first_name ||
+            !loggedInUser.last_name ||
+            !loggedInUser.avatar
+          ) {
+            return null;
+          }
           const user: Awaitable<User> = {
             id: loggedInUser.id,
             email: loggedInUser.email,
             first_name: loggedInUser.first_name,
             last_name: loggedInUser.last_name,
-            avatar: loggedInUser.avatar,
+            avatar: loggedInUser.avatar as string,
             profession: loggedInUser.profession,
             telephone: loggedInUser.telephone,
             access_token: auth.access_token ?? "",
@@ -90,7 +98,14 @@ export const options: NextAuthOptions = {
     signIn: "/connexion",
   },
   callbacks: {
-    async jwt({ token, user, account }): Promise<JWT> {
+    async jwt({ token, user, account, trigger, session }): Promise<JWT> {
+      if (trigger === "update") {
+        console.log("update token");
+        return {
+          ...token,
+          ...session.user,
+        };
+      }
       if (account) {
         return {
           access_token: user.access_token,
@@ -132,11 +147,22 @@ export const options: NextAuthOptions = {
         return token;
       }
     },
-    async session({ session, token }): Promise<Session> {
+    async session({ session, token, trigger }): Promise<Session> {
       session.error = token.error;
       session.acess_token = token.access_token;
       session.refresh_token = token.refresh_token;
       session.expires = token.expires_at;
+
+      if (trigger === "update") {
+        console.log("update session");
+        return {
+          ...session,
+          user: {
+            ...session.user,
+          },
+        };
+      }
+
       const {
         id,
         name,

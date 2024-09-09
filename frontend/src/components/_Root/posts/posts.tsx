@@ -59,10 +59,10 @@ const Posts: React.FC<PostsProps> = ({ subCategories, categories }) => {
     <>
       <div className="relative overflow-hidden rounded-full bg-[#fafafa] py-7">
         <div
-          className={`absolute top-1/2 flex w-full items-center justify-evenly gap-8 overflow-auto text-nowrap p-4 ${isSubCategories ? classes.categoryTranslateUp : "-translate-y-1/2 opacity-100 transition-all duration-300"}`}
+          className={`absolute top-1/2 flex w-full items-center justify-evenly gap-8 overflow-auto text-nowrap px-8 py-4 ${isSubCategories ? classes.categoryTranslateUp : "-translate-y-1/2 opacity-100 transition-all duration-300"}`}
         >
           <p
-            tabIndex={1}
+            tabIndex={0}
             className={`cursor-pointer text-sm ${activeCategory === "all" ? "underline-darker font-semibold text-darker underline underline-offset-2" : ""}`}
             onClick={() => setActiveCategory("all")}
           >
@@ -72,7 +72,7 @@ const Posts: React.FC<PostsProps> = ({ subCategories, categories }) => {
             ?.filter((cat) => cat.title !== "Autres")
             .map((category) => (
               <p
-                tabIndex={1}
+                tabIndex={0}
                 className={`flex cursor-pointer items-center gap-2 text-sm ${
                   activeCategory === category.title
                     ? "font-semibold text-darker"
@@ -86,7 +86,7 @@ const Posts: React.FC<PostsProps> = ({ subCategories, categories }) => {
               </p>
             ))}
           <p
-            tabIndex={1}
+            tabIndex={0}
             onClick={() => setActiveCategory("autres")}
             className={`cursor-pointer text-sm ${activeCategory === "autres" ? "underline-darker font-semibold text-darker underline underline-offset-2" : ""}`}
           >
@@ -175,7 +175,7 @@ const Posts: React.FC<PostsProps> = ({ subCategories, categories }) => {
       </div>
       <div className="mt-12 flex flex-col items-center gap-12">
         <div className="flex w-full justify-between">
-          <div className="grid justify-items-stretch gap-8 lg:grid-cols-3">
+          <div className="grid justify-items-stretch gap-8 md:grid-cols-2 xl:grid-cols-3">
             {currentArticles?.map((article) => (
               <Post
                 key={article.id}

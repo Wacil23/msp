@@ -4,8 +4,12 @@ import { UserSession } from "@/types/next-auth";
 
 export const getAllUsers = async (token: string) => {
   const api = directus(token);
-  const users = await api.request<UserSession[]>(withToken(token, readUsers()));
-  return users;
+  try {
+    const users = await api.request<UserSession[]>(
+      withToken(token, readUsers()),
+    );
+    return users;
+  } catch (e) {}
 };
 
 export const getMembersUsers = async (token: string) => {
@@ -31,32 +35,36 @@ export const getMembersUsers = async (token: string) => {
 
 export const getMe = async (token: string) => {
   const api = directus(token);
-  const user = await api.request<UserSession>(
-    withToken(
-      token,
-      readMe({
-        fields: [
-          "id",
-          "first_name",
-          "last_name",
-          "email",
-          "avatar",
-          "profession",
-          "telephone",
-          "access_token",
-          "expires",
-          "refresh_token",
-        ],
-      }),
-    ),
-  );
-  return user;
+  try {
+    const user = await api.request<UserSession>(
+      withToken(
+        token,
+        readMe({
+          fields: [
+            "id",
+            "first_name",
+            "last_name",
+            "email",
+            "avatar",
+            "profession",
+            "telephone",
+            "access_token",
+            "expires",
+            "refresh_token",
+          ],
+        }),
+      ),
+    );
+    return user;
+  } catch (e) {}
 };
 export const UpdateMe = async (
   token: string,
   newUser: Partial<UserSession>,
 ) => {
-  const api = directus(token);
-  const user = await api.request<UserSession>(updateMe(newUser));
-  return user;
+  try {
+    const api = directus(token);
+    const user = await api.request<UserSession>(updateMe(newUser));
+    return user;
+  } catch (e) {}
 };

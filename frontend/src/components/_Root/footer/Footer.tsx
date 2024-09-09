@@ -14,6 +14,7 @@ import { BsFacebook, BsInstagram, BsLinkedin, BsTwitter } from "react-icons/bs";
 import { CiAt } from "react-icons/ci";
 import { FiArrowUp } from "react-icons/fi";
 import { PiMapPinBold, PiPhoneBold } from "react-icons/pi";
+import { ShareButtons } from "../../../app/(root)/blog/[...id]/page";
 
 const Footer = () => {
   const [scroll, scrollTo] = useWindowScroll();
@@ -117,16 +118,15 @@ const Footer = () => {
         </Transition>
       </Affix>
       <Divider my="md" />
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col items-center justify-between lg:flex-row">
         <p className="text-sm text-darker">
           Copiright 2024 MSP denain. Tout droits réservés.
         </p>
-        <div className="flex flex-row items-center gap-5 text-sm text-darker">
+        <div className="flex flex-col items-center gap-5 text-sm text-darker lg:flex-row">
           <p>Suivez-nous sur</p>
-          <BsFacebook />
-          <BsInstagram />
-          <BsTwitter />
-          <BsLinkedin />
+          <div className="flex gap-5">
+            <ShareButtons />
+          </div>
         </div>
       </div>
     </footer>

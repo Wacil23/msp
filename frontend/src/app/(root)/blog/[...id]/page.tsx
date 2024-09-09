@@ -18,6 +18,53 @@ import { IoNewspaperOutline, IoShareSocial } from "react-icons/io5";
 import formatDate from "../../../../utils/func/GetLocalDate";
 import { CgCalendar } from "react-icons/cg";
 
+export const ShareButtons = () => {
+  const articleUrl = "https://docmsp.fr/blog"; // URL de l'article à partager
+  const message = encodeURIComponent("Découvrez cet article incroyable !");
+
+  return (
+    <>
+      <BsFacebook
+        size={20}
+        className="cursor-pointer"
+        onClick={() => {
+          window.open(
+            `https://www.facebook.com/sharer/sharer.php?u=${articleUrl}`,
+            "_blank",
+          );
+        }}
+      />
+      <BsTwitterX
+        size={20}
+        className="cursor-pointer"
+        onClick={() => {
+          window.open(
+            `https://twitter.com/intent/tweet?url=${articleUrl}&text=${message}`,
+            "_blank",
+          );
+        }}
+      />
+      <BsInstagram
+        size={20}
+        className="cursor-pointer"
+        onClick={() => {
+          window.open("https://www.instagram.com/", "_blank"); // Redirige vers Instagram
+        }}
+      />
+      <BsWhatsapp
+        size={20}
+        className="cursor-pointer"
+        onClick={() => {
+          window.open(
+            `https://wa.me/?text=${message}%20${articleUrl}`,
+            "_blank",
+          );
+        }}
+      />
+    </>
+  );
+};
+
 const Article = () => {
   const params = useParams();
   const { id } = params;
@@ -47,26 +94,7 @@ const Article = () => {
               <h3 className="text-lg font-medium text-darker">Partagez sur</h3>
             </div>
             <div className="flex items-center justify-between gap-3">
-              <BsFacebook
-                size={20}
-                className="cursor-pointer"
-                onClick={() => null}
-              />
-              <BsTwitterX
-                size={20}
-                className="cursor-pointer"
-                onClick={() => null}
-              />
-              <BsInstagram
-                size={20}
-                className="cursor-pointer"
-                onClick={() => null}
-              />
-              <BsWhatsapp
-                size={20}
-                className="cursor-pointer"
-                onClick={() => null}
-              />
+              <ShareButtons />
             </div>
           </div>
         </div>
