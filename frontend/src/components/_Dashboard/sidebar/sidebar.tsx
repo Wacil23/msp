@@ -8,18 +8,12 @@ import { NavLink } from "@mantine/core";
 import Link from "next/link";
 import Drawer from "./drawer/drawer";
 import HeaderSidebar from "./header/header";
-import { Notifications, notifications } from "@mantine/notifications";
-import { getSession } from "next-auth/react";
-import { useUnreadMessages } from "@/src/lib/providers/useMessagesUnreadContext";
 
 const Sidebar = ({ children }: { children?: React.ReactNode }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const pathname = usePathname().replace("/dashboard", "");
-  const session = getSession();
-
   return (
     <>
-      <Notifications position="bottom-right" />
       <div>
         <Drawer
           pathname={pathname}

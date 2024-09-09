@@ -1,11 +1,12 @@
 import React from "react";
 import { BsBell } from "react-icons/bs";
-import { CgChevronDown, CgMenuRight } from "react-icons/cg";
+import { CgMenuRight } from "react-icons/cg";
 import { Avatar, Indicator } from "@mantine/core";
 import { Menu } from "@mantine/core";
 import { signOut, useSession } from "next-auth/react";
 import { useUnreadMessages } from "@/src/lib/providers/useMessagesUnreadContext";
-import { Notifications } from "@mantine/notifications";
+import { useUserContextProvider } from "@/src/lib/providers/useUserProvider";
+import Link from "next/link";
 
 interface HeaderSidebar {
   setSidebarOpen: (value: boolean) => void;
@@ -19,12 +20,12 @@ const HeaderSidebar: React.FC<HeaderSidebar> = ({
   setSidebarOpen,
   children,
 }) => {
-  const { data: user } = useSession();
   const directusUrl = process.env.NEXT_PUBLIC_DIRECTUS_ASSETS;
   const userNavigation = [
     { name: "Paramètres", href: "/dashboard/parametres" },
   ];
   const { unreadMessages } = useUnreadMessages();
+  const { me } = useUserContextProvider();
 
   return (
     <div className="lg:pl-72">
@@ -82,29 +83,26 @@ const HeaderSidebar: React.FC<HeaderSidebar> = ({
               <Menu.Target>
                 <Avatar
                   size={"2rem"}
-                  src={user?.user.avatar && directusUrl + user.user.avatar}
+                  src={me?.avatar && directusUrl + me.avatar}
                 />
               </Menu.Target>
               <Menu.Dropdown className="absolute right-0 z-10 mt-2.5 w-full origin-top-right rounded-md bg-white py-2 shadow-lg ring-1 ring-gray-900/5 transition focus:outline-none data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-100 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in">
                 {userNavigation.map((item) => (
-                  <Menu.Item key={item.name}>
-                    <div className="flex flex-col gap-1 p-2">
-                      <a
-                        href={item.href}
-                        className={classNames(
-                          "block rounded-md px-3 py-2 text-sm leading-6 text-gray-900",
-                        )}
-                      >
+                  <>
+                    <Menu.Item key={item.name}>
+                      <Link className="px-2" href={item.href}>
                         {item.name}
-                      </a>
+                      </Link>
+                    </Menu.Item>
+                    <Menu.Item className="hover:bg-transparent">
                       <p
-                        className="cursor-pointer rounded-md bg-red-300 px-3 py-2 text-sm font-medium text-red-950 hover:bg-red-500"
+                        className="cursor-pointer rounded-md bg-red-300 px-3 py-2 text-sm font-medium text-red-950 transition-colors hover:bg-red-500 hover:text-white"
                         onClick={() => signOut()}
                       >
                         Se déconnecter
                       </p>
-                    </div>
-                  </Menu.Item>
+                    </Menu.Item>
+                  </>
                 ))}
               </Menu.Dropdown>
             </Menu>

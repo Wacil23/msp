@@ -38,8 +38,8 @@ const Teams: React.FC<TeamsProps> = ({ users }) => {
 
   return (
     <div className="flex flex-col text-darker">
-      <div className="flex flex-col gap-4 rounded-2xl bg-light/75 px-4 py-10 md:mx-24 md:px-20 md:py-14">
-        <h2 className="text-2xl font-semibold md:text-4xl">
+      <div className="flex flex-col gap-4 rounded-2xl bg-light/75 px-4 py-10 md:px-20 md:py-14 lg:mx-24">
+        <h2 className="text-2xl font-semibold lg:text-4xl">
           L'équipe de la MSP
         </h2>
         <div className="flex flex-col gap-4">

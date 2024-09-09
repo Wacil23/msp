@@ -30,7 +30,7 @@ export function ArticlesCardsGrid(article: BlogArticle) {
     { title: article.category?.parent_category?.title ?? "autres" },
     { title: article.category?.title ?? undefined },
   ].map((item, index) => (
-    <Text tabIndex={1} size="xs" fw={600} key={index}>
+    <Text tabIndex={0} size="xs" fw={600} key={index}>
       {item.title}
     </Text>
   ));
@@ -43,7 +43,7 @@ export function ArticlesCardsGrid(article: BlogArticle) {
       bg={"#fafafa"}
       radius="lg"
       shadow="sm"
-      tabIndex={1}
+      tabIndex={0}
       p={25}
       onClick={() => {
         setArticle(article.id);
@@ -90,7 +90,7 @@ export function ArticlesCardsGrid(article: BlogArticle) {
               fw={600}
               c={"darker.1"}
               size="xs"
-              tabIndex={1}
+              tabIndex={0}
             >
               <Text fw={700} truncate="end" size="10">
                 {article.category?.title ?? "Autres"}

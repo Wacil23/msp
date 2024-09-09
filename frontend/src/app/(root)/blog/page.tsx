@@ -22,7 +22,7 @@ const Blog: React.FC = async () => {
           }
         />
       </div>
-      <div className="flex flex-col gap-8 py-16 lg:mx-52">
+      <div className="mx-4 flex flex-col gap-8 py-16 md:mx-20 lg:mx-52">
         <Posts categories={categories} subCategories={subCategories} />
       </div>
     </>

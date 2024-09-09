@@ -2,21 +2,15 @@
 import Hero from "@/src/components/_Root/hero/hero";
 import styles from "./article.module.css";
 import { useBlogStore } from "@/src/store/blogStore";
-import { Badge, Blockquote, Button, TextInput } from "@mantine/core";
+import { Badge, Blockquote } from "@mantine/core";
 import { useParams } from "next/navigation";
 import React from "react";
-import {
-  BsAt,
-  BsClock,
-  BsFacebook,
-  BsInstagram,
-  BsTwitterX,
-  BsWhatsapp,
-} from "react-icons/bs";
+import { BsClock } from "react-icons/bs";
 import { FiInfo } from "react-icons/fi";
-import { IoNewspaperOutline, IoShareSocial } from "react-icons/io5";
+import { IoShareSocial } from "react-icons/io5";
 import formatDate from "../../../../utils/func/GetLocalDate";
 import { CgCalendar } from "react-icons/cg";
+import { ShareButtons } from "@/src/components/_UI/ShareButtons/ShareButtons";
 
 const Article = () => {
   const params = useParams();
@@ -47,26 +41,7 @@ const Article = () => {
               <h3 className="text-lg font-medium text-darker">Partagez sur</h3>
             </div>
             <div className="flex items-center justify-between gap-3">
-              <BsFacebook
-                size={20}
-                className="cursor-pointer"
-                onClick={() => null}
-              />
-              <BsTwitterX
-                size={20}
-                className="cursor-pointer"
-                onClick={() => null}
-              />
-              <BsInstagram
-                size={20}
-                className="cursor-pointer"
-                onClick={() => null}
-              />
-              <BsWhatsapp
-                size={20}
-                className="cursor-pointer"
-                onClick={() => null}
-              />
+              <ShareButtons />
             </div>
           </div>
         </div>

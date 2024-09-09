@@ -16,37 +16,37 @@ const Partnairs = () => {
     {
       nom: "ARS",
       image: ARS,
-      width: isMobile ? 100 : 150,
+      width: isMobile ? 90 : 150,
     },
     {
       nom: "CH",
       image: CH,
-      width: isMobile ? 60 : 110,
+      width: isMobile ? 50 : 110,
     },
     {
       nom: "Denain",
       image: Denain,
-      width: isMobile ? 100 : 150,
+      width: isMobile ? 90 : 150,
     },
     {
       nom: "Hainaut",
       image: Hainaut,
-      width: isMobile ? 100 : 150,
+      width: isMobile ? 90 : 150,
     },
     {
       nom: "CPAM",
       image: CPAM,
-      width: isMobile ? 100 : 150,
+      width: isMobile ? 90 : 150,
     },
     {
       nom: "Ministère",
       image: Ministere,
-      width: isMobile ? 100 : 150,
+      width: isMobile ? 90 : 150,
     },
   ];
   return (
-    <div className="mx-8 my-12 flex flex-col gap-16 md:my-28 md:gap-24 md:px-24">
-      <h2 className="text-2xl font-semibold text-darker md:text-4xl">
+    <div className="mx-4 my-12 flex flex-col gap-16 md:my-20 md:gap-24 md:px-20 lg:my-28 lg:px-24">
+      <h2 className="text-2xl font-semibold text-darker lg:text-4xl">
         Nos partenaires
       </h2>
       <div className="inline-flex w-full flex-nowrap overflow-hidden [mask-image:_linear-gradient(to_right,transparent_0,_black_128px,_black_calc(100%-200px),transparent_100%)]">

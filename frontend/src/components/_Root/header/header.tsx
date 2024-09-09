@@ -78,7 +78,7 @@ const Header = ({ user }: { user: UserAuthenticated }) => {
   const router = useRouter();
   return (
     <>
-      <header className="sticky top-0 z-50 flex w-full items-center justify-between gap-5 bg-main px-8 py-5 will-change-scroll md:px-28">
+      <header className="sticky top-0 z-50 flex w-full items-center justify-between gap-5 bg-main px-8 py-5 will-change-scroll md:px-20 lg:px-28">
         <nav className="flex w-full items-center justify-between">
           <Title
             order={1}
@@ -153,7 +153,7 @@ const MenuDrawer: React.FC<MenuDrawerProps> = ({ opened, onClose, user }) => {
                 <li key={link.title}>
                   <Link
                     onClick={handleLinkClick}
-                    className="group text-justify text-2xl font-light text-neutral-800 transition duration-300"
+                    className="group text-justify text-2xl font-medium text-neutral-800 transition duration-300"
                     href={link.href}
                   >
                     {link.title}
@@ -165,14 +165,6 @@ const MenuDrawer: React.FC<MenuDrawerProps> = ({ opened, onClose, user }) => {
             <ul className="flex flex-col gap-3">
               {!user ? (
                 <>
-                  <Button
-                    variant="outline"
-                    size="md"
-                    fw={700}
-                    leftSection={<FiUser />}
-                  >
-                    Devenir adhérent
-                  </Button>
                   <Button
                     size="md"
                     fw={700}

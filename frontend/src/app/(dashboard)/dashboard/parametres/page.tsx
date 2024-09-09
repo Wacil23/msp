@@ -3,7 +3,7 @@ import {
   ParametersPasswordSchema,
   Parameterschema,
 } from "@/src/config/validations/Parameter";
-import { UpdateMe, getMe } from "@/src/lib/services/users/Users";
+import { UpdateMe } from "@/src/lib/services/users/Users";
 import {
   Avatar,
   Blockquote,
@@ -13,15 +13,16 @@ import {
   TextInput,
 } from "@mantine/core";
 import { useForm, yupResolver } from "@mantine/form";
-import { signOut, useSession } from "next-auth/react";
-import { useEffect, useState } from "react";
+import { signOut } from "next-auth/react";
+import { useEffect } from "react";
 import { FiCheck, FiEdit } from "react-icons/fi";
-import { Notifications, notifications } from "@mantine/notifications";
-import useSWR, { useSWRConfig } from "swr";
+import { notifications } from "@mantine/notifications";
 import { CgClose } from "react-icons/cg";
 import PasswordForm from "@/src/components/_Root/parameters/password/password";
 import { CiWarning } from "react-icons/ci";
 import { UploadFiles } from "@/src/lib/services/files/Files";
+import { useUserContextProvider } from "@/src/lib/providers/useUserProvider";
+import { sleep } from "@directus/sdk";
 
 type FormGeneralValues = {
   email: string;
@@ -38,14 +39,8 @@ export type FormPasswordValues = {
 
 const Parametres = () => {
   const directusUrl = process.env.NEXT_PUBLIC_DIRECTUS_ASSETS;
-  const { data: user, status } = useSession();
-  const fetcher = () => (user?.acess_token ? getMe(user.acess_token) : null);
-  const { mutate } = useSWRConfig();
-  const { data: me, error } = useSWR(
-    user?.acess_token ? "users/me" : null,
-    fetcher,
-  );
-
+  const { me, mutateMe, session, status, error, isLoading } =
+    useUserContextProvider();
   const form = useForm<FormGeneralValues>({
     initialValues: {
       email: "",
@@ -80,12 +75,14 @@ const Parametres = () => {
   }, [me]);
 
   if (status === "unauthenticated") {
-    return (
-      <div>
-        <p> Vous avez été déconnecté...</p>
-        <Button onClick={() => signOut()}>Se reconnecter</Button>
-      </div>
-    );
+    notifications.show({
+      message: "Veuillez vous reconnecté",
+      title: "Vous avez été déconnecté",
+      color: "orange",
+    });
+    signOut();
+
+    return;
   }
 
   if (error)
@@ -95,7 +92,7 @@ const Parametres = () => {
       </div>
     );
 
-  if (!me)
+  if (!me || isLoading)
     return (
       <Skeleton className="m-10" animate>
         <div className="h-full rounded-md bg-primary/55 p-12">
@@ -122,7 +119,7 @@ const Parametres = () => {
         updatedFields[field] = updatedUser[field];
       }
     });
-    const app = await UpdateMe(user?.acess_token!, updatedFields);
+    const app = await UpdateMe(session?.acess_token!, updatedFields);
     if (app) {
       notifications.show({
         title: "Profile modifié",
@@ -140,13 +137,13 @@ const Parametres = () => {
         color: "red",
       });
     }
-    mutate("users/me", fetcher);
+    mutateMe();
   };
 
   //Update password information
   const updatePassword = async () => {
     const updatedUser = formPassword.values;
-    const app = await UpdateMe(user?.acess_token!, updatedUser);
+    const app = await UpdateMe(session?.acess_token!, updatedUser);
     if (app) {
       notifications.show({
         title: "Mot de passe modifié",
@@ -164,7 +161,7 @@ const Parametres = () => {
         color: "red",
       });
     }
-    mutate("users/me", fetcher);
+    mutateMe();
     signOut();
   };
 
@@ -172,16 +169,37 @@ const Parametres = () => {
   const updateAvatar = async (event: File | null) => {
     const formData = new FormData();
     if (!event) return;
+
     formData.append("avatar", event);
-    const result = await UploadFiles(user?.acess_token!, formData);
-    await UpdateMe(user?.acess_token!, {
-      avatar: result.id,
-    });
-    mutate("users/me", fetcher);
+
+    const result = await UploadFiles(session?.acess_token!, formData);
+    if (result?.id) {
+      const updatedUser = await UpdateMe(session?.acess_token!, {
+        avatar: result.id,
+      });
+      if (updatedUser) {
+        notifications.show({
+          title: "Avatar changé",
+          message: "Votre avatar a bien été modifié",
+          autoClose: true,
+          icon: <FiCheck />,
+          color: "primary.1",
+        });
+        mutateMe();
+      }
+    } else {
+      notifications.show({
+        title: "Oops ...",
+        message: "Il semblerait qu'il y ai eu une erreur, veuillez réessayer",
+        autoClose: true,
+        icon: <CgClose />,
+        color: "red",
+      });
+    }
   };
+
   return (
     <div className="md:m-10">
-      <Notifications position="top-right" />
       <div className="h-full rounded-md p-4 md:p-12">
         <div className="flex items-center justify-between">
           <div className="flex flex-col">
@@ -191,10 +209,7 @@ const Parametres = () => {
         </div>
         <div className="flex h-full flex-col gap-8 py-12 md:flex-row">
           <div className="flex flex-col items-center gap-3">
-            <Avatar
-              size={"5rem"}
-              src={user?.user.avatar && directusUrl + user.user.avatar}
-            />
+            <Avatar size={"5rem"} src={me?.avatar && directusUrl + me.avatar} />
             <FileButton
               onChange={(event) => updateAvatar(event)}
               accept="image/png,image/jpeg, image/avif, image/svg"

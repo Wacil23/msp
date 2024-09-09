@@ -1,4 +1,4 @@
-import { schema } from "@/src/config/validations/Login";
+import { EmailValidation } from "@/src/config/validations/Login";
 import { Button, PasswordInput, TextInput } from "@mantine/core";
 import { useForm, yupResolver } from "@mantine/form";
 import React, { FormEvent } from "react";
@@ -14,7 +14,7 @@ export type AuthFormProps = {
   formClass: string;
   buttonText: string;
   onSubmit: (data: Login) => void;
-  linkText: string;
+  linkText?: string;
   onButtonClick: () => void;
   loading: boolean;
 };
@@ -29,7 +29,7 @@ export default function AuthForm({
 }: AuthFormProps) {
   const form = useForm({
     initialValues: { email: "", password: "" },
-    validate: yupResolver(schema),
+    validate: yupResolver(EmailValidation),
     validateInputOnChange: true,
   });
 
@@ -68,7 +68,7 @@ export default function AuthForm({
           {buttonText}
         </Button>
         <Button
-          className="text-md underline underline-offset-2 w-fit font-medium text-center"
+          className="text-md w-fit text-center font-medium underline underline-offset-2"
           variant="transparent"
           onClick={onButtonClick}
         >
