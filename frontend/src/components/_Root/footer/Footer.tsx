@@ -10,11 +10,10 @@ import {
 import { useWindowScroll } from "@mantine/hooks";
 import Link from "next/link";
 import React from "react";
-import { BsFacebook, BsInstagram, BsLinkedin, BsTwitter } from "react-icons/bs";
 import { CiAt } from "react-icons/ci";
 import { FiArrowUp } from "react-icons/fi";
 import { PiMapPinBold, PiPhoneBold } from "react-icons/pi";
-import { ShareButtons } from "../../../app/(root)/blog/[...id]/page";
+import { ShareButtons } from "../../_UI/ShareButtons/ShareButtons";
 
 const Footer = () => {
   const [scroll, scrollTo] = useWindowScroll();
