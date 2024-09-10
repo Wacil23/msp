@@ -7,13 +7,13 @@ import {
   BlogCategoriesProps,
   BlogSubCategoriesProps,
 } from "@/src/lib/services/blog/BlogCategory";
-import classes from "../../../config/theme/theme.module.css";
-import { IoIosArrowBack, IoIosArrowDown } from "react-icons/io";
+
 import { CgSearch } from "react-icons/cg";
 import { IoFilter } from "react-icons/io5";
 import { CiCalendarDate } from "react-icons/ci";
 import { BsSortAlphaDown, BsSortAlphaDownAlt } from "react-icons/bs";
-interface PostsProps {
+import { CategoriesFilter } from "../../_UI/Filters/Filters";
+export interface PostsProps {
   subCategories?: BlogSubCategoriesProps[];
   categories?: BlogCategoriesProps[];
 }
@@ -22,12 +22,7 @@ const Posts: React.FC<PostsProps> = ({ subCategories, categories }) => {
   const filteredArticles = useBlogStore((state) => state.filteredArticles);
   const initializeArticles = useBlogStore((state) => state.initializeArticles);
   const [currentPage, setCurrentPage] = React.useState(1);
-  const [isSubCategories, setIsSubCategories] = React.useState(false);
-  const [selectedCategory, setSelectedCategory] = React.useState<string | null>(
-    null,
-  );
-  const setActiveCategory = useBlogStore((state) => state.setActiveCategory);
-  const activeCategory = useBlogStore((state) => state.activeCategory);
+
   const filteringArticles = useBlogStore((state) => state.filteringArticles);
   const searchingArticles = useBlogStore((state) => state.searchingArticles);
   const articlesPerPage = 9;
@@ -46,94 +41,28 @@ const Posts: React.FC<PostsProps> = ({ subCategories, categories }) => {
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
-  const handleCategoryClick = (category: string) => {
-    setSelectedCategory(category);
-    setIsSubCategories(true);
-  };
-  const handleBackClick = () => {
-    setIsSubCategories(false);
-    setSelectedCategory(null);
-  };
 
   return (
     <>
-      <div className="relative overflow-hidden rounded-full bg-[#fafafa] py-7">
-        <div
-          className={`absolute top-1/2 flex w-full items-center justify-evenly gap-8 overflow-auto text-nowrap px-8 py-4 ${isSubCategories ? classes.categoryTranslateUp : "-translate-y-1/2 opacity-100 transition-all duration-300"}`}
-        >
-          <p
-            tabIndex={0}
-            className={`cursor-pointer text-sm ${activeCategory === "all" ? "underline-darker font-semibold text-darker underline underline-offset-2" : ""}`}
-            onClick={() => setActiveCategory("all")}
-          >
-            Tout
-          </p>
-          {categories
-            ?.filter((cat) => cat.title !== "Autres")
-            .map((category) => (
-              <p
-                tabIndex={0}
-                className={`flex cursor-pointer items-center gap-2 text-sm ${
-                  activeCategory === category.title
-                    ? "font-semibold text-darker"
-                    : ""
-                }`}
-                key={category.id}
-                onClick={() => handleCategoryClick(category.title)}
-              >
-                {category.title}
-                <IoIosArrowDown />
-              </p>
-            ))}
-          <p
-            tabIndex={0}
-            onClick={() => setActiveCategory("autres")}
-            className={`cursor-pointer text-sm ${activeCategory === "autres" ? "underline-darker font-semibold text-darker underline underline-offset-2" : ""}`}
-          >
-            Autres
-          </p>
-        </div>
-        <div
-          className={`absolute top-1/2 flex w-full items-center justify-evenly gap-8 overflow-auto text-nowrap p-4 text-sm ${isSubCategories ? classes.subcategoryTranslateUp : "translate-y-[4rem] opacity-0"}`}
-        >
-          <div>
-            <IoIosArrowBack
-              className="cursor-pointer"
-              onClick={() => handleBackClick()}
-            >
-              Retour
-            </IoIosArrowBack>
-          </div>
-          {subCategories
-            ?.filter(
-              (subCategory) =>
-                subCategory.parent_category.title === selectedCategory,
-            )
-            .map((subCategory) => (
-              <p
-                className={`cursor-pointer ${activeCategory === subCategory.title ? "underline-darker font-semibold text-darker underline underline-offset-2" : ""}`}
-                key={subCategory.id}
-                onClick={() => setActiveCategory(subCategory.title)}
-              >
-                {subCategory.title}
-              </p>
-            ))}
-        </div>
-      </div>
-      <div className="flex w-full items-center gap-5">
+      <CategoriesFilter
+        filteredArticles={filteredArticles}
+        categories={categories}
+        subCategories={subCategories}
+      />
+      <div className="flex w-full items-center gap-5 px-4 md:mx-0">
         <Input
-          size="md"
+          size="sm"
           className="w-full"
           placeholder="Rechercher un article/catégorie..."
-          radius={"lg"}
+          radius={"md"}
           leftSection={<CgSearch size={16} />}
           onChange={({ target }) => searchingArticles(target.value)}
         />
-        <Menu position="bottom" shadow="md">
+        <Menu zIndex={1} position="bottom" shadow="md">
           <Menu.Target>
             <ActionIcon
               size={"lg"}
-              radius={"lg"}
+              radius={"md"}
               color="#23410C"
               variant="outline"
             >
@@ -173,7 +102,7 @@ const Posts: React.FC<PostsProps> = ({ subCategories, categories }) => {
           </Menu.Dropdown>
         </Menu>
       </div>
-      <div className="mt-12 flex flex-col items-center gap-12">
+      <div className="mx-4 mt-12 flex flex-col items-center gap-12 md:mx-0">
         <div className="flex w-full justify-between">
           <div className="grid justify-items-stretch gap-8 md:grid-cols-2 xl:grid-cols-3">
             {currentArticles?.map((article) => (

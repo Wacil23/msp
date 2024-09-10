@@ -1,6 +1,6 @@
 import { FormPasswordValues } from "@/src/app/(dashboard)/dashboard/parametres/page";
 import { PasswordInput } from "@mantine/core";
-import { UseFormReturnType, useForm, yupResolver } from "@mantine/form";
+import { UseFormReturnType } from "@mantine/form";
 import React from "react";
 
 interface PasswordFormProps {

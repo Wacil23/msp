@@ -12,10 +12,10 @@ import {
   FiMenu,
   FiMessageCircle,
   FiSettings,
-  FiUser,
 } from "react-icons/fi";
 import MenuUI, { MenuItem } from "../../_UI/Menu/Menu";
 import { signOut } from "next-auth/react";
+import { CgMenuRightAlt } from "react-icons/cg";
 
 type MenuDrawerProps = {
   opened: boolean;
@@ -78,7 +78,7 @@ const Header = ({ user }: { user: UserAuthenticated }) => {
   const router = useRouter();
   return (
     <>
-      <header className="sticky top-0 z-50 flex w-full items-center justify-between gap-5 bg-main px-8 py-5 will-change-scroll md:px-20 lg:px-28">
+      <header className="sticky top-0 z-50 flex w-full items-center justify-between gap-5 bg-main px-4 py-5 will-change-scroll md:px-20 lg:px-28">
         <nav className="flex w-full items-center justify-between">
           <Title
             order={1}
@@ -114,7 +114,7 @@ const Header = ({ user }: { user: UserAuthenticated }) => {
             </li>
           </ul>
         </nav>
-        <FiMenu
+        <CgMenuRightAlt
           onClick={open}
           size={35}
           className="text-primary-700 cursor-pointer lg:hidden"
