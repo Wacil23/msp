@@ -20,6 +20,8 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           script: |
             cd www/msp
+            git reset --hard
+            git clean -fd
             git pull origin prod
             docker-compose -f docker-compose.yml -f docker-compose.prod.yml down
             docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
