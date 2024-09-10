@@ -3,3 +3,4 @@ node_modules
 .DS_Store
 backend/database
 frontend/.env.local
+sync_db.sh
