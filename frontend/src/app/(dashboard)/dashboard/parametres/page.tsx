@@ -18,11 +18,10 @@ import { useEffect } from "react";
 import { FiCheck, FiEdit } from "react-icons/fi";
 import { notifications } from "@mantine/notifications";
 import { CgClose } from "react-icons/cg";
-import PasswordForm from "@/src/components/_Root/parameters/password/password";
+import PasswordForm from "@/src/components/_Dashboard/parameters/password/password";
 import { CiWarning } from "react-icons/ci";
 import { UploadFiles } from "@/src/lib/services/files/Files";
 import { useUserContextProvider } from "@/src/lib/providers/useUserProvider";
-import { sleep } from "@directus/sdk";
 
 type FormGeneralValues = {
   email: string;

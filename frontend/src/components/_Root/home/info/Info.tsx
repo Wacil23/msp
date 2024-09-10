@@ -1,4 +1,5 @@
 "use client";
+import { useWindowSize } from "@/src/lib/hooks/window/useWindowSize";
 import { Button, Collapse } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { YouTubeEmbed } from "@next/third-parties/google";
@@ -6,6 +7,7 @@ import React from "react";
 
 const Info = () => {
   const [opened, { toggle }] = useDisclosure(false);
+  const isMobile = useWindowSize().width < 768;
   return (
     <div className="mx-4 mb-8 flex flex-col gap-12 md:mx-20 lg:mx-24 lg:mb-36">
       <h2 className="text-xl font-semibold text-darker md:text-2xl lg:text-4xl">
@@ -59,7 +61,7 @@ const Info = () => {
             style="border-radius: 1.5rem"
             params="controls=0&loop=1&modestbranding=1"
             videoid="Rz0zCWxAsqE"
-            height={400}
+            height={isMobile ? 200 : 400}
           />
         </div>
       </div>

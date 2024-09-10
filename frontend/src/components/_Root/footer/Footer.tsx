@@ -63,21 +63,12 @@ const Footer = () => {
               <p className="font-semibold">Informations</p>
               <ul className="flex flex-col justify-between gap-3 font-medium lg:text-nowrap">
                 <li className="flex items-center gap-2">
-                  <ThemeIcon color="primary" size="sm">
-                    <CiAt />
-                  </ThemeIcon>
                   <a href="mailto:contact@mspdenain.fr">contact@mspdenain.fr</a>
                 </li>
                 <li className="flex items-center gap-2">
-                  <ThemeIcon color="primary" size="sm">
-                    <PiPhoneBold />
-                  </ThemeIcon>
                   <a href="tel:0327067898">03 27 06 78 98</a>
                 </li>
                 <li className="flex items-center gap-2">
-                  <ThemeIcon color="primary" size="sm">
-                    <PiMapPinBold />
-                  </ThemeIcon>
                   <a href="https://www.google.com/maps/place/570+Rue+Arthur+Brunet,+59220+Denain/@50.436785,3.366884,17z/data=!3m1!4b1!4m6!3m5!1s0x47c2e70000000001:0x100000000000000!8m2!3m1!1s0x47c2e70000000001:0x100000000000000!16s%2Fg%2F11c255550y?entry=ttu">
                     570 rue Arthur Brunet, Denain 59220
                   </a>
@@ -95,10 +86,12 @@ const Footer = () => {
             </p>
           </div>
           <form className="flex gap-4">
-            <TextInput type="email" className="w-3/5" placeholder="Email" />
-            <Button className="w-full" variant="default">
-              S'inscrire
-            </Button>
+            <TextInput
+              type="email"
+              className="w-full lg:w-3/5"
+              placeholder="Email"
+            />
+            <Button variant="default">S'inscrire</Button>
           </form>
         </div>
       </div>
