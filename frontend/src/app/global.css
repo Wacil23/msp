@@ -2,47 +2,56 @@
   font-family: "Silka";
   src: url("../../public/fonts/silka/silka-thin-webfont.ttf");
   font-weight: 100;
+  font-display: swap;
 }
 @font-face {
   font-family: "Silka";
   src: url("../../public/fonts/silka/silka-extralight-webfont.ttf");
   font-weight: 200;
+  font-display: swap;
 }
 @font-face {
   font-family: "Silka";
   src: url("../../public/fonts/silka/silka-light-webfont.ttf");
   font-weight: 300;
+  font-display: swap;
 }
 @font-face {
   font-family: "Silka";
   src: url("../../public/fonts/silka/silka-regular-webfont.ttf");
   font-weight: 400;
+  font-display: swap;
 }
 @font-face {
   font-family: "Silka";
   src: url("../../public/fonts/silka/silka-medium-webfont.ttf");
   font-weight: 500;
+  font-display: swap;
 }
 @font-face {
   font-family: "Silka";
   src: url("../../public/fonts/silka/silka-semibold-webfont.ttf");
   font-weight: 600;
+  font-display: swap;
 }
 @font-face {
   font-family: "Silka";
   src: url("../../public/fonts/silka/silka-bold-webfont.ttf");
   font-weight: 700;
+  font-display: swap;
 }
 @font-face {
   font-family: "Silka";
   src: url("../../public/fonts/silka/silka-black-webfont.ttf");
   font-weight: 800;
+  font-display: swap;
 }
 
 @layer base {
   html,
   body {
     font-family: "Silka";
+    font-display: swap;
     box-sizing: border-box;
     color: #0a1c2d !important;
     scroll-behavior: smooth;
