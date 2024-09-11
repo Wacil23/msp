@@ -49,7 +49,14 @@ const Hero = () => {
           transition={{ duration: 1, delay: 0.5 }}
           className="top-full h-24 w-[6rem] rounded-full bg-[#DCF1A7]"
         ></motion.div>
-        <Image className="absolute -top-2 z-10" src={HeroImage} alt="" />
+        <Image
+          className="absolute -top-2 z-10"
+          width={560}
+          height={500}
+          priority={true}
+          src={HeroImage}
+          alt=""
+        />
       </div>
     </div>
   );

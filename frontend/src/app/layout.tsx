@@ -8,6 +8,7 @@ import LoadingManager from "../components/_UI/Loading/LoadingManager";
 import { Notifications } from "@mantine/notifications";
 import { GoogleTagManager } from "@next/third-parties/google";
 import CookieConsentComponent from "../components/_Root/cookieConsent/CookieConsent";
+import Head from "next/head";
 
 export default async function RootLayout({
   children,
@@ -17,6 +18,11 @@ export default async function RootLayout({
   return (
     <html lang="fr" data-mantine-color-scheme="light">
       <GoogleTagManager gtmId="GTM-PCWK4T4P" />
+      <Head>
+        <link rel="preconnect" href="https://www.youtube.fr" />
+        <link rel="preconnect" href="https://www.google.fr" />
+        <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+      </Head>
       <body>
         <Providers>
           <LoadingManager>
@@ -24,9 +30,9 @@ export default async function RootLayout({
               <Notifications />
               {children}
             </MantineProvider>
+            <CookieConsentComponent />
           </LoadingManager>
         </Providers>
-        <CookieConsentComponent />
       </body>
     </html>
   );
