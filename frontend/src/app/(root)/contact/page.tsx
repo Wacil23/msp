@@ -30,14 +30,12 @@ const Contact = () => {
         radius="lg"
       >
         <div className="flex flex-col rounded-lg border border-solid border-gray-200 p-4 md:p-8 lg:flex-row">
-          <div className="relative mb-2 box-border flex flex-auto flex-col items-center gap-12 rounded-lg border border-solid border-transparent bg-light to-90% bg-cover bg-center p-8 pl-8 text-darker md:mb-0">
+          <div className="relative mb-2 box-border flex flex-auto flex-col items-center rounded-lg border border-solid border-transparent bg-light to-90% bg-cover bg-center p-8 pl-8 text-darker md:mb-0">
             <Text fz="lg" fw={700} className="mb-8 md:mb-12" c="darker.1">
               Informations
             </Text>
-
             <ContactIconsList />
           </div>
-
           <form
             className="flex flex-col gap-5 border-l-0 p-5 md:p-6 lg:w-1/2 lg:p-8"
             onSubmit={(event) => event.preventDefault()}
@@ -45,7 +43,6 @@ const Contact = () => {
             <Text fz="lg" fw={700}>
               Contactez nous
             </Text>
-
             <div>
               <SimpleGrid cols={{ base: 1, sm: 1, md: 2 }}>
                 <TextInput
@@ -58,7 +55,6 @@ const Contact = () => {
                   required
                 />
               </SimpleGrid>
-
               <TextInput
                 mt="md"
                 label="Objet"
@@ -66,7 +62,6 @@ const Contact = () => {
                 placeholder="Objet"
                 required
               />
-
               <Textarea
                 mt="md"
                 label="Votre message"
@@ -75,7 +70,6 @@ const Contact = () => {
                 maxRows={6}
                 autosize
               />
-
               <Group justify="flex-end" mt="md">
                 <Button type="submit" className="">
                   Envoyer

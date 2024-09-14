@@ -4,7 +4,6 @@ import { getMembersUsers } from "@/src/lib/services/users/Users";
 import Banner from "@/src/components/_Root/home/banner/Banner";
 import Info from "@/src/components/_Root/home/info/Info";
 import Hero from "@/src/components/_Root/home/hero/Hero";
-import Partnairs from "@/src/components/_Root/home/partnairs/Partnairs";
 import Blog from "@/src/components/_Root/home/blog/Blog";
 import { getPageSeo } from "@/src/lib/services/page/Page";
 
@@ -23,9 +22,8 @@ const Home: React.FC = async () => {
       <Hero />
       <Info />
       <Teams users={users} />
-      <Partnairs />
-      <Banner />
       <Blog />
+      <Banner />
     </div>
   );
 };

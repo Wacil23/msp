@@ -1,11 +1,10 @@
 import Image from "next/image";
 import React from "react";
 import BannerImage from "../../../../../public/images/World Health Day Illustration.svg";
-import { Button } from "@mantine/core";
 
 const Banner = () => {
   return (
-    <div className="flex flex-col gap-10 rounded-2xl bg-light px-8 py-10 text-darker md:mx-24 md:px-20 md:py-12">
+    <div className="mx-4 mb-28 flex flex-col gap-10 rounded-2xl bg-darker px-8 py-10 text-primary md:px-20 md:py-12">
       <h3 className="text-center text-xl font-semibold">En savoir plus</h3>
       <div className="flex flex-col items-center lg:flex-row">
         <Image

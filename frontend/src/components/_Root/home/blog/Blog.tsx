@@ -18,8 +18,8 @@ const Blog = () => {
   };
 
   return (
-    <div className="flex flex-col gap-12 px-4 pb-10 md:px-24 md:py-32 xl:gap-24">
-      <h2 className="text-xl font-semibold text-darker md:text-4xl">
+    <div className="mx-4 flex flex-col gap-12 px-4 pb-10 md:py-32 xl:gap-24">
+      <h2 className="text-2xl font-normal text-darker lg:text-4xl">
         Nos derniers articles
       </h2>
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-4 md:gap-6">
