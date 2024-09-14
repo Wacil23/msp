@@ -16,73 +16,54 @@ const Partnairs = () => {
     {
       nom: "ARS",
       image: ARS,
-      width: isMobile ? 90 : 150,
+      width: 90,
     },
     {
       nom: "CH",
       image: CH,
-      width: isMobile ? 50 : 110,
+      width: 50,
     },
     {
       nom: "Denain",
       image: Denain,
-      width: isMobile ? 90 : 150,
+      width: 90,
     },
     {
       nom: "Hainaut",
       image: Hainaut,
-      width: isMobile ? 90 : 150,
+      width: 90,
     },
     {
       nom: "CPAM",
       image: CPAM,
-      width: isMobile ? 90 : 150,
+      width: 90,
     },
     {
       nom: "Ministère",
       image: Ministere,
-      width: isMobile ? 90 : 150,
+      width: 90,
     },
   ];
   return (
-    <div className="mx-4 my-12 flex flex-col gap-16 md:my-20 md:gap-24 md:px-20 lg:my-28 lg:px-24">
-      <h2 className="text-2xl font-semibold text-darker lg:text-4xl">
-        Nos partenaires
-      </h2>
+    <div className="mx-4 flex flex-col gap-8 md:px-20 lg:px-24">
       <div className="inline-flex w-full flex-nowrap overflow-hidden [mask-image:_linear-gradient(to_right,transparent_0,_black_128px,_black_calc(100%-200px),transparent_100%)]">
-        <ul className="flex animate-infinite-scroll items-center justify-center md:justify-start [&_img]:max-w-none [&_li]:mx-8">
-          {partenaires.map((partenaire) => {
-            return (
-              <li key={partenaire.nom}>
-                <Image
-                  className="grayscale transition-all duration-500 hover:grayscale-0"
-                  width={partenaire.width}
-                  height={partenaire.width}
-                  src={partenaire.image}
-                  alt={partenaire.nom}
-                />
-              </li>
-            );
-          })}
-        </ul>
-        <ul
-          className="flex animate-infinite-scroll items-center justify-center md:justify-start [&_img]:max-w-none [&_li]:mx-8"
-          aria-hidden="true"
-        >
-          {partenaires.map((partenaire) => {
-            return (
-              <li key={partenaire.nom}>
-                <Image
-                  className="grayscale transition-all duration-500 hover:grayscale-0"
-                  width={partenaire.width}
-                  height={partenaire.width}
-                  src={partenaire.image}
-                  alt={partenaire.nom}
-                />
-              </li>
-            );
-          })}
-        </ul>
+        {[...Array(5)].map(() => (
+          <ul className="flex animate-infinite-scroll items-center justify-center md:justify-start [&_img]:max-w-none [&_li]:mx-8">
+            {partenaires.map((partenaire) => {
+              return (
+                <li key={partenaire.nom}>
+                  <Image
+                    className="grayscale transition-all duration-500 hover:grayscale-0"
+                    width={partenaire.width}
+                    height={partenaire.width}
+                    src={partenaire.image}
+                    alt={partenaire.nom}
+                  />
+                </li>
+              );
+            })}
+          </ul>
+        ))}
       </div>
     </div>
   );

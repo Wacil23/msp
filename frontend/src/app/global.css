@@ -63,6 +63,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  .h-hero {
+    height: calc(100dvh - 6rem);
+  }
+}
+
 .mantine-NavLink-label {
   font-size: 1rem !important;
 }

@@ -1,92 +1,58 @@
 "use client";
-import React from "react";
-import {
-  Profession,
-  Professionnels,
-} from "@/src/lib/types/users/profession/professions.types";
+import { useState, useEffect } from "react";
+import { Professionnels } from "@/src/lib/types/users/profession/professions.types";
 import { categorySpecificProfessions } from "@/src/utils/func/RegroupUserByProfession";
 import { UserSession } from "@/types/next-auth";
-import { SegmentedControl } from "@mantine/core";
+import { Badge, Divider } from "@mantine/core";
 import { FiMapPin } from "react-icons/fi";
-import { useWindowSize } from "@/src/lib/hooks/window/useWindowSize";
 
 type TeamsProps = {
   users?: UserSession[];
 };
 
 const Teams: React.FC<TeamsProps> = ({ users }) => {
-  const [selectedCategory, setSelectedCategory] = React.useState<Profession>(
-    Profession.Infirmiers,
-  );
-  const [categoryData, setCategoryData] = React.useState<Professionnels[]>([]);
+  const [categoryData, setCategoryData] = useState<
+    Record<string, Professionnels[]>
+  >({});
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (users) {
-      setCategoryData(categorySpecificProfessions(users)![selectedCategory]);
+      const groupedProfessionals = categorySpecificProfessions(users);
+      setCategoryData(groupedProfessionals || {});
     }
-  }, [selectedCategory, users]);
-
-  const handleCategoryChange = (value: string) => {
-    if (users) {
-      setSelectedCategory(value as Profession);
-      setCategoryData(categorySpecificProfessions(users)![value as Profession]);
-    }
-  };
-
-  const size = useWindowSize();
-  const isMobile = size.width <= 768;
+  }, [users]);
 
   return (
     <div className="flex flex-col text-darker">
-      <div className="flex flex-col gap-4 rounded-2xl bg-light/75 px-4 py-10 md:px-20 md:py-14 lg:mx-24">
-        <h2 className="text-2xl font-semibold lg:text-4xl">
-          L'équipe de la MSP
-        </h2>
-        <div className="flex flex-col gap-4">
-          <SegmentedControl
-            fullWidth={isMobile}
-            size={isMobile ? "sm" : "md"}
-            my={40}
-            radius={"16"}
-            withItemsBorders={false}
-            orientation={isMobile ? "vertical" : "horizontal"}
-            bg={"#dcf1a7"}
-            data={[
-              "Infirmiers",
-              "Médecin Généralistes",
-              "Cardiologues",
-              "Kinésithérapeutes",
-              "Diététiciennes",
-            ]}
-            value={selectedCategory}
-            onChange={handleCategoryChange}
-          />
-          <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {categoryData
-              ?.sort((a, b) => a.nom!.localeCompare(b.nom!))
-              .map((person: Professionnels, index: number) => (
-                <div
-                  key={index}
-                  className="group flex flex-col gap-7 rounded-2xl bg-white p-6 shadow-md transition-all duration-300 hover:shadow-xl"
-                >
-                  <div className="flex flex-col gap-2 self-center text-darker">
-                    <p className="text-center font-semibold">
-                      {person.civilite} {person.nom?.toUpperCase()}{" "}
-                      {person.prenom}
+      <div className="mx-4 flex flex-col gap-4 overflow-hidden rounded-2xl bg-primary px-4 py-10 transition-all md:mx-8 md:px-12 md:py-14 lg:gap-12">
+        <h2 className="text-2xl font-normal lg:text-4xl">L'équipe de la MSP</h2>
+        <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
+          {users
+            ?.sort((a, b) => a.last_name!.localeCompare(b.last_name!))
+            .map((user) => (
+              <>
+                <div className="group relative flex flex-col gap-7 rounded-2xl bg-white p-6 shadow-primary/40 transition-all duration-300 hover:-translate-y-3 hover:bg-darker hover:shadow-md">
+                  <Badge className="self-center" color="primary.1">
+                    <span className="text-darker">{user.profession}</span>
+                  </Badge>
+                  <div className="flex flex-col gap-2 self-center text-darker group-hover:text-primary">
+                    <p className="text-center font-normal">
+                      {user.civility} {user.last_name?.toUpperCase()}{" "}
+                      {user.first_name}
                     </p>
                     <a
-                      href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(person.location!)}`}
+                      href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(user.location!)}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex cursor-pointer items-center gap-3 text-sm font-semibold underline"
+                      className="flex cursor-pointer items-center gap-3 text-sm font-normal underline"
                     >
                       <FiMapPin />
-                      {person.location}
+                      {user.location}
                     </a>
                   </div>
                 </div>
-              ))}
-          </div>
+              </>
+            ))}
         </div>
       </div>
     </div>

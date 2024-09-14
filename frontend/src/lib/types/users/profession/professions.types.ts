@@ -3,6 +3,7 @@ export type Professionnels = {
   civilite: string | null;
   prenom: string | null;
   location: string | null;
+  profession?: string | null;
 };
 
 export enum Profession {

@@ -3,13 +3,11 @@ import { UserAuthenticated } from "@/types/next-auth";
 import { Button, Drawer, Title } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import React from "react";
+import { useRouter, usePathname } from "next/navigation";
 import {
   FiHome,
   FiLogIn,
   FiLogOut,
-  FiMenu,
   FiMessageCircle,
   FiSettings,
 } from "react-icons/fi";
@@ -23,26 +21,27 @@ type MenuDrawerProps = {
   user: UserAuthenticated;
 };
 
-const navMenu = [
+export interface NavigationMenu {
+  label: string;
+  href: string;
+}
+
+export const navMenu: NavigationMenu[] = [
   {
     label: "Blog",
     href: "/blog",
-    isActive: false,
   },
   {
     label: "Qui sommes nous",
     href: "/qui-sommes-nous",
-    isActive: false,
   },
   {
     label: "contact",
     href: "/contact",
-    isActive: false,
   },
   {
     label: "faq",
     href: "/faq",
-    isActive: false,
   },
 ];
 
@@ -76,6 +75,8 @@ const menuItems: MenuItem[] = [
 const Header = ({ user }: { user: UserAuthenticated }) => {
   const [opened, { open, close }] = useDisclosure(false);
   const router = useRouter();
+  const pathname = usePathname();
+
   return (
     <>
       <header className="sticky top-0 z-50 flex w-full items-center justify-between gap-5 bg-main px-4 py-5 will-change-scroll md:px-20 lg:px-28">
@@ -86,19 +87,22 @@ const Header = ({ user }: { user: UserAuthenticated }) => {
             onClick={() => router.push("/")}
             className="cursor-pointer text-center font-semibold text-darker"
           >
-            LOGO
+            MspDenain
           </Title>
           <ul className="hidden text-darker lg:flex lg:gap-12">
             {navMenu.map((menu, index) => (
               <li key={index}>
                 <Link
                   className={`capitalize ${
-                    menu.isActive ? "font-semibold" : "font-medium"
+                    pathname === menu.href ? "font-bold" : "font-medium"
                   }`}
                   href={menu.href}
                 >
                   {menu.label}
                 </Link>
+                {pathname === menu.href && (
+                  <div className="mx-auto size-1 rounded-full bg-darker"></div>
+                )}
               </li>
             ))}
           </ul>
@@ -147,13 +151,13 @@ const MenuDrawer: React.FC<MenuDrawerProps> = ({ opened, onClose, user }) => {
         <Drawer.Overlay />
         <Drawer.Content>
           <Drawer.Body className="flex h-full flex-col bg-gray-100 px-5">
-            <Drawer.CloseButton c={"primary.9"} size={35} />
+            <Drawer.CloseButton c={"darker.1"} size={35} />
             <ul className="flex h-full flex-col items-center justify-center gap-5">
               {links.map((link) => (
                 <li key={link.title}>
                   <Link
                     onClick={handleLinkClick}
-                    className="group text-justify text-2xl font-medium text-neutral-800 transition duration-300"
+                    className="group text-justify text-2xl font-normal text-neutral-800 transition duration-300"
                     href={link.href}
                   >
                     {link.title}
@@ -167,7 +171,7 @@ const MenuDrawer: React.FC<MenuDrawerProps> = ({ opened, onClose, user }) => {
                 <>
                   <Button
                     size="md"
-                    fw={700}
+                    fw={400}
                     variant="filled"
                     leftSection={<FiLogIn />}
                     bg={"primary.3"}
@@ -180,7 +184,7 @@ const MenuDrawer: React.FC<MenuDrawerProps> = ({ opened, onClose, user }) => {
                 <>
                   <Button
                     size="md"
-                    fw={700}
+                    fw={400}
                     variant="filled"
                     leftSection={<FiLogIn />}
                     bg={"primary.6"}

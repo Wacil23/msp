@@ -10,9 +10,6 @@
 .mantine-Input-section {
   width: auto;
 }
-.segmentedControl[data-active] {
-  color: "green" !important;
-}
 
 .categoryTranslateUp {
   transform: translateY(-4rem);
