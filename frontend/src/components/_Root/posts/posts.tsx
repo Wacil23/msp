@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import { useState, useEffect } from "react";
 import Post from "./post/post";
 import { ActionIcon, Input, Menu, Pagination } from "@mantine/core";
 import { FiltreArticle, useBlogStore } from "@/src/store/blogStore";
@@ -21,13 +21,13 @@ export interface PostsProps {
 const Posts: React.FC<PostsProps> = ({ subCategories, categories }) => {
   const filteredArticles = useBlogStore((state) => state.filteredArticles);
   const initializeArticles = useBlogStore((state) => state.initializeArticles);
-  const [currentPage, setCurrentPage] = React.useState(1);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const filteringArticles = useBlogStore((state) => state.filteringArticles);
   const searchingArticles = useBlogStore((state) => state.searchingArticles);
   const articlesPerPage = 9;
 
-  React.useEffect(() => {
+  useEffect(() => {
     initializeArticles();
   }, [initializeArticles]);
 

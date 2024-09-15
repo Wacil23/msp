@@ -1,10 +1,14 @@
-import Hero from "@/src/components/_Root/hero/hero";
-import Posts from "@/src/components/_Root/posts/posts";
+import dynamic from "next/dynamic";
+const Hero = dynamic(() => import("@/src/components/_Root/hero/hero"), {
+  ssr: false,
+});
+const Posts = dynamic(() => import("@/src/components/_Root/posts/posts"), {
+  ssr: false,
+});
 import {
   useGetAllCategoriesBlog,
   useGetAllSubCategoriesBlog,
 } from "@/src/lib/services/blog/BlogCategory";
-import React from "react";
 
 const Blog: React.FC = async () => {
   const categories = await useGetAllCategoriesBlog();
