@@ -59,7 +59,6 @@ const HeaderSidebar: React.FC<HeaderSidebar> = ({
               <Menu.Dropdown>
                 <Menu.Label>Notifications</Menu.Label>
                 {unreadMessages.map((message) => {
-                  console.log(message);
                   return (
                     <Menu.Item>
                       <div className="flex">

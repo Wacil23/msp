@@ -46,9 +46,7 @@ export const useBlogStore = create<BlogStore>()((set) => ({
       return { activeCategory: parentCategoryId };
     }),
   initializeArticles: async (size?: number) => {
-    console.log("size", size);
     const articles = await useGetAllArticlesBlog();
-    console.log("art", articles);
     set({
       articles,
       filteredArticles: articles,

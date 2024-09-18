@@ -100,7 +100,6 @@ export const options: NextAuthOptions = {
   callbacks: {
     async jwt({ token, user, account, trigger, session }): Promise<JWT> {
       if (trigger === "update") {
-        console.log("update token");
         return {
           ...token,
           ...session.user,
@@ -154,7 +153,6 @@ export const options: NextAuthOptions = {
       session.expires = token.expires_at;
 
       if (trigger === "update") {
-        console.log("update session");
         return {
           ...session,
           user: {
