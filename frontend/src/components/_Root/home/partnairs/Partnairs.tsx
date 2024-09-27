@@ -1,4 +1,3 @@
-"use client";
 import React from "react";
 import ARS from "../../../../../public/images/MSP partenaires/ARS.png";
 import CH from "../../../../../public/images/MSP partenaires/CH.png";
@@ -7,11 +6,8 @@ import Hainaut from "../../../../../public/images/MSP partenaires/Hainaut.png";
 import CPAM from "../../../../../public/images/MSP partenaires/CPAM.png";
 import Ministere from "../../../../../public/images/MSP partenaires/Ministere.png";
 import Image from "next/image";
-import { useWindowSize } from "@/src/lib/hooks/window/useWindowSize";
 
 const Partnairs = () => {
-  const size = useWindowSize();
-  const isMobile = size.width <= 768;
   const partenaires = [
     {
       nom: "ARS",

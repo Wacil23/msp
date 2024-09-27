@@ -33,13 +33,14 @@ const Sidebar = ({ children }: { children?: React.ReactNode }) => {
               <ul role="list" className="flex flex-1 flex-col gap-7">
                 <li>
                   {links.map((item) => (
-                    <div className="flex flex-col gap-1">
+                    <div key={item.title} className="flex flex-col gap-1">
                       <div className="mt-2 text-xs font-semibold leading-6 text-gray-900">
                         {item.title}
                       </div>
                       <ul role="list" className="-mx-2 space-y-1">
                         {item.links.map((link) => (
                           <NavLink
+                            key={link.name}
                             component={Link}
                             href={`/dashboard/${link.url}`}
                             leftSection={link.icon}

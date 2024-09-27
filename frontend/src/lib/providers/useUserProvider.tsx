@@ -1,10 +1,12 @@
 "use client";
-import React, { createContext, useContext } from "react";
-import { getMe } from "../services/users/Users";
+import React, { createContext, useContext, useEffect } from "react";
+import { getAllUsers, getMe } from "../services/users/Users";
 import { useSession } from "next-auth/react";
 import useSWR, { useSWRConfig, KeyedMutator } from "swr";
 import { UserSession } from "@/types/next-auth";
 import { Session } from "next-auth";
+import { notifications } from "@mantine/notifications";
+import { BiErrorCircle } from "react-icons/bi";
 
 interface UserContextProviderProps {
   me?: UserSession | null;
@@ -12,32 +14,54 @@ interface UserContextProviderProps {
   status: "authenticated" | "loading" | "unauthenticated";
   session: Session | null;
   error?: any;
-  isLoading: boolean;
+  loadingMe?: boolean;
+  loadingUsers?: boolean;
+  users?: UserSession[] | null;
 }
 
 const UserContext = createContext<UserContextProviderProps | undefined>(
   undefined,
 );
 
-export const UserContextProvider: React.FC<{ children: React.ReactNode }> = ({
-  children,
-}) => {
+export const UserContextProvider: React.FC<{
+  children: React.ReactNode;
+}> = ({ children }) => {
   const { data: session, status } = useSession();
   const { mutate } = useSWRConfig();
-  const fetcher = () =>
+  const meFetcher = () =>
     session?.acess_token ? getMe(session.acess_token) : null;
   const {
     data: me,
     error,
-    isLoading,
-  } = useSWR(session?.acess_token ? "users/me" : null, fetcher);
+    isLoading: loadingMe,
+  } = useSWR(session?.acess_token ? "users/me" : null, meFetcher);
   const mutateMe: KeyedMutator<any> = () => {
-    return mutate("users/me", fetcher);
+    return mutate("users/me", meFetcher);
   };
+
+  const usersFetcher = () =>
+    session?.acess_token ? getAllUsers(session?.acess_token) : null;
+
+  const { data: users, isLoading: loadingUsers } = useSWR(
+    session?.acess_token ? "users/" : null,
+    usersFetcher,
+  );
+  useEffect(() => {
+    if ((!me || !users) && !loadingMe && !loadingUsers) {
+      notifications.show({
+        title: "Vous êtes déconnecté",
+        color: "red",
+        icon: <BiErrorCircle />,
+        message: "Vous avez perdu la connexion, veuillez vous reconnecter",
+      });
+      window.location.href = "/connexion";
+    }
+  }, [me, users, loadingMe, loadingUsers]);
 
   return (
     <UserContext.Provider
-      value={{ me, mutateMe, status, session, error, isLoading }}
+      value={{ me, mutateMe, status, session, error, loadingMe, users }}
+      key={me?.id}
     >
       {children}
     </UserContext.Provider>

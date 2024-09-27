@@ -6,7 +6,7 @@ export default withAuth(async function middleware(req) {
   const token = await getToken({ req });
   const isExpired = Date.now() >= (token?.expires_at ?? 0) * 1000;
 
-  if (token?.error === "RefreshAccessTokenError" || isExpired) {
+  if (isExpired) {
     return NextResponse.redirect(new URL("/connexion", req.url));
   }
   return NextResponse.next();

@@ -1,9 +1,5 @@
-"use client";
-import { useState, useEffect } from "react";
-import { Professionnels } from "@/src/lib/types/users/profession/professions.types";
-import { categorySpecificProfessions } from "@/src/utils/func/RegroupUserByProfession";
 import { UserSession } from "@/types/next-auth";
-import { Badge, Divider } from "@mantine/core";
+import { Badge } from "@mantine/core";
 import { FiMapPin } from "react-icons/fi";
 
 type TeamsProps = {
@@ -11,22 +7,11 @@ type TeamsProps = {
 };
 
 const Teams: React.FC<TeamsProps> = ({ users }) => {
-  const [categoryData, setCategoryData] = useState<
-    Record<string, Professionnels[]>
-  >({});
-
-  useEffect(() => {
-    if (users) {
-      const groupedProfessionals = categorySpecificProfessions(users);
-      setCategoryData(groupedProfessionals || {});
-    }
-  }, [users]);
-
   return (
     <div className="flex flex-col text-darker">
       <div className="mx-4 flex flex-col gap-4 overflow-hidden rounded-2xl bg-primary px-4 py-10 transition-all md:mx-8 md:px-12 md:py-14 lg:gap-12">
         <h2 className="text-2xl font-normal lg:text-4xl">L'équipe de la MSP</h2>
-        <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {users
             ?.sort((a, b) => a.last_name!.localeCompare(b.last_name!))
             .map((user) => (

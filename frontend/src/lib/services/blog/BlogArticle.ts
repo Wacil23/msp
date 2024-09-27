@@ -1,3 +1,4 @@
+"use server";
 import { readItems, readItem } from "@directus/sdk";
 import { directus } from "../../directus";
 import { type BlogArticle } from "../../types/blog/BlogArticle";

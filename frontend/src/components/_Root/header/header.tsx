@@ -79,7 +79,7 @@ const Header = ({ user }: { user: UserAuthenticated }) => {
 
   return (
     <>
-      <header className="sticky top-0 z-50 flex w-full items-center justify-between gap-5 bg-main px-4 py-5 will-change-scroll md:px-20 lg:px-28">
+      <header className="sticky top-0 z-50 flex w-full items-center justify-between gap-5 bg-main px-4 py-5 will-change-scroll md:px-20 lg:px-8">
         <nav className="flex w-full items-center justify-between">
           <Title
             order={1}

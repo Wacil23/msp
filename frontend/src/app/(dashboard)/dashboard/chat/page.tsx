@@ -240,7 +240,6 @@ const Chat = () => {
     (message) =>
       !message.is_seen && message.user_reciever.id === session?.user.id,
   );
-  console.log("unread messages", unreadMessages);
 
   return (
     <div className="m-10">

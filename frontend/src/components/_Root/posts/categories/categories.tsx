@@ -19,17 +19,15 @@ const Categories: React.FC<CategoriesProps> = ({
   const setActiveCategory = useBlogStore((state) => state.setActiveCategory);
   const showSubCategories = useBlogStore((state) => state.showSubCategories);
   const activeSubCategories = subCategories.filter(
-    (subCategory) => subCategory.parent_category.id === activeCategory
+    (subCategory) => subCategory.parent_category.id === activeCategory,
   );
-
-  console.log("categories", categories);
 
   return (
     <div className="w-full">
-      <ul className="flex justify-between lg:px-12 bg-darker rounded-b-lg rounded-br-lg gap-7 overflow-x-auto py-8">
+      <ul className="flex justify-between gap-7 overflow-x-auto rounded-b-lg rounded-br-lg bg-darker py-8 lg:px-12">
         <li
           onClick={() => setActiveCategory("all")}
-          className={`text-white px-4 rounded-lg cursor-pointer py-2 hover:bg-darkLight/45 border border-transparent hover:border hover:border-darkStroke/50 ${
+          className={`hover:bg-darkLight/45 hover:border-darkStroke/50 cursor-pointer rounded-lg border border-transparent px-4 py-2 text-white hover:border ${
             activeCategory === "all" ? "bg-darkLight border-darkStroke" : ""
           }`}
         >
@@ -40,7 +38,7 @@ const Categories: React.FC<CategoriesProps> = ({
             <li
               key={subCategory.id}
               onClick={() => setActiveCategory(subCategory.title)}
-              className={`text-white px-4 rounded-lg cursor-pointer py-2 hover:bg-darkLight/45 border border-transparent hover:border hover:border-darkStroke/50 ${
+              className={`hover:bg-darkLight/45 hover:border-darkStroke/50 cursor-pointer rounded-lg border border-transparent px-4 py-2 text-white hover:border ${
                 activeCategory === subCategory.title
                   ? "bg-darkLight border-darkStroke"
                   : ""
@@ -58,7 +56,7 @@ const Categories: React.FC<CategoriesProps> = ({
                   setActiveCategory(category.title);
                   showSubCategories(category.id);
                 }}
-                className={`text-white px-4 rounded-lg cursor-pointer py-2 hover:bg-darkLight/45 border border-transparent hover:border hover:border-darkStroke/50 ${
+                className={`hover:bg-darkLight/45 hover:border-darkStroke/50 cursor-pointer rounded-lg border border-transparent px-4 py-2 text-white hover:border ${
                   activeCategory === category.title
                     ? "bg-darkLight border-darkStroke"
                     : ""

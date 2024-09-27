@@ -65,7 +65,7 @@ const Drawer: React.FC<DrawerPorps> = ({
               <ul role="list" className="flex flex-1 flex-col gap-y-7">
                 <li>
                   {links.map((item) => (
-                    <>
+                    <div key={item.title}>
                       <div className="text-xs font-semibold leading-6 text-gray-400">
                         {item.title}
                       </div>
@@ -73,6 +73,7 @@ const Drawer: React.FC<DrawerPorps> = ({
                         {item.links.map((link) => (
                           <li key={link.name}>
                             <NavLink
+                              onClick={() => setSidebarOpen(false)}
                               component={Link}
                               href={`/dashboard/${link.url}`}
                               leftSection={link.icon}
@@ -84,7 +85,7 @@ const Drawer: React.FC<DrawerPorps> = ({
                           </li>
                         ))}
                       </ul>
-                    </>
+                    </div>
                   ))}
                 </li>
                 <li className="mt-auto">
