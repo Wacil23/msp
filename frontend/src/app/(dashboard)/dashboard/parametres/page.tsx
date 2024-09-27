@@ -38,7 +38,7 @@ export type FormPasswordValues = {
 
 const Parametres = () => {
   const directusUrl = process.env.NEXT_PUBLIC_DIRECTUS_ASSETS;
-  const { me, mutateMe, session, status, error, isLoading } =
+  const { me, mutateMe, session, status, error, loadingMe } =
     useUserContextProvider();
   const form = useForm<FormGeneralValues>({
     initialValues: {
@@ -91,7 +91,7 @@ const Parametres = () => {
       </div>
     );
 
-  if (!me || isLoading)
+  if (!me || loadingMe)
     return (
       <Skeleton className="m-10" animate>
         <div className="h-full rounded-md bg-primary/55 p-12">

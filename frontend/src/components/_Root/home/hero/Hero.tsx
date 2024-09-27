@@ -1,12 +1,8 @@
-"use client";
-import React from "react";
 import { Button } from "@mantine/core";
-import { useWindowSize } from "@/src/lib/hooks/window/useWindowSize";
 import { FaArrowRightLong } from "react-icons/fa6";
 import Partnairs from "../partnairs/Partnairs";
 
 const Hero = () => {
-  const isMobile = useWindowSize().width < 1024;
   return (
     <div className="h-hero relative mx-4 flex flex-col items-center justify-between overflow-hidden rounded-2xl bg-primary px-4 py-8 md:mx-8 md:px-28 md:pb-12 md:pt-24">
       <div className="m-auto flex w-full flex-col gap-14 md:gap-24 lg:w-1/2">
@@ -30,11 +26,9 @@ const Hero = () => {
         </div>
         <div className="flex flex-col items-center gap-4 self-center md:flex-row md:justify-between md:gap-0">
           <Button
-            size={isMobile ? "sm" : "md"}
-            w={isMobile ? "100%" : "fit-content"}
             rightSection={<FaArrowRightLong />}
             radius={"xl"}
-            className="transition-all hover:w-24 hover:bg-darker hover:text-light"
+            className="w-full transition-all hover:bg-darker hover:text-light"
           >
             Prendre rendez-vous
           </Button>

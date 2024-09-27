@@ -6,12 +6,15 @@ import { getZoomCredentials } from "./reunion-action";
 import { notifications } from "@mantine/notifications";
 import { PiCheckLight } from "react-icons/pi";
 import { sleep } from "@directus/sdk";
-import CreateZoom from "@/src/components/_Dashboard/zoom/CreateZoom";
+import CreateZoomMeeting from "@/src/components/_Dashboard/zoom/CreateZoomMeeting";
+import { useUserContextProvider } from "@/src/lib/providers/useUserProvider";
+import GetZoomMeeting from "@/src/components/_Dashboard/zoom/GetZoomMeeting";
 
 const Reunion: React.FC = () => {
   const [opened, { open, close }] = useDisclosure(false);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
+  const { users } = useUserContextProvider();
 
   function _isTokenValid() {
     const expiresAt = localStorage.getItem("zoom_expires_at");
@@ -80,9 +83,11 @@ const Reunion: React.FC = () => {
             </Button>
           )}
         </div>
-        <div className="grid grid-cols-2 gap-y-6 p-20 md:grid-cols-3"></div>
+        <div className="flex flex-col py-5">
+          <GetZoomMeeting />
+        </div>
       </div>
-      <CreateZoom opened={opened} close={close} />
+      <CreateZoomMeeting opened={opened} users={users!} close={close} />
     </div>
   );
 };

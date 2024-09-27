@@ -3,29 +3,34 @@ import { BsBell } from "react-icons/bs";
 import { CgMenuRight } from "react-icons/cg";
 import { Avatar, Indicator } from "@mantine/core";
 import { Menu } from "@mantine/core";
-import { signOut, useSession } from "next-auth/react";
+import { signOut } from "next-auth/react";
 import { useUnreadMessages } from "@/src/lib/providers/useMessagesUnreadContext";
 import { useUserContextProvider } from "@/src/lib/providers/useUserProvider";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 interface HeaderSidebar {
   setSidebarOpen: (value: boolean) => void;
   children: React.ReactNode;
-}
-function classNames(...classes: any[]) {
-  return classes.filter(Boolean).join(" ");
 }
 
 const HeaderSidebar: React.FC<HeaderSidebar> = ({
   setSidebarOpen,
   children,
 }) => {
+  const router = useRouter();
   const directusUrl = process.env.NEXT_PUBLIC_DIRECTUS_ASSETS;
   const userNavigation = [
     { name: "Paramètres", href: "/dashboard/parametres" },
   ];
   const { unreadMessages } = useUnreadMessages();
   const { me } = useUserContextProvider();
+  function handleLogout() {
+    signOut();
+    router.push("/connexion", {
+      scroll: true,
+    });
+  }
 
   return (
     <div className="lg:pl-72">
@@ -60,10 +65,10 @@ const HeaderSidebar: React.FC<HeaderSidebar> = ({
                 <Menu.Label>Notifications</Menu.Label>
                 {unreadMessages.map((message) => {
                   return (
-                    <Menu.Item>
+                    <Menu.Item key={message.id}>
                       <div className="flex">
                         <p>
-                          {message.user_created.last_name}{" "}
+                          {message.user_created.last_name}
                           {message.user_created.first_name}
                           {" : "}
                         </p>
@@ -87,8 +92,8 @@ const HeaderSidebar: React.FC<HeaderSidebar> = ({
               </Menu.Target>
               <Menu.Dropdown className="absolute right-0 z-10 mt-2.5 w-full origin-top-right rounded-md bg-white py-2 shadow-lg ring-1 ring-gray-900/5 transition focus:outline-none data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-100 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in">
                 {userNavigation.map((item) => (
-                  <>
-                    <Menu.Item key={item.name}>
+                  <div key={item.name}>
+                    <Menu.Item>
                       <Link className="px-2" href={item.href}>
                         {item.name}
                       </Link>
@@ -96,12 +101,12 @@ const HeaderSidebar: React.FC<HeaderSidebar> = ({
                     <Menu.Item className="hover:bg-transparent">
                       <p
                         className="cursor-pointer rounded-md bg-red-300 px-3 py-2 text-sm font-medium text-red-950 transition-colors hover:bg-red-500 hover:text-white"
-                        onClick={() => signOut()}
+                        onClick={handleLogout}
                       >
                         Se déconnecter
                       </p>
                     </Menu.Item>
-                  </>
+                  </div>
                 ))}
               </Menu.Dropdown>
             </Menu>

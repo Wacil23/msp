@@ -1,3 +1,4 @@
+"use server";
 import { readItems } from "@directus/sdk";
 import { directus } from "../../directus";
 

@@ -1,3 +1,4 @@
+"use server";
 import { uploadFiles } from "@directus/sdk";
 import { directus } from "../../directus";
 

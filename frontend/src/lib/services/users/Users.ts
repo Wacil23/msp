@@ -1,3 +1,4 @@
+"use server";
 import { readMe, readUsers, updateMe, withToken } from "@directus/sdk";
 import { directus } from "../../directus";
 import { UserSession } from "@/types/next-auth";

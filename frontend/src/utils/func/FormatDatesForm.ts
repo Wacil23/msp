@@ -88,3 +88,25 @@ export function getInitialStartTime() {
   const minutes = initialDateTime.getMinutes().toString().padStart(2, "0");
   return `${hours}h${minutes}`;
 }
+
+export function combineDateAndTime(dateStart: Date, timeStart: string): Date {
+  // Vérifier le format de timeStart (ex: '18h30')
+  const timeMatch = timeStart.match(/^(\d{2})h(\d{2})$/);
+  if (!timeMatch) {
+    throw new Error(`Format d'heure invalide : ${timeStart}`);
+  }
+
+  const hours = parseInt(timeMatch[1], 10);
+  const minutes = parseInt(timeMatch[2], 10);
+
+  // Créer une nouvelle instance de Date pour éviter de modifier dateStart
+  const combinedDate = new Date(dateStart);
+
+  // Définir les heures et les minutes
+  combinedDate.setHours(hours);
+  combinedDate.setMinutes(minutes);
+  combinedDate.setSeconds(0);
+  combinedDate.setMilliseconds(0);
+
+  return combinedDate;
+}

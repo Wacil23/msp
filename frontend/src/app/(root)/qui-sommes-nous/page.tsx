@@ -1,5 +1,4 @@
 import Hero from "@/src/components/_Root/hero/hero";
-import React from "react";
 
 const QuiSommesNous = () => {
   return (
