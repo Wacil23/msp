@@ -1,7 +1,6 @@
 "use client";
 import { Badge } from "@mantine/core";
 import formatDate from "@/src/utils/func/GetLocalDate";
-import React from "react";
 import { BlogArticle } from "@/src/lib/types/blog/BlogArticle";
 
 interface BlogArticleProps {
@@ -63,7 +62,7 @@ const BlogArticles: React.FC<BlogArticleProps> = ({ articles }) => {
             }}
             onClick={() => redirectToBlog(article.id)}
             tabIndex={0}
-            className="group/blog relative h-96 cursor-pointer rounded-2xl bg-[#d3ed91] bg-cover bg-center bg-no-repeat p-5 shadow-md hover:shadow-xl md:col-span-2 lg:col-span-2"
+            className="group/blog relative h-96 cursor-pointer rounded-2xl bg-[#d3ed91] bg-cover bg-center bg-no-repeat p-5 shadow-md hover:shadow-xl md:col-span-2 xl:col-span-1"
             key={article.id}
           >
             <div className="relative z-10 flex h-full flex-col place-content-between">
@@ -101,7 +100,7 @@ const BlogArticles: React.FC<BlogArticleProps> = ({ articles }) => {
           }}
           onClick={() => redirectToBlog(article.id)}
           tabIndex={0}
-          className="group/blog relative h-96 cursor-pointer rounded-2xl bg-[#d3ed91] bg-cover bg-center bg-no-repeat p-5 shadow-md hover:shadow-xl md:col-span-2 lg:col-span-2"
+          className="group/blog relative h-96 cursor-pointer rounded-2xl bg-[#d3ed91] bg-cover bg-center bg-no-repeat p-5 shadow-md hover:shadow-xl md:col-span-2 xl:col-span-1"
           key={article.id}
         >
           <div className="relative z-10 flex h-full flex-col place-content-between">

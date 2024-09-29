@@ -9,12 +9,12 @@ import { sleep } from "@directus/sdk";
 import CreateZoomMeeting from "@/src/components/_Dashboard/zoom/CreateZoomMeeting";
 import { useUserContextProvider } from "@/src/lib/providers/useUserProvider";
 import GetZoomMeeting from "@/src/components/_Dashboard/zoom/GetZoomMeeting";
+import { MeetingProvider } from "@/src/lib/providers/useMeetingProvider";
 
 const Reunion: React.FC = () => {
   const [opened, { open, close }] = useDisclosure(false);
-  const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
-  const { users } = useUserContextProvider();
+  const { users, isAdmin } = useUserContextProvider();
 
   function _isTokenValid() {
     const expiresAt = localStorage.getItem("zoom_expires_at");
@@ -34,7 +34,6 @@ const Reunion: React.FC = () => {
       color: "primary.1",
     });
     setLoading(true);
-    setError(null);
     try {
       const result = await getZoomCredentials();
       await sleep(2000); //For better ux
@@ -43,7 +42,6 @@ const Reunion: React.FC = () => {
       localStorage.setItem("zoom_access_token", accessToken);
       localStorage.setItem("zoom_expires_at", expiresAt.toString());
     } catch (err) {
-      setError("Erreur lors de la récupération des données.");
     } finally {
       notifications.update({
         id: loadingZoomId,
@@ -69,26 +67,31 @@ const Reunion: React.FC = () => {
   }
 
   return (
-    <div className="w-full p-12">
-      {_getZoomStatus()}
-      <div className="rounded-md p-12">
-        <div className="flex items-center justify-between">
-          <h1 className="text-2xl font-extrabold">Vos réunions</h1>
-
-          {_isTokenValid() ? (
-            <Button onClick={open}>Créer une réunion</Button>
-          ) : (
-            <Button loading={loading} onClick={handleFetchZoomData}>
-              Se connecter à Zoom
-            </Button>
-          )}
+    <MeetingProvider>
+      <div className="w-full p-12">
+        {isAdmin && <>{_getZoomStatus()}</>}
+        <div className="rounded-md p-12">
+          <div className="flex items-center justify-between">
+            <h1 className="text-2xl font-extrabold">Vos réunions</h1>
+            {isAdmin && (
+              <>
+                {_isTokenValid() ? (
+                  <Button onClick={open}>Créer une réunion</Button>
+                ) : (
+                  <Button loading={loading} onClick={handleFetchZoomData}>
+                    Se connecter à Zoom
+                  </Button>
+                )}
+              </>
+            )}
+          </div>
+          <div className="flex flex-col py-5">
+            <GetZoomMeeting />
+          </div>
         </div>
-        <div className="flex flex-col py-5">
-          <GetZoomMeeting />
-        </div>
+        <CreateZoomMeeting opened={opened} users={users!} close={close} />
       </div>
-      <CreateZoomMeeting opened={opened} users={users!} close={close} />
-    </div>
+    </MeetingProvider>
   );
 };
 

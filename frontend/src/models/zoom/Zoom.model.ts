@@ -3,7 +3,7 @@ import { UserSession } from "@/types/next-auth";
 export interface ZoomForm {
   title: string;
   dateStart: Date;
-  participants: [];
+  participants: string[];
   startTime: string;
   duration: string;
   description?: string;
@@ -21,7 +21,7 @@ export interface DirectusUsersId {
 }
 
 export interface PayloadDirectusMeeting {
-  id: number;
+  zoom_id: number;
   title: string;
   join_url: string;
   meeting_invitees: DirectusUsersId[];

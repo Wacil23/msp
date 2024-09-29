@@ -73,17 +73,6 @@ const Parametres = () => {
     }
   }, [me]);
 
-  if (status === "unauthenticated") {
-    notifications.show({
-      message: "Veuillez vous reconnecté",
-      title: "Vous avez été déconnecté",
-      color: "orange",
-    });
-    signOut();
-
-    return;
-  }
-
   if (error)
     return (
       <div className="grid place-content-center place-items-center">

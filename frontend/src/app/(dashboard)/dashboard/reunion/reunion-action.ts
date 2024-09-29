@@ -1,5 +1,4 @@
 "use server";
-
 import { directus } from "@/src/lib/directus";
 import {
   DirectusMeeting,
@@ -9,13 +8,7 @@ import {
   RequestBodyZoomMeetingSettings,
   ZoomPayload,
 } from "@/src/models/zoom/Zoom.model";
-import {
-  createItem,
-  deleteItem,
-  readItems,
-  updateItem,
-  withToken,
-} from "@directus/sdk";
+import { createItem, deleteItem, readItems, withToken } from "@directus/sdk";
 
 const ZOOM_CLIENT_ID = process.env.ZOOM_CLIENT_ID;
 const ZOOM_CLIENT_SECRET = process.env.ZOOM_CLIENT_SECRET;
@@ -35,6 +28,7 @@ export async function getZoomCredentials() {
   const params = new URLSearchParams();
   params.append("grant_type", "account_credentials");
   params.append("account_id", ZOOM_ACCOUNT_ID);
+
   try {
     const response = await fetch("https://zoom.us/oauth/token", {
       method: "POST",
@@ -85,7 +79,7 @@ export async function postZoomMeeting(payload: ZoomPayload, tokenZoom: string) {
   const requestBody: RequestBodyZoomMeeting = {
     duration: Number(payload.duration),
     start_time: payload.dateStart,
-    timezone: "Europe/London",
+    timezone: "Europe/Paris",
     topic: payload.title,
     settings: requestSettingsBody,
   };
@@ -116,13 +110,30 @@ export async function postZoomMeeting(payload: ZoomPayload, tokenZoom: string) {
   }
 }
 
-export async function deleteZoomMeeting(id: string, tokenZoom: string) {}
+export async function deleteZoomMeeting(id: number, tokenZoom: string) {
+  if (!id || !tokenZoom) {
+    throw new Error("Id ou zoom token non défini");
+  }
+  try {
+    const bearerToken = tokenZoom;
+    await fetch(`https://zoom.us/v2/meetings/${id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${bearerToken}`,
+        "Content-Type": "application/json",
+      },
+    });
+  } catch (err) {
+    console.error("Erreur est survenue ", err);
+  }
+}
 
 export async function postDirectusMeeting(
   directusMeetingPayload: PayloadDirectusMeeting,
   token: string,
 ) {
   const api = directus();
+  console.log(directusMeetingPayload);
   await api.request<DirectusMeeting>(
     withToken(token, createItem("meeting", directusMeetingPayload)),
   );
@@ -141,6 +152,7 @@ export async function getDirectusMeeting(token: string) {
           sort: ["-start_date"],
           fields: [
             "id",
+            "zoom_id",
             "title",
             "description",
             "start_date",

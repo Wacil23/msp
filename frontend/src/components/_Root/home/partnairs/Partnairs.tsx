@@ -1,4 +1,3 @@
-import React from "react";
 import ARS from "../../../../../public/images/MSP partenaires/ARS.png";
 import CH from "../../../../../public/images/MSP partenaires/CH.png";
 import Denain from "../../../../../public/images/MSP partenaires/Denain.png";
@@ -43,8 +42,11 @@ const Partnairs = () => {
   return (
     <div className="mx-4 flex flex-col gap-8 md:px-20 lg:px-24">
       <div className="inline-flex w-full flex-nowrap overflow-hidden [mask-image:_linear-gradient(to_right,transparent_0,_black_128px,_black_calc(100%-200px),transparent_100%)]">
-        {[...Array(5)].map(() => (
-          <ul className="flex animate-infinite-scroll items-center justify-center md:justify-start [&_img]:max-w-none [&_li]:mx-8">
+        {[...Array(5)].map((_, id) => (
+          <ul
+            key={id}
+            className="flex animate-infinite-scroll items-center justify-center md:justify-start [&_img]:max-w-none [&_li]:mx-8"
+          >
             {partenaires.map((partenaire) => {
               return (
                 <li key={partenaire.nom}>
@@ -54,6 +56,7 @@ const Partnairs = () => {
                     height={partenaire.width}
                     src={partenaire.image}
                     alt={partenaire.nom}
+                    loading="lazy"
                   />
                 </li>
               );

@@ -6,7 +6,7 @@ export default withAuth(async function middleware(req) {
   const token = await getToken({ req });
   const isExpired = Date.now() >= (token?.expires_at ?? 0) * 1000;
 
-  if (isExpired) {
+  if (isExpired || !token) {
     return NextResponse.redirect(new URL("/connexion", req.url));
   }
   return NextResponse.next();
@@ -16,6 +16,7 @@ export const config = {
   matcher: [
     "/dashboard",
     "/dashboard/chat",
+    "/dashboard/reunion",
     "/dashboard/membres",
     "/dashboard/parametres",
   ],

@@ -1,6 +1,10 @@
+"use client";
 import { Button } from "@mantine/core";
+import dynamic from "next/dynamic";
 import { FaArrowRightLong } from "react-icons/fa6";
-import Partnairs from "../partnairs/Partnairs";
+const Partnairs = dynamic(() => import("../partnairs/Partnairs"), {
+  ssr: false,
+});
 
 const Hero = () => {
   return (
@@ -29,6 +33,10 @@ const Hero = () => {
             rightSection={<FaArrowRightLong />}
             radius={"xl"}
             className="w-full transition-all hover:bg-darker hover:text-light"
+            onClick={() =>
+              (window.location.href =
+                "https://www.doctolib.fr/maison-de-sante/denain/msp-pole-de-sante-du-denaisis/booking/new-patient")
+            }
           >
             Prendre rendez-vous
           </Button>

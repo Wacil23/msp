@@ -36,6 +36,7 @@ import { getSession } from "next-auth/react";
 import { notifications } from "@mantine/notifications";
 import { ZoomMeetingValidation } from "@/src/config/validations/ZoomMeeting";
 import { useUserContextProvider } from "@/src/lib/providers/useUserProvider";
+import { useMeetingContext } from "@/src/lib/providers/useMeetingProvider";
 
 interface CreateZoomProps {
   opened: boolean;
@@ -52,6 +53,7 @@ const CreateZoomMeeting: React.FC<CreateZoomProps> = (props) => {
   const [allMembersSelected, setAllMembersSelected] = useState(false);
   const [loadingForm, setLoadingForm] = useState(false);
   const { me } = useUserContextProvider();
+  const { fetchMeetings } = useMeetingContext();
 
   const form = useForm({
     mode: "uncontrolled",
@@ -85,6 +87,18 @@ const CreateZoomMeeting: React.FC<CreateZoomProps> = (props) => {
     setAllMembersSelected(false);
   }
 
+  function handleAllMembers() {
+    const allEmails = users
+      .map((user) => user.email)
+      .filter((email) => email !== null);
+    setAllMembersSelected((prev) => !prev);
+    if (!allMembersSelected) {
+      form.setFieldValue("participants", allEmails);
+    } else {
+      form.setFieldValue("participants", []);
+    }
+  }
+
   function transformUserToParticipant(form: ZoomForm) {
     return form.participants.map((participant) => {
       const email = participant;
@@ -100,6 +114,7 @@ const CreateZoomMeeting: React.FC<CreateZoomProps> = (props) => {
         directus_users_id: user?.id!,
       };
     });
+
     if (me && me.id) {
       participants.push({
         directus_users_id: me.id,
@@ -114,19 +129,21 @@ const CreateZoomMeeting: React.FC<CreateZoomProps> = (props) => {
     if (!session?.acess_token) {
       throw new Error("Vous n'êtes pas connecté");
     }
+
     setLoadingForm(true);
+
     notifications.show({
       id: "crea",
       title: "Réunion Zoom",
       message: "Réunion en cours de création",
       color: "orange",
       loading: true,
+      position: "top-center",
     });
 
     try {
       const date = combineDateAndTime(values.dateStart, values.startTime);
       const tokenZoom = localStorage.getItem("zoom_access_token");
-
       const payload: ZoomPayload = {
         ...values,
         dateStart: date,
@@ -144,7 +161,7 @@ const CreateZoomMeeting: React.FC<CreateZoomProps> = (props) => {
       }
 
       const payloadDirectus: PayloadDirectusMeeting = {
-        id: meeting.id,
+        zoom_id: meeting.id,
         title: meeting.topic,
         join_url: meeting.join_url,
         meeting_invitees: [...getUserBasedOnParticipants(values)],
@@ -155,7 +172,7 @@ const CreateZoomMeeting: React.FC<CreateZoomProps> = (props) => {
       };
 
       await postDirectusMeeting(payloadDirectus, session?.acess_token);
-
+      fetchMeetings();
       setLoadingForm(false);
       handleCloseModal();
 
@@ -163,9 +180,10 @@ const CreateZoomMeeting: React.FC<CreateZoomProps> = (props) => {
         id: "crea",
         title: "Réunion crée",
         message: "Votre réunion a bien été crée",
-        color: "primary.1",
-        icon: <CgCheck />,
+        color: "green",
+        icon: <CgCheck color="black" />,
         loading: false,
+        position: "top-center",
       });
     } catch (e) {
       notifications.update({
@@ -244,7 +262,7 @@ const CreateZoomMeeting: React.FC<CreateZoomProps> = (props) => {
         <Checkbox
           value={allMembersSelected.toString()}
           checked={allMembersSelected}
-          onChange={() => setAllMembersSelected((prev) => !prev)}
+          onChange={handleAllMembers}
           label="Tous les membres"
         />
       </div>
@@ -259,7 +277,7 @@ const CreateZoomMeeting: React.FC<CreateZoomProps> = (props) => {
       opened={opened}
       centered
     >
-      <DatesProvider settings={{ locale: "fr", timezone: "Europe/London" }}>
+      <DatesProvider settings={{ locale: "fr", timezone: "Europe/Paris" }}>
         <form
           onSubmit={form.onSubmit((values) => handleSubmitForm(values))}
           className="my-2 flex flex-col gap-8"

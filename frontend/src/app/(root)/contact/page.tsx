@@ -1,5 +1,3 @@
-"use client";
-
 import { ContactIconsList } from "@/src/components/_Root/contact/ContactIconsList";
 import Hero from "@/src/components/_Root/hero/hero";
 import {
@@ -11,9 +9,9 @@ import {
   TextInput,
   Textarea,
 } from "@mantine/core";
-import React from "react";
 
 const Contact = () => {
+  const handleClick = () => {};
   return (
     <div className="flex flex-col gap-8 py-16">
       <Hero
@@ -38,7 +36,10 @@ const Contact = () => {
           </div>
           <form
             className="flex flex-col gap-5 border-l-0 p-5 md:p-6 lg:w-1/2 lg:p-8"
-            onSubmit={(event) => event.preventDefault()}
+            action={async () => {
+              "use server";
+              console.log("hello");
+            }}
           >
             <Text fz="lg" fw={700}>
               Contactez nous
