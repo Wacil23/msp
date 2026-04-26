@@ -5,6 +5,7 @@ import type {
 } from "@/src/lib/types/blog/BlogArticle";
 
 import generated from "./blog.generated.json";
+import imageManifest from "./blog-images.generated.json";
 
 interface RawArticle {
   sourceUrl: string;
@@ -20,6 +21,7 @@ interface RawArticle {
 }
 
 const RAW_ARTICLES = generated as RawArticle[];
+const IMAGE_MAP = imageManifest as Record<string, string>;
 
 const OLD_DOMAIN_RE = /https?:\/\/(?:www\.)?docteurmbockpolesantedenain\.fr/i;
 
@@ -46,13 +48,20 @@ for (const raw of RAW_ARTICLES) {
   SLUG_BY_OLD_URL.set(normalizeOldUrl(raw.sourceUrl), slug);
 }
 
+const localImage = (url: string): string | null => IMAGE_MAP[url] ?? null;
+
 const cleanContentHtml = (html: string): string => {
   if (!html) return html;
   let out = html;
 
   out = out.replace(
-    /<img\b[^>]*src=["'][^"']*docteurmbockpolesantedenain\.fr[^"']*["'][^>]*\/?>/gi,
-    "",
+    /<img\b([^>]*?)src=["']([^"']*docteurmbockpolesantedenain\.fr[^"']*)["']([^>]*?)\/?>/gi,
+    (_match, before, src, after) => {
+      const local = localImage(src);
+      if (!local) return "";
+      const cleanAttrs = `${before}${after}`.replace(/\ssrcset=["'][^"']*["']/gi, "");
+      return `<img${cleanAttrs}src="${local}" loading="lazy" />`;
+    },
   );
   out = out.replace(
     /<source\b[^>]*srcset=["'][^"']*docteurmbockpolesantedenain\.fr[^"']*["'][^>]*\/?>/gi,
@@ -75,8 +84,8 @@ const cleanContentHtml = (html: string): string => {
 
 const cleanCover = (cover: string | null): string | null => {
   if (!cover) return null;
-  if (OLD_DOMAIN_RE.test(cover)) return null;
-  return cover;
+  if (!OLD_DOMAIN_RE.test(cover)) return cover;
+  return localImage(cover);
 };
 
 const stripHtml = (html: string) =>
