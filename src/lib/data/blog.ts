@@ -21,6 +21,8 @@ interface RawArticle {
 
 const RAW_ARTICLES = generated as RawArticle[];
 
+const OLD_DOMAIN_RE = /https?:\/\/(?:www\.)?docteurmbockpolesantedenain\.fr/i;
+
 const slugify = (s: string) =>
   s
     .normalize("NFD")
@@ -28,6 +30,54 @@ const slugify = (s: string) =>
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-+|-+$/g, "");
+
+const normalizeOldUrl = (url: string) =>
+  url
+    .trim()
+    .toLowerCase()
+    .replace(/[?#].*$/, "")
+    .replace(/\/+$/, "");
+
+const SLUG_BY_OLD_URL = new Map<string, string>();
+for (const raw of RAW_ARTICLES) {
+  if (!raw.sourceUrl) continue;
+  const slug = raw.slug || raw.sourceSlug;
+  if (!slug) continue;
+  SLUG_BY_OLD_URL.set(normalizeOldUrl(raw.sourceUrl), slug);
+}
+
+const cleanContentHtml = (html: string): string => {
+  if (!html) return html;
+  let out = html;
+
+  out = out.replace(
+    /<img\b[^>]*src=["'][^"']*docteurmbockpolesantedenain\.fr[^"']*["'][^>]*\/?>/gi,
+    "",
+  );
+  out = out.replace(
+    /<source\b[^>]*srcset=["'][^"']*docteurmbockpolesantedenain\.fr[^"']*["'][^>]*\/?>/gi,
+    "",
+  );
+
+  out = out.replace(
+    /<a\b([^>]*?)href=["']([^"']*docteurmbockpolesantedenain\.fr[^"']*)["']([^>]*)>([\s\S]*?)<\/a>/gi,
+    (_match, before, href, after, inner) => {
+      const slug = SLUG_BY_OLD_URL.get(normalizeOldUrl(href));
+      if (slug) {
+        return `<a${before}href="/blog/${slug}"${after}>${inner}</a>`;
+      }
+      return inner;
+    },
+  );
+
+  return out;
+};
+
+const cleanCover = (cover: string | null): string | null => {
+  if (!cover) return null;
+  if (OLD_DOMAIN_RE.test(cover)) return null;
+  return cover;
+};
 
 const stripHtml = (html: string) =>
   html
@@ -64,18 +114,18 @@ const dateOf = (a: { date: string | null }) =>
 
 const ARTICLES: BlogArticle[] = RAW_ARTICLES.map((raw) => {
   const categorySlug = slugify(raw.category);
+  const cleanedContent = cleanContentHtml(raw.contentHtml);
   const excerpt =
     raw.summary && raw.summary.trim()
       ? raw.summary.trim()
-      : buildExcerpt(raw.contentHtml);
+      : buildExcerpt(cleanedContent);
   return {
     slug: raw.slug || raw.sourceSlug,
     title: raw.title,
     date: raw.date,
-    cover: raw.cover,
-    contentHtml: raw.contentHtml,
+    cover: cleanCover(raw.cover),
+    contentHtml: cleanedContent,
     excerpt,
-    sourceUrl: raw.sourceUrl,
     category: {
       slug: categorySlug,
       name: raw.category,

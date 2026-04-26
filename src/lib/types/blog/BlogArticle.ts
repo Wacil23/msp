@@ -17,5 +17,4 @@ export interface BlogArticle {
   cover: string | null;
   contentHtml: string;
   category: BlogCategoryListItem;
-  sourceUrl?: string;
 }
