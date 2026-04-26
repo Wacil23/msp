@@ -1,0 +1,42 @@
+{
+  "name": "msp-denain",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "scrape": "node scripts/scrape-old-site.mjs"
+  },
+  "dependencies": {
+    "@mantine/core": "^7.5.1",
+    "@mantine/hooks": "^7.12.2",
+    "@next/third-parties": "^14.2.8",
+    "@tailwindcss/typography": "^0.5.19",
+    "dayjs": "^1.11.10",
+    "next": "^14.2.8",
+    "react": "^18",
+    "react-dom": "^18",
+    "react-icons": "^5.0.1",
+    "sharp": "^0.33.4",
+    "vanilla-cookieconsent": "^3.0.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/forms": "^0.5.7",
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "autoprefixer": "^10.4.17",
+    "eslint": "^8",
+    "eslint-config-next": "14.1.0",
+    "node-html-parser": "^7.0.1",
+    "postcss": "^8.4.33",
+    "postcss-preset-mantine": "^1.13.0",
+    "postcss-simple-vars": "^7.0.1",
+    "prettier": "^3.3.2",
+    "prettier-plugin-tailwindcss": "^0.6.5",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5"
+  }
+}

@@ -1,0 +1,8 @@
+.scrape-cache/
+scripts/
+frontend/
+backend/
+.github/
+.cursor/
+docker-compose*.yml
+*.md

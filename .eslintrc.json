@@ -1,0 +1,10 @@
+{
+  "extends": ["next/core-web-vitals"],
+  "rules": {
+    "@typescript-eslint/no-explicit-any": "off",
+    "react/no-unescaped-entities": "off",
+    "react/no-children-prop": "off",
+    "react/jsx-key": "warn",
+    "@next/next/no-img-element": "warn"
+  }
+}

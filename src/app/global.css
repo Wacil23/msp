@@ -1,0 +1,211 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  html,
+  body {
+    background-color: #ffffff;
+    color: #0e1311;
+    scroll-behavior: smooth;
+    box-sizing: border-box;
+  }
+  body {
+    font-family: var(--font-poppins), system-ui, -apple-system, sans-serif;
+    font-size: 0.875rem; /* 14px — mobile default */
+    line-height: 1.55;
+    font-weight: 400;
+  }
+  @media (min-width: 768px) {
+    body {
+      font-size: 0.9375rem; /* 15px — tablet */
+    }
+  }
+  @media (min-width: 1280px) {
+    body {
+      font-size: 1rem; /* 16px — desktop */
+    }
+  }
+  ::selection {
+    background-color: #4f7355;
+    color: #ffffff;
+  }
+  *:focus-visible {
+    outline: 2px solid #4f7355;
+    outline-offset: 2px;
+    border-radius: 8px;
+  }
+}
+
+@layer components {
+  /* Page-width container — generous side padding on mobile. */
+  .container-msp {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+  @media (min-width: 768px) {
+    .container-msp {
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+  }
+  @media (min-width: 1280px) {
+    .container-msp {
+      max-width: 1200px;
+      padding-left: 2.5rem;
+      padding-right: 2.5rem;
+    }
+  }
+
+  /* Eyebrow / label utility — tracking-wide caps, sage. */
+  .eyebrow {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #4f7355;
+  }
+
+  /* Sage chip — subtle pastel pill for tags. */
+  .chip-sage {
+    background: #f4f8f2;
+    color: #3d5a42;
+    border: 1px solid #e4efe2;
+  }
+
+  /* Article body — renders the scraped HTML.
+     Mobile-first: 14px body, 16px h2, refined and sober. */
+  .msp-article {
+    font-size: 0.875rem;
+    line-height: 1.75;
+    color: #2c302e;
+    max-width: 70ch;
+  }
+  @media (min-width: 1024px) {
+    .msp-article {
+      font-size: 0.9375rem;
+    }
+  }
+  .msp-article > div + div {
+    margin-top: 1rem;
+  }
+  .msp-article h2 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-top: 2.25rem;
+    margin-bottom: 0.75rem;
+    color: #0e1311;
+    letter-spacing: -0.01em;
+  }
+  .msp-article h3 {
+    font-size: 0.9375rem;
+    font-weight: 600;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: #0e1311;
+  }
+  @media (min-width: 1024px) {
+    .msp-article h2 {
+      font-size: 1.125rem;
+    }
+    .msp-article h3 {
+      font-size: 1rem;
+    }
+  }
+  .msp-article p,
+  .msp-article span,
+  .msp-article div {
+    font-size: inherit;
+    line-height: inherit;
+  }
+  .msp-article a {
+    color: #4f7355;
+    text-decoration: underline;
+    text-underline-offset: 0.18em;
+    text-decoration-thickness: 1px;
+    font-weight: 500;
+  }
+  .msp-article a:hover {
+    color: #3d5a42;
+  }
+  .msp-article strong,
+  .msp-article b {
+    font-weight: 600;
+    color: #0e1311;
+  }
+  .msp-article ul,
+  .msp-article ol {
+    padding-left: 1.25rem;
+    margin: 0.75rem 0;
+  }
+  .msp-article ul {
+    list-style: disc;
+  }
+  .msp-article ol {
+    list-style: decimal;
+  }
+  .msp-article li {
+    margin-bottom: 0.35rem;
+  }
+  .msp-article li::marker {
+    color: #4f7355;
+  }
+  .msp-article ul ul,
+  .msp-article ol ol,
+  .msp-article ul ol,
+  .msp-article ol ul {
+    margin: 0.25rem 0;
+  }
+  .msp-article img {
+    border-radius: 0.75rem;
+    margin: 1.5rem auto;
+    max-width: 100%;
+    height: auto;
+    display: block;
+    border: 1px solid #efeee8;
+  }
+  .msp-article .BlogSummary {
+    background: #f4f8f2;
+    border: 1px solid #e4efe2;
+    border-left: 3px solid #4f7355;
+    padding: 0.875rem 1rem;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #0e1311;
+    margin-bottom: 1.5rem;
+  }
+  .msp-article .remark {
+    background: #f4f8f2;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    margin: 1rem 0;
+    font-size: 0.8125rem;
+    color: #5a615e;
+  }
+  .msp-article section {
+    display: block;
+    margin-bottom: 1.5rem;
+  }
+  .msp-article br + br {
+    display: none;
+  }
+
+  /* Hide scrollbars helper. */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
